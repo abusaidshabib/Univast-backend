@@ -29,7 +29,12 @@ const admissionSchema = new mongoose.Schema({
     marital: String,
     email: String,
     mobile: String,
-    nid_Birth_certificate: String,
+    nid_Birth_certificate: {
+      type: String,
+      required: [true, "Nid or birth_certificate must have to add"],
+      unique: true, // Set the unique option to true for a unique index
+    },
+
     passport: String,
     nationality: String,
     country: String,
@@ -96,5 +101,14 @@ const admissionSchema = new mongoose.Schema({
   },
 });
 
+admissionSchema.index(
+  { "personal.nid_Birth_certificate": 1 },
+  { unique: true }
+);
+
 const Admission = mongoose.model("Admission", admissionSchema);
+Admission.collection.createIndex(
+  { "personal.nid_Birth_certificate": 1 },
+  { unique: true }
+);
 module.exports = Admission;

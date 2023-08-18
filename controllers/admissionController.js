@@ -2,7 +2,6 @@ const Admission = require("../models/admissionModel");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createAdmission = catchAsync(async (req, res, next) => {
-  console.log(req.body);
   const newAdmission = await Admission.create(req.body);
   res.status(201).json({
     status: "success",
