@@ -5,8 +5,9 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 const globalErrorHandler = require("./controllers/errorController");
-const applicationRouter = require("./routes/applicationRouter");
+const admissionRouter = require("./routes/admissionRouter");
 const facultyRouter = require("./routes/facultyRouter");
+const studentRouter = require("./routes/studentRouter");
 const AppError = require("./utils/appError");
 
 const app = express();
@@ -26,8 +27,9 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-app.use("/api/v1/application", applicationRouter);
+app.use("/api/v1/admission", admissionRouter);
 app.use("/api/v1/faculty", facultyRouter);
+app.use("/api/v1/student", studentRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

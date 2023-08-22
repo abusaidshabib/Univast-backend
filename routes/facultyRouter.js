@@ -1,8 +1,6 @@
-const express = require('express');
-const { getFacultyData, editCourse } = require('../controllers/facultyController');
+const express = require("express");
 const router = express.Router();
 
-
-router.route("/").get(getFacultyData).patch(editCourse);
+router.route("/");
 
 module.exports = router;

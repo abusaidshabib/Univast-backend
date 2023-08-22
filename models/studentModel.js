@@ -11,20 +11,21 @@ const educationSchema = new mongoose.Schema({
 });
 
 const studentSchema = new mongoose.Schema({
-  programCode: String,
   studentId: {
     type: Number,
     required: true,
     unique: true,
   },
+  facultyCode: String,
+  departmentCode: String,
+  programCode: String,
+  admission_date: Date,
   general: {
-    applicant_type: String,
     program_type: String,
     last_complete_degree_type: String,
     program: String,
     medium: String,
     education_shift: String,
-    admission_test_venue: String,
   },
   personal: {
     firstName: String,
@@ -33,13 +34,7 @@ const studentSchema = new mongoose.Schema({
     birth_date: Date,
     religion: String,
     marital: String,
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
+    email: String,
     mobile: String,
     nid_Birth_certificate: {
       type: String,
@@ -116,9 +111,9 @@ const studentSchema = new mongoose.Schema({
 studentSchema.index({ "personal.nid_Birth_certificate": 1 }, { unique: true });
 
 const Student = mongoose.model("Student", studentSchema);
-
 Student.collection.createIndex(
   { "personal.nid_Birth_certificate": 1 },
   { unique: true }
 );
+
 module.exports = Student;

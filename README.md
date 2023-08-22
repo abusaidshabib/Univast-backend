@@ -1,106 +1,81 @@
-faculty
-facultyId
-faculty_name:
-contact number:
-email:
-dean:
+const mongoose = require("mongoose");
 
-Department
-departmentId:
-facultyId:
-departmentName:
-faculty_name:
+const courseSchema = new mongoose.Schema({
+facultyCode: String,
+departmentCode: String,
+programCode: String,
+courseCode: String,
+courseName: String,
+credit: Number,
+});
 
-Program
-programId:
-programName:
-programType:
-programLevel:
-programDuration:
-departmentId:
+const Course = mongoose.model("Course", shiftSchema);
+module.exports = Course;
 
-Semester
-semesterId:
-name: Fall-2023, Summer-2023, Spring-2023
-startDate:
-endDate:
+const mongoose = require("mongoose");
 
-Course
-courseId:
-programID:
-courseCode:
-courseName:
-credit:
-description
-
-[
+const departmentSchema = new mongoose.Schema({
+facultyCode: String,
+departmentCode: String,
+departmentName: String,
+departmentTeacher: [
 {
-facultyId:
-facultyName:
-contactNumber:
-email:
-dean:
-department: [
+type: mongoose.Schema.Types.ObjectId,
+ref: "Teacher",
+},
+],
+shift: [
 {
-departmentId:
-departmentName:
-departmentTeacher: []
-programs:[
-{
-programId:
-programName:
-programType:
-programLevel:
-programDuration:
-courses: [
-courseId:
-courseCode:
-courseName:
-credit:
-description
-]
-}
-]
-}
-]
-}
-]
+type: mongoose.Schema.Types.ObjectId,
+ref: "Shift",
+},
+],
+});
 
-const mongoose = require('mongoose');
+const Department = mongoose.model("Department", departmentSchema);
+module.exports = Department;
 
-// Load your Mongoose schemas for Faculty, Department, Program, and Course
-const Course = require('./path-to-your-course-model');
-const Program = require('./path-to-your-program-model');
-const Department = require('./path-to-your-department-model');
-const Faculty = require('./path-to-your-faculty-model');
+const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/your-database-name', { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => {
-console.log('Connected to the database');
+const programSchema = new mongoose.Schema({
+programCode: String,
+programName: String, //CSE, Math
+programType: String, //Bachelor, Masters
+programLevel: String, //Undergraduate, Graduate
+programDuration: String,
+departmentCode: String,
+});
 
-        // Replace 'your-target-course-id' with the actual course ID you want to retrieve
-        const targetCourseId = 'your-target-course-id';
+const Program = mongoose.model("Program", programSchema);
 
-        Faculty.findOne({ 'department.programs.courses.courseId': targetCourseId })
-            .populate({
-                path: 'department.programs.courses',
-                match: { courseId: targetCourseId }
-            })
-            .exec((err, faculty) => {
-                if (err) {
-                    console.error('Error retrieving course:', err);
-                    return;
-                }
+const mongoose = require("mongoose");
 
-                if (!faculty) {
-                    console.log('Course not found');
-                    return;
-                }
+const semesterSchema = new mongoose.Schema({
+semesterCode: String,
+semesterName: String,
+semesterType: String,
+startDate: Date,
+endDate: Date,
+});
 
-                const course = faculty.department[0].programs[0].courses[0];
-                console.log('Found course:', course);
-            });
-    })
-    .catch(err => {
-        console.error('Error connecting to the database:', err);
-    });
+const Semester = ("Semester", semesterSchema);
+
+module.exports = Semester;
+
+const mongoose = require("mongoose");
+
+const shiftSchema = new mongoose.Schema({
+shiftName: String,
+});
+
+const Shift = mongoose.model("Shift", shiftSchema);
+module.exports = Shift;
+
+const { default: mongoose } = require("mongoose");
+
+const teacherSchema = new mongoose.Schema({
+
+});
+
+const Teacher = mongoose.model("Teacher", teacherSchema);
+module.exports = Teacher;
