@@ -5,12 +5,26 @@ const educationSchema = new mongoose.Schema({
   institution_name: String,
   board: String,
   group_major: String,
-  result: String,
+  result: Number,
   passing_year: Number,
   certificates: String,
 });
 
-const admissionSchema = new mongoose.Schema({
+const applicationSchema = new mongoose.Schema({
+  applicationId: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+
+  // application will be pending, waiting, admitted, passed, Failed
+  applicationStatus: {
+    type: String,
+    default: function () {
+      return this.default || pending;
+    },
+  },
+
   general: {
     applicant_type: String,
     program_type: String,
@@ -27,7 +41,13 @@ const admissionSchema = new mongoose.Schema({
     birth_date: Date,
     religion: String,
     marital: String,
-    email: String,
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
     mobile: String,
     nid_Birth_certificate: {
       type: String,
@@ -101,14 +121,15 @@ const admissionSchema = new mongoose.Schema({
   },
 });
 
-admissionSchema.index(
+applicationSchema.index(
   { "personal.nid_Birth_certificate": 1 },
   { unique: true }
 );
 
-const Admission = mongoose.model("Admission", admissionSchema);
-Admission.collection.createIndex(
+const Application = mongoose.model("Application", applicationSchema);
+Application.collection.createIndex(
   { "personal.nid_Birth_certificate": 1 },
   { unique: true }
 );
-module.exports = Admission;
+
+module.exports = Application;
