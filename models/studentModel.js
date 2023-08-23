@@ -39,7 +39,7 @@ const studentSchema = new mongoose.Schema({
     nid_Birth_certificate: {
       type: String,
       required: [true, "Nid or birth_certificate must have to add"],
-      unique: true, // Set the unique option to true for a unique index
+      unique: [true, "You have already registered"], // Set the unique option to true for a unique index
     },
 
     passport: String,
