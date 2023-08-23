@@ -108,12 +108,8 @@ const studentSchema = new mongoose.Schema({
   },
 });
 
-studentSchema.index({ "personal.nid_Birth_certificate": 1 }, { unique: true });
 
 const Student = mongoose.model("Student", studentSchema);
-Student.collection.createIndex(
-  { "personal.nid_Birth_certificate": 1 },
-  { unique: true }
-);
+studentSchema.index({ "studentId": 1 }, { unique: true });
 
 module.exports = Student;

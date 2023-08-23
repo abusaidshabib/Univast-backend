@@ -74,7 +74,7 @@ const importData = async () => {
   */
 
 
-    const result = await Student.create(...newStudent);
+    const result = await Student.insertMany(newStudent);
   } catch (error) {
     console.log(error.message);
   }
@@ -106,8 +106,15 @@ const importData = async () => {
 };
 */
 
-const deleteData = () => {
-  console.log("Change");
+const deleteData = async() => {
+     try{
+           const result = await Student.deleteMany();
+            console.log(result)
+        }
+        catch (error) {
+            console.log(error)
+        }
+        process.exit(); //help to stop the process after successful
 };
 
 if (process.argv[2] === "--import") {
