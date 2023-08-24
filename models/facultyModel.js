@@ -8,10 +8,10 @@ const facultySchema = new mongoose.Schema({
   dean: String,
 });
 
+// This help to make second ObjectId
+facultySchema.index({ facultyCode: 1 }, { unique: true });
 const Faculties = mongoose.model("Faculties", facultySchema);
 
 module.exports = Faculties;
 
 //FAC-101
-
-

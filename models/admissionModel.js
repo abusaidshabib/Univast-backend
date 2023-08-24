@@ -107,8 +107,4 @@ admissionSchema.index(
 );
 
 const Admission = mongoose.model("Admission", admissionSchema);
-Admission.collection.createIndex(
-  { "personal.nid_Birth_certificate": 1 },
-  { unique: true }
-);
 module.exports = Admission;

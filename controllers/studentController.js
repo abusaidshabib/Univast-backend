@@ -28,3 +28,16 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.updateStudent = catchAsync(async (req, res, next) => {
+  const newStudent = await Student.findOneAndUpdate(req.query, req.body, {
+    new: true,
+    useFindAndModify: false,
+  });
+  res.status(201).json({
+    status: "success",
+    data: {
+      newStudent: newStudent,
+    },
+  });
+});
