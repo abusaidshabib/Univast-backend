@@ -1,43 +1,30 @@
 const Student = require("../models/studentModel");
 const catchAsync = require("../utils/catchAsync");
+const {
+  dataGetResponse,
+  serverNOTdeclared,
+  sendCreatedResponse,
+} = require("../utils/successStatus");
 
 exports.getStudents = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
   if (queryKeys.length === 1) {
     const newStudent = await Student.findOne(req.query);
-    res.status(200).json({
-      status: "success",
-      data: {
-        newStudent,
-      },
-    });
+    dataGetResponse(res, newStudent);
+  } else if (queryKeys.length === 0) {
+    const newStudent = await Student.find();
+    dataGetResponse(res, newStudent);
   } else {
-    res.status(401).json({
-      status: "Failed",
-      message: "Multiple query work not finished",
-    });
+    serverNOTdeclared(res);
   }
 });
 
 exports.createStudent = catchAsync(async (req, res, next) => {
-  const newStudent = await Student.create(req.body);
-  res.status(201).json({
-    status: "success",
-    data: {
-      newStudent: newStudent,
-    },
-  });
+  const result = await Student.create(req.body);
+  sendCreatedResponse(res, result);
 });
 
 exports.updateStudent = catchAsync(async (req, res, next) => {
-  const newStudent = await Student.findOneAndUpdate(req.query, req.body, {
-    new: true,
-    useFindAndModify: false,
-  });
-  res.status(201).json({
-    status: "success",
-    data: {
-      newStudent: newStudent,
-    },
-  });
+  const newStudent = await Student.findOneAndUpdate(req.query, req.body);
+  sendCreatedResponse(res, newStudent);
 });

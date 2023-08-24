@@ -17,17 +17,3 @@ module.exports = (fn) => {
     });
   };
 };
-
-// {
-//     "status": "failed",
-    // "message": {
-    //     "index": 0,
-    //     "code": 11000,
-    //     "keyPattern": {
-    //         "personal.nid_Birth_certificate": 1
-    //     },
-    //     "keyValue": {
-    //         "personal.nid_Birth_certificate": "1234567890142"
-    //     }
-    // }
-// }
