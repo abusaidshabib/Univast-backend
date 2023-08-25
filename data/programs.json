@@ -1,0 +1,83 @@
+[
+  {
+    "departmentCode": "DEP-101",
+    "programCode": "PRO-101",
+    "programName": "Computer Science & Engineering",
+    "programType": "Bachelor",
+    "programLevel": "Undergraduate",
+    "programDuration": "4 years",
+    "shifts": ["Day", "Evening"]
+  },
+  {
+    "departmentCode": "DEP-102",
+    "programCode": "PRO-102",
+    "programName": "Mathematics",
+    "programType": "Bachelor",
+    "programLevel": "Undergraduate",
+    "programDuration": "4 years",
+    "shifts": ["Day", "Evening"]
+  },
+  {
+    "departmentCode": "DEP-104",
+    "programCode": "PRO-104",
+    "programName": "Electrical Engineering",
+    "programType": "Bachelor",
+    "programLevel": "Undergraduate",
+    "programDuration": "4 years",
+    "shifts": ["Day"]
+  },
+  {
+    "departmentCode": "DEP-105",
+    "programCode": "PRO-105",
+    "programName": "Biology",
+    "programType": "Bachelor",
+    "programLevel": "Undergraduate",
+    "programDuration": "3 years",
+    "shifts": ["Day"]
+  },
+  {
+    "departmentCode": "DEP-106",
+    "programCode": "PRO-106",
+    "programName": "Business Administration",
+    "programType": "Bachelor",
+    "programLevel": "Undergraduate",
+    "programDuration": "3 years",
+    "shifts": ["Day", "Evening"]
+  },
+  {
+    "departmentCode": "DEP-107",
+    "programCode": "PRO-107",
+    "programName": "Civil Engineering",
+    "programType": "Bachelor",
+    "programLevel": "Undergraduate",
+    "programDuration": "4 years",
+    "shifts": ["Evening"]
+  },
+  {
+    "departmentCode": "DEP-108",
+    "programCode": "PRO-108",
+    "programName": "English Literature",
+    "programType": "Bachelor",
+    "programLevel": "Undergraduate",
+    "programDuration": "3.5 years",
+    "shifts": ["Evening"]
+  },
+  {
+    "departmentCode": "DEP-108",
+    "programCode": "PRO-112",
+    "programName": "English Literature",
+    "programType": "Masters",
+    "programLevel": "Graduate",
+    "programDuration": "2 years",
+    "shifts": ["Evening"]
+  },
+  {
+    "departmentCode": "DEP-107",
+    "programCode": "PRO-111",
+    "programName": "Civil Engineering",
+    "programType": "Masters",
+    "programLevel": "Graduate",
+    "programDuration": "3 years",
+    "shifts": ["Day"]
+  }
+]

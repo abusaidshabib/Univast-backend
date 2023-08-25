@@ -1,0 +1,62 @@
+[
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-101",
+    "programCode": "PRO-101",
+    "departmentName": "Computer Science & Engineering"
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-102",
+    "programCode": "PRO-102",
+    "departmentName": "Mathematics"
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-103",
+    "programCode": "PRO-103",
+    "departmentName": "Pharmacy"
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-104",
+    "programCode": "PRO-104",
+    "departmentName": "Electrical and Electronic Engineering"
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-105",
+    "programCode": "PRO-105",
+    "departmentName": "Architecture"
+  },
+  {
+    "facultyCode": "FAC-102",
+    "departmentCode": "DEP-106",
+    "programCode": "PRO-106",
+    "departmentName": "English"
+  },
+  {
+    "facultyCode": "FAC-102",
+    "departmentCode": "DEP-107",
+    "programCode": "PRO-107",
+    "departmentName": "Sociology"
+  },
+  {
+    "facultyCode": "FAC-102",
+    "departmentCode": "DEP-108",
+    "programCode": "PRO-108",
+    "departmentName": "Bachelor of Laws"
+  },
+  {
+    "facultyCode": "FAC-103",
+    "departmentCode": "DEP-109",
+    "programCode": "PRO-109",
+    "departmentName": "Bachelor of Business Administration"
+  },
+  {
+    "facultyCode": "FAC-103",
+    "departmentCode": "DEP-110",
+    "programCode": "PRO-110",
+    "departmentName": "Bachelor of Economics"
+  }
+]

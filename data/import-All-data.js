@@ -11,15 +11,11 @@ const DB = process.env.DATABASE.replace(
 
 mongoose.connect(DB).then(() => console.log("DB connection successful!"));
 
-const student = JSON.parse(
-  fs.readFileSync(`${__dirname}/student.json`, "utf-8")
-);
-
 const newStudent = JSON.parse(
   fs.readFileSync(`${__dirname}/newStudent.json`, "utf-8")
 );
-const test = JSON.parse(
-  fs.readFileSync(`${__dirname}/test.json`, "utf-8")
+const faculty = JSON.parse(
+  fs.readFileSync(`${__dirname}/faculty.json`, "utf-8")
 );
 
 const yourDateString = "2023-08-22";
@@ -48,6 +44,9 @@ const count = 10000;
 const length = 13;
 const uniqueNumbers = generateUniqueNumbers(count, length);
 
+
+
+/*
 const importData = async () => {
   try {
     const updateStudent = student.map((student, index) => {
@@ -61,7 +60,7 @@ const importData = async () => {
       };
     });
 
-    /*
+
 
     // Write the updated data to a JSON file
     const updatedDataJSON = JSON.stringify(updateStudent, null, 2); // Convert to JSON format
@@ -70,41 +69,21 @@ const importData = async () => {
     console.log('Data updated and saved to updatedStudentData.json');
     // const department = "DEP-105";
   // const number = parseInt(department.match(/\d+/)[0]);
-
-  */
-
-
     const result = await Student.insertMany(newStudent);
   } catch (error) {
     console.log(error.message);
   }
-};
-
-/*
-const importData = async () => {
-  try {
-    function hasDuplicateNID(array) {
-      const nidSet = new Set();
-
-      for (const student of array) {
-        const nid = student.personal.nid_Birth_certificate;
-
-        if (nidSet.has(nid)) {
-          return true;
-        }
-        nidSet.add(nid);
-      }
-
-      return false;
-    }
-
-    const hasDuplicateNIDField = hasDuplicateNID(newStudent);
-    console.log(hasDuplicateNIDField);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+}
 */
+
+// const importData = async () => {
+//   try {
+//     const result = await 
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+
 
 const deleteData = async() => {
      try{

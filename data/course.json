@@ -1,0 +1,58 @@
+[
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-101",
+    "programCode": "PRO-101",
+    "courseCode": "CSE-101",
+    "courseName": "Introduction of computer Science",
+    "credit": 3
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-101",
+    "programCode": "PRO-101",
+    "courseCode": "CSE-102",
+    "courseName": "Analog Electronics",
+    "credit": 3
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-101",
+    "programCode": "PRO-101",
+    "courseCode": "CSE-103",
+    "courseName": "Analog Electronics (Lab)",
+    "credit": 1
+  },
+  {
+      "facultyCode": "FAC-101",
+    "departmentCode": "DEP-102",
+    "programCode": "PRO-102",
+    "courseCode": "Math-101",
+    "courseName": "Math-I (Differential Calculus & Co-ordinateGeom.)",
+    "credit": 3
+  },
+  {
+    "facultyCode": "FAC-102",
+    "departmentCode": "DEP-106",
+    "programCode": "PRO-106",
+    "courseCode": "ENG-101",
+    "courseName": "English I",
+    "credit": 3
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-101",
+    "programCode": "PRO-101",
+    "courseCode": "BUS-101",
+    "courseName": "Business Organization",
+    "credit": 1
+  },
+  {
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-105",
+    "programCode": "PRO-101",
+    "courseCode": "CSE-104",
+    "courseName": "Structural Programming Language",
+    "credit": 3
+  }
+]

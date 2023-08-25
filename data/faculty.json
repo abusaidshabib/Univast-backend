@@ -1,0 +1,23 @@
+[
+  {
+    "facultyCode": "FAC-101",
+    "facultyName": "Faculty of Science, Engineering & Technology",
+    "contactNumber": "123-456-7890",
+    "email": "science@university.edu",
+    "dean": "Dr. John Smith"
+  },
+  {
+    "facultyCode": "FAC-102",
+    "facultyName": "Faculty of Arts, Social Science & Law",
+    "contactNumber": "987-654-3210",
+    "email": "arts@university.edu",
+    "dean": "Dr. Jane Doe"
+  },
+  {
+    "facultyCode": "FAC-103",
+    "facultyName": "Faculty of Business Administration & Economics",
+    "contactNumber": "555-555-5555",
+    "email": "engineering@university.edu",
+    "dean": "Dr. Robert Johnson"
+  }
+]

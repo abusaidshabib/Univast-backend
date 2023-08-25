@@ -1,0 +1,20 @@
+[
+  {
+    "semesterName": "Spring",
+    "semesterType": "Tri-Semester",
+    "startMonth": "January",
+    "endMonth": "April"
+  },
+  {
+    "semesterName": "Summer",
+    "semesterType": "Tri-Semester",
+    "startMonth": "May",
+    "endMonth": "August"
+  },
+  {
+    "semesterName": "Fall",
+    "semesterType": "Tri-Semester",
+    "startMonth": "September",
+    "endMonth": "December"
+  }
+]
