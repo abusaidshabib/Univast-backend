@@ -10,5 +10,5 @@ const programSchema = new mongoose.Schema({
   shifts: Array, //day, evening
 });
 
-const Program = mongoose.Model("Program", programSchema);
+const Program = mongoose.model("Program", programSchema);
 module.exports = Program;

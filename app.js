@@ -39,14 +39,14 @@ app.use("/api/v1/faculty", facultyRouter);
 app.use("/api/v1/student", studentRouter);
 app.use("/api/v1/course", courseRouter);
 app.use("/api/v1/department", departmentRouter);
-app.use("/api/v1/program", programRouter);
+app.use("/api/v1/programs", programRouter);
 app.use("/api/v1/semester", semesterRouter);
 app.use("/api/v1/teacher", teacherRouter);
 app.use("/api/v1/users", usersRouter);
 
 // Handle unusual routes
 app.all("*", (req, res, next) => {
-  // next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
   res.status(401).json({
     status: "Failed",
     message: `Can't find ${req.originalUrl} on this server!`

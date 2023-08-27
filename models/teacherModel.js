@@ -1,6 +1,6 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
-const publicationSchema = new mongoose.Model({
+const publicationSchema = new mongoose.Schema({
   title: String,
   author: [String],
   publication_year: Date,
@@ -10,7 +10,7 @@ const publicationSchema = new mongoose.Model({
   doi: String,
 });
 
-const coursesSchema = new mongoose.Model({
+const coursesSchema = new mongoose.Schema({
   course_code: String,
   course_name: String,
   semester: String,
@@ -31,11 +31,15 @@ const educationSchema = new mongoose.Schema({
   certificates: String,
 });
 
-const teacherSchema = new mongoose.Model({
+const teacherSchema = new mongoose.Schema({
   teacherId: {
     type: Number,
     required: true,
     unique: true,
+  },
+  family: {
+    father_name: String,
+    mother_name: String,
   },
   personal: {
     firstName: String,
@@ -77,18 +81,14 @@ const teacherSchema = new mongoose.Model({
         permanent_street2: String,
       },
     },
-    family: {
-      father_name: String,
-      mother_name: String,
-    },
-    education: [educationSchema],
-    facultyCode: String,
-    departmentCode: String,
-    position: String,
-    courses_taught: [coursesSchema],
-    research_interests: [String],
-    publication: [publicationSchema],
   },
+  education: [educationSchema],
+  facultyCode: String,
+  departmentCode: String,
+  position: String,
+  courses_taught: [coursesSchema],
+  research_interests: [String],
+  publication: [publicationSchema],
   others: {
     is_parents_freedom_fighter: Boolean,
     is_tribal: Boolean,
@@ -99,5 +99,5 @@ const teacherSchema = new mongoose.Model({
   },
 });
 
-const Teacher = mongoose.Model("Teacher", teacherSchema);
+const Teacher = mongoose.model("Teacher", teacherSchema);
 module.exports = Teacher;

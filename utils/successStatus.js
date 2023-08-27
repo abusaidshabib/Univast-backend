@@ -16,9 +16,26 @@ exports.sendCreatedResponse = (res, data) => {
   });
 };
 
+exports.sendUpdatedResponse = (res, data) => {
+  res.status(201).json({
+    status: "successfully updated data",
+    data: {
+      data,
+    },
+  });
+};
+
 exports.serverNOTdeclared = (res) => {
   res.status(204).json({
     status: "success",
     message: "server is ok but, we don't work with this",
+  });
+};
+
+exports.sendSuccessResponse = (res, statusCode, data, message) => {
+  res.status(statusCode).json({
+    status: "success",
+    message: message,
+    data: data,
   });
 };
