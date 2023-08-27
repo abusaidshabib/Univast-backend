@@ -4,6 +4,7 @@ const {
   dataGetResponse,
   serverNOTdeclared,
   sendCreatedResponse,
+  sendUpdatedResponse,
 } = require("../utils/successStatus");
 
 exports.getStudents = catchAsync(async (req, res, next) => {
@@ -26,5 +27,5 @@ exports.createStudent = catchAsync(async (req, res, next) => {
 
 exports.updateStudent = catchAsync(async (req, res, next) => {
   const newStudent = await Student.findOneAndUpdate(req.query, req.body);
-  sendCreatedResponse(res, newStudent);
+  sendUpdatedResponse(res, newStudent);
 });
