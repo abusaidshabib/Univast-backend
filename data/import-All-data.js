@@ -44,11 +44,9 @@ const count = 10000;
 const length = 13;
 const uniqueNumbers = generateUniqueNumbers(count, length);
 
-
-
-/*
 const importData = async () => {
   try {
+    /*
     const updateStudent = student.map((student, index) => {
       return {
         ...student,
@@ -69,31 +67,30 @@ const importData = async () => {
     console.log('Data updated and saved to updatedStudentData.json');
     // const department = "DEP-105";
   // const number = parseInt(department.match(/\d+/)[0]);
+
+  */
     const result = await Student.insertMany(newStudent);
   } catch (error) {
     console.log(error.message);
   }
-}
-*/
+};
 
 // const importData = async () => {
 //   try {
-//     const result = await 
+//     const result = await
 //   } catch (error) {
 //     console.log(error.message);
 //   }
 // };
 
-
-const deleteData = async() => {
-     try{
-           const result = await Student.deleteMany();
-            console.log(result)
-        }
-        catch (error) {
-            console.log(error)
-        }
-        process.exit(); //help to stop the process after successful
+const deleteData = async () => {
+  try {
+    const result = await Student.deleteMany();
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+  process.exit(); //help to stop the process after successful
 };
 
 if (process.argv[2] === "--import") {
