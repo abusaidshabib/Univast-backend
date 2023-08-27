@@ -27,10 +27,11 @@ exports.createProgram = catchAsync(async (req, res, next) => {
   sendCreatedResponse(res, result);
 });
 
-exports.updatePrograms = catchAsync(async (req, res, next) => {
-  const result = await Program.findOneAndUpdate(req.query, req.body);
-  sendUpdatedResponse(res, result);
-});
+// exports.updatePrograms = catchAsync(async (req, res, next) => {
+//     const bodyData = req.body;
+//   const result = await Program.findOneAndUpdate(req.query, req.body);
+//   sendUpdatedResponse(res, result);
+// });
 
 exports.deleteProgram = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);

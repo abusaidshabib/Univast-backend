@@ -5,7 +5,7 @@ module.exports = (fn) => {
         const [[key, value]] = Object.entries(error.keyValue)
         res.status(400).json({
           status: "failed",
-          message: 'You have already applied',
+          message: `${key}: ${value} this value is already exist`,
           // message: `'${key}' value must be unique. This value '${value}' is already exist.`,
         });
       } else {

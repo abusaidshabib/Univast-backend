@@ -32,9 +32,11 @@ exports.serverNOTdeclared = (res) => {
   });
 };
 
-exports.sendSuccessResponse = (res, statusCode, data, message) => {
+exports.customResponse = (res, statusCode, data, message) => {
+  const status = `${statusCode}`.startsWith("4") ? "fail" : "success";
+
   res.status(statusCode).json({
-    status: "success",
+    status: status,
     message: message,
     data: data,
   });

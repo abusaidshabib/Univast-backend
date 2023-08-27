@@ -1,10 +1,12 @@
 const Student = require("../models/studentModel");
+const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const {
   dataGetResponse,
   serverNOTdeclared,
   sendCreatedResponse,
   sendUpdatedResponse,
+  customResponse,
 } = require("../utils/successStatus");
 
 exports.getStudents = catchAsync(async (req, res, next) => {
@@ -26,6 +28,16 @@ exports.createStudent = catchAsync(async (req, res, next) => {
 });
 
 exports.updateStudent = catchAsync(async (req, res, next) => {
-  const newStudent = await Student.findOneAndUpdate(req.query, req.body);
-  sendUpdatedResponse(res, newStudent);
+  let result = [];
+  if (req.body.studentId || req.body.personal.nid_Birth_certificate) {
+    customResponse(
+      res,
+      404,
+      result,
+      "Student Id or Nid/birth certificate not upgradable"
+    );
+  } else {
+    result = await Student.findOneAndUpdate(req.query, req.body);
+    sendUpdatedResponse(res, result);
+  }
 });
