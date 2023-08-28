@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
 const facultySchema = new mongoose.Schema({
-  facultyCode: String,
-  facultyName: String,
+  facultyCode: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  facultyName: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   contactNumber: String,
   email: String,
   dean: String,
