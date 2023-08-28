@@ -44,7 +44,7 @@ exports.updateStudent = catchAsync(async (req, res, next) => {
       res,
       404,
       result,
-      "Student Id or Nid/birth certificate not upgradable"
+      "Student Id or Nid/birth certificate not editable"
     );
   } else {
     result = await Student.findOneAndUpdate(req.query, req.body);
