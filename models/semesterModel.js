@@ -6,4 +6,6 @@ const semesterSchema = new mongoose.Schema({
   startDate: Date,
   endDate: Date,
 });
+
+const Semester = mongoose.model("Semester", semesterSchema);
 module.exports = Semester;
