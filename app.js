@@ -1,9 +1,10 @@
 const dotenv = require("dotenv");
-dotenv.config({ path: "./envFile/config.env" });
+dotenv.config({ path: "./config.env" });
 const express = require("express");
 const morgan = require("morgan");
-const cors = require("cors");
+const helmet = require("helmet");
 const app = express();
+var cors = require("cors");
 
 //Take all router required..............
 const admissionRouter = require("./routes/admissionRouter");
@@ -19,13 +20,35 @@ const usersRouter = require("./routes/usersRouter");
 // All error handler route
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
+const { limiter } = require("./Authentication/Rate-limit");
 
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// Limiter will help to set maximum request at a fixed time like 15/20 min
 app.use(cors());
+app.use(limiter);
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", process.env.FRONTEND_URL],
+    },
+  })
+);
+
+/*
+// for specific route
+app.use("/api/v1/admission", limiter);
+
+//for method
+app.get("/login", limiter, function(req, res) {
+  res.send("Test for limiter")
+})
+*/
+
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 app.use((req, res, next) => {
@@ -49,8 +72,8 @@ app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
   res.status(401).json({
     status: "Failed",
-    message: `Can't find ${req.originalUrl} on this server!`
-  })
+    message: `Can't find ${req.originalUrl} on this server!`,
+  });
 });
 
 app.use(globalErrorHandler);
