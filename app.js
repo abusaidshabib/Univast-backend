@@ -16,11 +16,14 @@ const programRouter = require("./routes/programRouter");
 const semesterRouter = require("./routes/semesterRouter");
 const teacherRouter = require("./routes/teacherRouter");
 const usersRouter = require("./routes/usersRouter");
+const mailRouter = require("./routes/nodeMailRoutes");
 
 // All error handler route
-const AppError = require("./utils/appError");
+const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 const { limiter } = require("./Authentication/Rate-limit");
+const { verifyToken } = require("./controllers/authController");
+const { uploadUserPhoto } = require("./middlewares/imageUploader");
 
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === "development") {
@@ -49,7 +52,7 @@ app.get("/login", limiter, function(req, res) {
 })
 */
 
-app.use(express.json());
+app.use(express.json({ limit: "1000kb" }));
 app.use(express.static(`${__dirname}/public`));
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
@@ -60,12 +63,13 @@ app.use((req, res, next) => {
 app.use("/api/v1/admission", admissionRouter);
 app.use("/api/v1/faculty", facultyRouter);
 app.use("/api/v1/student", studentRouter);
-app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/course", uploadUserPhoto, courseRouter);
 app.use("/api/v1/department", departmentRouter);
 app.use("/api/v1/programs", programRouter);
 app.use("/api/v1/semester", semesterRouter);
 app.use("/api/v1/teacher", teacherRouter);
 app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/email", mailRouter);
 
 // Handle unusual routes
 app.all("*", (req, res, next) => {

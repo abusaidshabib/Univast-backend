@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  firebaseId: {
+    type: String,
+  },
   role: {
     type: String,
     enum: ["student", "faculty", "admin", "teacher"],
@@ -32,4 +35,5 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
+userSchema.index({ email: 1 }, { unique: true });
 module.exports = User;

@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 const publicationSchema = new mongoose.Schema({
@@ -49,6 +48,7 @@ const teacherSchema = new mongoose.Schema({
     birth_date: Date,
     religion: String,
     marital: String,
+    blood_group: String,
     email: String,
     mobile: String,
     nid_Birth_certificate: {

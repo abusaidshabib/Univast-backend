@@ -1,5 +1,5 @@
 const Teacher = require("../models/teacherModel");
-const AppError = require("../utils/appError");
+const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const {
   dataGetResponse,
@@ -27,11 +27,10 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
 });
 
 exports.updateTeacher = catchAsync(async (req, res, next) => {
-
-  console.log(req.body)
+  console.log(req.body);
   const queryKeys = Object.keys(req.query);
   if (queryKeys.length === 1) {
-    const result = await Teacher.findOneAndUpdate(req.query, req.body)
+    const result = await Teacher.findOneAndUpdate(req.query, req.body);
     sendUpdatedResponse(res, result);
   } else {
     throw new AppError(

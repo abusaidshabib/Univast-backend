@@ -34,6 +34,7 @@ const studentSchema = new mongoose.Schema({
     birth_date: Date,
     religion: String,
     marital: String,
+    blood_group: String,
     email: String,
     mobile: String,
     nid_Birth_certificate: {
@@ -108,8 +109,7 @@ const studentSchema = new mongoose.Schema({
   },
 });
 
-
 const Student = mongoose.model("Student", studentSchema);
-studentSchema.index({ "studentId": 1 }, { unique: true });
+studentSchema.index({ studentId: 1 }, { unique: true });
 
 module.exports = Student;
