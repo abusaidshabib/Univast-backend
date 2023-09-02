@@ -27,6 +27,10 @@ const admissionSchema = new mongoose.Schema({
     birth_date: Date,
     religion: String,
     marital: String,
+    bloodGroup: {
+      type: String,
+      enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+    },
     email: String,
     mobile: String,
     nid_Birth_certificate: {

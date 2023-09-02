@@ -7,7 +7,7 @@ const {
   sendCreatedResponse,
   sendUpdatedResponse,
 } = require("../utils/successStatus");
-const AppError = require("../utils/appError");
+const AppError = require("../utils/AppError");
 
 exports.getProgram = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
