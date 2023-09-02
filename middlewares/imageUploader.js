@@ -1,29 +1,54 @@
 const multer = require("multer");
 const AppError = require("../utils/AppError");
+const catchAsync = require("../utils/catchAsync");
+const sharp = require("sharp");
+
 const multerStorage = multer.diskStorage({
-  destination: (req, file, callBack) => {
-    callBack(null, "public/img/users");
+  destination: (req, file, cb) => {
+    cb(null, "./public/files"); // Destination directory for storing both images and PDFs
   },
   filename: (req, file, cb) => {
-    const ext = file.mimetype.split("/")[1];
-
-    cb(null, `user-1-${Date.now()}.${ext}`);
+    const ext = file.originalname.split(".").pop(); // Get the file extension from the original file name
+    cb(null, `user-${Date.now()}.${ext}`);
   },
 });
 
-// helps to check the file is image or not
+// Middleware to check if the file is an image or a PDF
 const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
+  const allowedMimeTypes = ["image/jpeg", "image/png", "application/pdf"];
+
+  if (allowedMimeTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new AppError("Not an image. Please upload image", 400), false);
+    cb(
+      new AppError("Only images (JPEG, PNG) and PDF files are allowed.", 400),
+      false
+    );
   }
 };
 
+const fileSize = { fileSize: 2 * 1024 * 1024 }; // 5MB limit
+
 const uploadOptions = {
   storage: multerStorage,
+  limits: fileSize,
   fileFilter: multerFilter,
 };
 
 const upload = multer(uploadOptions);
-exports.uploadUserPhoto = upload.single("photo");
+
+
+// Change the field name to "photo" to match your form or request
+exports.uploadUserPhoto = catchAsync(async (req, res, next) => {
+  upload.fields([{ name: "photo", maxCount: 1 }, { name: "pdf" }])(
+    req,
+    res,
+    async (err) => {
+      if (err) {
+        console.error("File upload error:", err);
+        return res.status(400).json({ error: err.message });
+      }
+      next();
+    }
+  );
+});
