@@ -34,7 +34,6 @@ const admissionSchema = new mongoose.Schema({
       required: [true, "Nid or birth_certificate must have to add"],
       unique: true, // Set the unique option to true for a unique index
     },
-
     passport: String,
     nationality: String,
     country: String,
