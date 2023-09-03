@@ -18,6 +18,7 @@ const studentSchema = new mongoose.Schema({
   },
   facultyCode: String,
   departmentCode: String,
+  batch: Number,
   programCode: String,
   admission_date: Date,
   general: {
