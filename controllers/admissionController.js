@@ -14,8 +14,15 @@ exports.createAdmission = catchAsync(async (req, res, next) => {
 exports.getAllAdmissions = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
   if (queryKeys.length === 1) {
-    const features = await Admission.findOne(req.query);
-    dataGetResponse(res, features);
+    if (req.query.email) {
+      const features = await Admission.findOne({
+        "personal.email": req.query.email,
+      });
+      dataGetResponse(res, features);
+    } else {
+      const features = await Admission.findOne(req.query);
+      dataGetResponse(res, features);
+    }
   } else if (queryKeys.length === 0) {
     const features = await Admission.find();
     dataGetResponse(res, features);

@@ -23,7 +23,6 @@ const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 const { limiter } = require("./Authentication/Rate-limit");
 const { verifyToken } = require("./controllers/authController");
-const { uploadUserPhoto } = require("./middlewares/imageUploader");
 
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === "development") {
@@ -63,7 +62,7 @@ app.use((req, res, next) => {
 app.use("/api/v1/admission", admissionRouter);
 app.use("/api/v1/faculty", facultyRouter);
 app.use("/api/v1/student", studentRouter);
-app.use("/api/v1/course", uploadUserPhoto, courseRouter);
+app.use("/api/v1/course", courseRouter);
 app.use("/api/v1/department", departmentRouter);
 app.use("/api/v1/programs", programRouter);
 app.use("/api/v1/semester", semesterRouter);
