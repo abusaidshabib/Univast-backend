@@ -25,6 +25,15 @@ exports.sendUpdatedResponse = (res, data) => {
   });
 };
 
+exports.sendDeleteResponse = (res, data) => {
+  res.status(201).json({
+    status: "successfully deleted data",
+    data: {
+      data,
+    },
+  });
+};
+
 exports.serverNOTdeclared = (res) => {
   res.status(204).json({
     status: "success",
