@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "../config.env" });
 
 exports.sendEmail = catchAsync(async (req, res, next) => {
-  const { email, subject, text } = req.body;
+  const { email, subject, text, html } = req.body;
 
   console.log(process.env.EMAIL_USERNAME, process.env.EMAIL_PASS);
 
@@ -24,7 +24,7 @@ exports.sendEmail = catchAsync(async (req, res, next) => {
     to: email,
     subject: subject,
     text: text,
-    html: "<b>Hello world<b>",
+    html: html,
   };
   const info = await transporter.sendMail(mailOptions);
   console.log("Email sent:", info);

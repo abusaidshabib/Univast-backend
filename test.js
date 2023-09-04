@@ -1,28 +1,35 @@
-// Change the field name to "photo" to match your form or request
-exports.uploadUserPhoto = async (req, res, next) => {
-  try {
-    await upload.fields([{ name: "photo", maxCount: 1 }, { name: "pdf" }])(
-      req,
-      res,
-      async (err) => {
-        if (err) {
-          console.error("File upload error:", err);
-          return res.status(400).json({ error: err.message });
-        }
+const myObject = {
+  foo: {
+    program_type: String,
+    last_complete_degree_type: String,
+    program: String,
+    medium: String,
+    education_shift: String,
+  },
+  baz: "qux",
+};
+delete myObject.foo.program_type;
+console.log(myObject)
 
-        // If a photo was uploaded, optimize it
-        if (req.files && req.files["photo"] && req.files["photo"][0]) {
-          const photoBuffer = req.files["photo"][0].buffer;
-          req.body.photo = await optimizeImage(photoBuffer);
-        }
-
-        next();
-      }
-    );
-  } catch (err) {
-    console.error("File upload error:", err);
-    return res.status(500).json({ error: "Internal server error" });
-  }
+const myObject = {
+  foo: {
+    program_type: "SomeValue",
+    last_complete_degree_type: "AnotherValue",
+    program: "YetAnotherValue",
+    medium: "OneMoreValue",
+    education_shift: "FinalValue",
+  },
+  baz: "qux",
 };
 
+// List of fields you want to delete
+const fieldsToDelete = ["program_type", "program", "education_shift"];
 
+// Iterate through the fieldsToDelete array and delete the corresponding properties
+for (const field of fieldsToDelete) {
+  if (myObject.foo.hasOwnProperty(field)) {
+    delete myObject.foo[field];
+  }
+}
+
+console.log(myObject);
