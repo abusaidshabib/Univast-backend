@@ -13,7 +13,7 @@ const {
 exports.getStudents = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
   if (queryKeys.length === 1) {
-    const newStudent = await Student.find(req.query);
+    const newStudent = await Student.findOne(req.query);
     dataGetResponse(res, newStudent);
   } else if (queryKeys.length === 0) {
     const newStudent = await Student.find();

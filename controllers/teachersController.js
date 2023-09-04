@@ -1,4 +1,5 @@
 const Teacher = require("../models/teacherModel");
+const { teacherIdCreator } = require("../subControllers/teacherSub");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const {
@@ -6,6 +7,7 @@ const {
   serverNOTdeclared,
   sendCreatedResponse,
   sendUpdatedResponse,
+  customResponse,
 } = require("../utils/successStatus");
 
 exports.getTeacher = catchAsync(async (req, res, next) => {
@@ -22,8 +24,16 @@ exports.getTeacher = catchAsync(async (req, res, next) => {
 });
 
 exports.createTeacher = catchAsync(async (req, res, next) => {
-  const result = await Teacher.create(req.body);
-  sendCreatedResponse(res, result);
+  const bodyData = req.body;
+  if (req.body.teacherId) {
+    customResponse(res, 404, result, "Teacher Id not creatable");
+  } else {
+    const collectionLength = await Teacher.countDocuments();
+    const teacherId = teacherIdCreator(collectionLength);
+    bodyData.teacherId = teacherId;
+    const result = await Teacher.create(bodyData);
+    sendCreatedResponse(res, result);
+  }
 });
 
 exports.updateTeacher = catchAsync(async (req, res, next) => {
