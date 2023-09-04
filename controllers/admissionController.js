@@ -4,6 +4,7 @@ const {
   dataGetResponse,
   sendCreatedResponse,
   serverNOTdeclared,
+  sendDeleteResponse,
 } = require("../utils/successStatus");
 
 exports.createAdmission = catchAsync(async (req, res, next) => {
@@ -26,6 +27,22 @@ exports.getAllAdmissions = catchAsync(async (req, res, next) => {
   } else if (queryKeys.length === 0) {
     const features = await Admission.find();
     dataGetResponse(res, features);
+  } else {
+    serverNOTdeclared(res);
+  }
+});
+
+exports.deleteAdmission = catchAsync(async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  if (queryKeys.length === 1) {
+    if (req.query.email) {
+      const result = await Admission.findOneAndRemove({
+        "personal.email": req.query.email,
+      });
+      sendDeleteResponse(res, result);
+    } else {
+      throw new AppError("no data with this query", 404);
+    }
   } else {
     serverNOTdeclared(res);
   }
