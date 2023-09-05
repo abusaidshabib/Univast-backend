@@ -51,9 +51,13 @@ exports.deleteAdmission = catchAsync(async (req, res, next) => {
     case 0:
       message = "No query is available";
     case 1:
-      result = await Admission.findOneAndRemove({
-        "personal.email": req.query.email,
-      });
+      if (req.query.email) {
+        result = await Admission.findOneAndRemove({
+          "personal.email": req.query.email,
+        });
+      } else {
+        message = "One query is available only";
+      }
     default:
       message = "Unknown Error";
   }
