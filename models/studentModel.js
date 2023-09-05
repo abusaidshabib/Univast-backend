@@ -24,7 +24,6 @@ const studentSchema = new mongoose.Schema({
   general: {
     program_type: String,
     last_complete_degree_type: String,
-    program: String,
     medium: String,
     education_shift: String,
   },
