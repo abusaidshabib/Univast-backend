@@ -40,6 +40,15 @@ class ResponseGenerator {
           message = customMessage || "Data update failed";
         }
         break;
+      case "DELETE":
+        if (statusCode === 204) {
+          status = true;
+          message = customMessage || "Data deleted successfully";
+        } else {
+          status = false;
+          message = customMessage || "Data deletion failed";
+        }
+        break;
       default:
         status = false;
         message = customMessage || "Invalid method";

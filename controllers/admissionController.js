@@ -1,12 +1,7 @@
 const Admission = require("../models/admissionModel");
 const Program = require("../models/programModel");
+const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
-const {
-  dataGetResponse,
-  sendCreatedResponse,
-  serverNOTdeclared,
-  sendDeleteResponse,
-} = require("../utils/successStatus");
 
 exports.createAdmission = catchAsync(async (req, res, next) => {
   let bodyData = req.body;
@@ -15,42 +10,52 @@ exports.createAdmission = catchAsync(async (req, res, next) => {
     programCode: req.body.general.programCode,
   });
   bodyData.general.programName = program.programName;
-  const newAdmission = await Admission.create(bodyData);
-  sendCreatedResponse(res, newAdmission);
+  const result = await Admission.create(bodyData);
+  new ResponseGenerator(res, 201, result, "POST");
 });
 
 exports.getAllAdmissions = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
-  if (queryKeys.length === 1) {
-    if (req.query.email) {
-      const features = await Admission.findOne({
-        "personal.email": req.query.email,
-      });
-      dataGetResponse(res, features);
-    } else {
-      const features = await Admission.findOne(req.query);
-      dataGetResponse(res, features);
-    }
-  } else if (queryKeys.length === 0) {
-    const features = await Admission.find();
-    dataGetResponse(res, features);
-  } else {
-    serverNOTdeclared(res);
+  let result;
+  let statusCode = 200;
+  let message;
+  let method = "GET";
+
+  switch (queryKeys.length) {
+    case 0:
+      result = await Admission.find();
+      break;
+    case 1:
+      if (req.query.email) {
+        result = await Admission.findOne({
+          "personal.email": req.query.email,
+        });
+      } else {
+        statusCode = 401;
+        message = "Your query not acceptable";
+      }
+      break;
+    default:
+      message = "Multiple query or others work not done yet";
   }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });
 
 exports.deleteAdmission = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
-  if (queryKeys.length === 1) {
-    if (req.query.email) {
-      const result = await Admission.findOneAndRemove({
+  let result;
+  let statusCode = 204;
+  let message;
+  let method = "DELETE";
+  switch (queryKeys.length) {
+    case 0:
+      message = "No query is available";
+    case 1:
+      result = await Admission.findOneAndRemove({
         "personal.email": req.query.email,
       });
-      sendDeleteResponse(res, result);
-    } else {
-      throw new AppError("no data with this query", 404);
-    }
-  } else {
-    serverNOTdeclared(res);
+    default:
+      message = "Unknown Error";
   }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });

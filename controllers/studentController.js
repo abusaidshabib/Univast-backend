@@ -9,35 +9,6 @@ const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
-// Student getting callback function
-exports.getStudents = catchAsync(async (req, res, next) => {
-  const queryKeys = Object.keys(req.query);
-  let result;
-  let statusCode = 200;
-  let message;
-  let method = "GET";
-
-  switch (queryKeys.length) {
-    case 0:
-      result = await Student.find();
-      break;
-    case 1:
-      if (req.query.email) {
-        result = await Student.findOne({
-          "personal.email": req.query.email,
-        });
-      } else {
-        statusCode = 401;
-        message = "Your query not acceptable";
-      }
-      break;
-    default:
-      statusCode = 401;
-      message = "Multiple query work not done yet";
-  }
-  new ResponseGenerator(res, statusCode, result, method, message);
-});
-
 // Student creating callback function
 exports.createStudent = catchAsync(async (req, res, next) => {
   let result;
@@ -64,6 +35,35 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     bodyData.admission_date = new Date();
 
     result = await Student.create(bodyData);
+  }
+  new ResponseGenerator(res, statusCode, result, method, message);
+});
+
+// Student getting callback function
+exports.getStudents = catchAsync(async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  let result;
+  let statusCode = 200;
+  let message;
+  let method = "GET";
+
+  switch (queryKeys.length) {
+    case 0:
+      result = await Student.find();
+      break;
+    case 1:
+      if (req.query.email) {
+        result = await Student.findOne({
+          "personal.email": req.query.email,
+        });
+      } else {
+        statusCode = 401;
+        message = "Your query not acceptable";
+      }
+      break;
+    default:
+      statusCode = 401;
+      message = "Multiple query work not done yet";
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
