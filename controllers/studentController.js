@@ -41,7 +41,6 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     const department = await Department.findOne({
       departmentCode: program.departmentCode,
     });
-
     bodyData.studentId = studentId;
     bodyData.departmentCode = program.departmentCode;
     bodyData.facultyCode = department.facultyCode;
