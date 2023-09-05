@@ -26,10 +26,15 @@ exports.createUser = catchAsync(async (req, res, next) => {
 // });
 
 exports.login = catchAsync(async (req, res, next) => {
+  let user;
+  const queryKeys = Object.keys(req.query);
   // const { email, firebaseId } = req.body;
   // const user = await User.findOne({ email: req.query.email });
-  const user = await User.findOne({ firebaseId: req.query.firebaseId });
-
+  if (queryKeys.length === 1) {
+    user = await User.findOne({ firebaseId: req.query.firebaseId });
+  } else {
+    user = await User.find();
+  }
 
   // const token = generateToken(req.body);
   // console.log(token);
