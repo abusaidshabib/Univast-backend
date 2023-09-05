@@ -9,22 +9,39 @@ const {
 } = require("../utils/successStatus");
 const AppError = require("../utils/AppError");
 
-exports.getProgram = catchAsync(async (req, res, next) => {
-  const queryKeys = Object.keys(req.query);
-  if (queryKeys.length === 1) {
-    const result = await Program.find(req.query);
-    dataGetResponse(res, result);
-  } else if (queryKeys.length === 0) {
-    const result = await Program.find();
-    dataGetResponse(res, result);
-  } else {
-    serverNOTdeclared(res);
-  }
+exports.createProgram = catchAsync(async (req, res, next) => {
+  let result;
+  let statusCode = 201;
+  let message;
+  let method = "POST";
+  result = await Program.create(req.body);
+  new ResponseGenerator(res, statusCode, result, method, message);
 });
 
-exports.createProgram = catchAsync(async (req, res, next) => {
-  const result = await Program.create(req.body);
-  sendCreatedResponse(res, result);
+exports.getProgram = catchAsync(async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  let result;
+  let statusCode = 200;
+  let message;
+  let method = "GET";
+  switch (queryKeys.length) {
+    case 0:
+      result = await Program.find();
+      break;
+    case 1:
+      if (
+        req.query.programCode ||
+        req.query.programType ||
+        req.query.programLevel
+      ) {
+        result = await Program.find(req.query);
+      }
+
+    default:
+      message = "unknown error arrive";
+      break;
+  }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });
 
 // exports.updatePrograms = catchAsync(async (req, res, next) => {
@@ -35,12 +52,25 @@ exports.createProgram = catchAsync(async (req, res, next) => {
 
 exports.deleteProgram = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
-  if (queryKeys.length === 1) {
-    const result = await Program.deleteOne(req.query);
-    dataGetResponse(res, result);
-  } else if (queryKeys.length === 0) {
-    throw new AppError(`Please give docId or field`, 204);
-  } else {
-    serverNOTdeclared(res);
+  let result;
+  let statusCode = 204;
+  let message;
+  let method = "DELETE";
+  switch (queryKeys.length) {
+    case 0:
+      message = "No query is available";
+    case 1:
+      if (
+        req.query.programCode ||
+        req.query.programType ||
+        req.query.programLevel
+      ) {
+        result = await Program.findOneAndRemove(req.query);
+      } else {
+        message = "One query is available only";
+      }
+    default:
+      message = "Unknown Error";
   }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });

@@ -7,22 +7,22 @@ const {
 } = require("../utils/successStatus");
 
 exports.createCourse = catchAsync(async (req, res, next) => {
-  // Access uploaded files from req.files array (provided by Multer)
-  const uploadedFiles = req.files;
-  console.log(req.files);
-
-  res.status(201).json({
-    status: "Success",
-    message: "Files uploaded successfully",
-    fileUrls,
-  });
+  let result;
+  let statusCode = 201;
+  let message;
+  let method = "POST";
+  new ResponseGenerator(res, statusCode, result, method, message);
 });
 
 exports.getCourse = catchAsync(async (req, res, next) => {
+  let result;
+  let statusCode = 200;
+  let message;
+  let method = "GET";
   if (req.query.courseCode) {
-    const result = await Course.findOne(req.query);
-    dataGetResponse(res, result);
+    result = await Course.findOne(req.query);
   } else {
-    throw new AppError("Please use write query", 404);
+    message = "Please use right query";
   }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });

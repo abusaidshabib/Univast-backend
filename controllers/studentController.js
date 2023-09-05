@@ -6,32 +6,19 @@ const {
   admissionDateCreate,
 } = require("../subControllers/studentSub");
 const AppError = require("../utils/AppError");
+const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
-const {
-  dataGetResponse,
-  serverNOTdeclared,
-  sendCreatedResponse,
-  sendUpdatedResponse,
-  customResponse,
-} = require("../utils/successStatus");
 
-exports.getStudents = catchAsync(async (req, res, next) => {
-  const queryKeys = Object.keys(req.query);
-  if (queryKeys.length === 1) {
-    const newStudent = await Student.findOne(req.query);
-    dataGetResponse(res, newStudent);
-  } else if (queryKeys.length === 0) {
-    const newStudent = await Student.find();
-    dataGetResponse(res, newStudent);
-  } else if (queryKeys.length > 1) {
-    serverNOTdeclared(res);
-  }
-});
-
+// Student creating callback function
 exports.createStudent = catchAsync(async (req, res, next) => {
+  let result;
+  let statusCode = 201;
+  let message;
+  let method = "POST";
   let bodyData = req.body;
   if (req.body.studentId) {
-    customResponse(res, 404, result, "Student Id not creatable");
+    statusCode = 401;
+    message = "Student Id not creatable";
   } else {
     const collectionLength = await Student.countDocuments();
     const studentId = studentIdCreator(collectionLength);
@@ -47,22 +34,64 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     bodyData.facultyCode = department.facultyCode;
     bodyData.admission_date = new Date();
 
-    const result = await Student.create(bodyData);
-    sendCreatedResponse(res, result);
+    result = await Student.create(bodyData);
   }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });
 
-exports.updateStudent = catchAsync(async (req, res, next) => {
-  let result = [];
-  if (req.body.studentId || req.body.personal.nid_Birth_certificate) {
-    customResponse(
-      res,
-      404,
-      result,
-      "Student Id or Nid/birth certificate not editable"
-    );
-  } else {
-    result = await Student.findOneAndUpdate(req.query, req.body);
-    sendUpdatedResponse(res, result);
+// Student getting callback function
+exports.getStudents = catchAsync(async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  let result;
+  let statusCode = 200;
+  let message;
+  let method = "GET";
+
+  switch (queryKeys.length) {
+    case 0:
+      result = await Student.find();
+      break;
+    case 1:
+      if (req.query.email) {
+        result = await Student.findOne({
+          "personal.email": req.query.email,
+        });
+      } else {
+        statusCode = 401;
+        message = "Your query not acceptable";
+      }
+      break;
+    default:
+      statusCode = 401;
+      message = "Multiple query work not done yet";
   }
+  new ResponseGenerator(res, statusCode, result, method, message);
+});
+
+// Update Student
+exports.updateStudent = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
+  let message;
+  let method = "PATCH";
+  let result;
+  switch (true) {
+    case req.query.email !== undefined:
+      if (
+        req.body.studentId ||
+        req.body.personal.nid_Birth_certificate ||
+        req.body._id ||
+        req.body.personal.email
+      ) {
+        message =
+          "Student Id or Nid/birth or ID or Email certificate not editable";
+      } else {
+        console.log("SUccess");
+        const filter = { "personal.email": req.query.email };
+        result = await Student.findOneAndUpdate(filter, req.body);
+      }
+      break;
+    default:
+      message = "Only one query available";
+  }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });
