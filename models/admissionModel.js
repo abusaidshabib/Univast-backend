@@ -30,7 +30,7 @@ const admissionSchema = new mongoose.Schema({
     marital: String,
     blood_group: {
       type: String,
-      enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+      enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", " ", ""],
     },
     email: {
       type: String,
