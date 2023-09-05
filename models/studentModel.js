@@ -19,7 +19,11 @@ const studentSchema = new mongoose.Schema({
   facultyCode: String,
   departmentCode: String,
   batch: Number,
-  programCode: String,
+  programName: String,
+  programCode: {
+    type: String,
+    required: [true, "ProgramCode must have to add"],
+  },
   admission_date: Date,
   general: {
     program_type: String,

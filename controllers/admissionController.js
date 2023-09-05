@@ -1,4 +1,5 @@
 const Admission = require("../models/admissionModel");
+const Program = require("../models/programModel");
 const catchAsync = require("../utils/catchAsync");
 const {
   dataGetResponse,
@@ -8,7 +9,12 @@ const {
 } = require("../utils/successStatus");
 
 exports.createAdmission = catchAsync(async (req, res, next) => {
-  const newAdmission = await Admission.create(req.body);
+  let bodyData = req.body;
+  const program = await Program.findOne({
+    programCode: req.body.programCode,
+  });
+  bodyData.general.programName = program.programName;
+  const newAdmission = await Admission.create(bodyData);
   sendCreatedResponse(res, newAdmission);
 });
 
