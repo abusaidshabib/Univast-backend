@@ -15,5 +15,16 @@ const departmentSchema = new mongoose.Schema({
   programCode: String,
 });
 
-const Department = mongoose.Model("Department", departmentSchema);
+const Department = mongoose.model("Department", departmentSchema);
 module.exports = Department;
+
+
+// const departmentSchema = new mongoose.Schema({
+//   facultyCode: String,
+//   departmentCode: String,
+//   programCode: String,
+//   departmentName: String,
+// });
+
+// const Department = mongoose.model("Department", departmentSchema);
+// module.exports = Department;

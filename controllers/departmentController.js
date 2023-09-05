@@ -1,13 +1,14 @@
 const Department = require("../models/departmentModel");
 const catchAsync = require("../utils/catchAsync");
-const { sendCreatedResponse } = require("../utils/successStatus");
+const { sendCreatedResponse, dataGetResponse } = require("../utils/successStatus");
 
 exports.createDepartment = catchAsync(async (req, res, next) => {
-  const result = await Department.create();
+  console.log(req.body);
+  const result = await Department.create(req.body);
   sendCreatedResponse(res, result);
 });
 
 exports.getDepartment = catchAsync(async (req, res, next) => {
-  const result = await Department.create();
-  sendCreatedResponse(res, result);
+  const result = await Department.findOne(req.query);
+  dataGetResponse(res, result);
 });

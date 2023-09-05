@@ -1,5 +1,10 @@
+const Department = require("../models/departmentModel");
+const Program = require("../models/programModel");
 const Student = require("../models/studentModel");
-const { studentIdCreator } = require("../subControllers/studentSub");
+const {
+  studentIdCreator,
+  admissionDateCreate,
+} = require("../subControllers/studentSub");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const {
@@ -24,16 +29,26 @@ exports.getStudents = catchAsync(async (req, res, next) => {
 });
 
 exports.createStudent = catchAsync(async (req, res, next) => {
-  let result = [];
   let bodyData = req.body;
   if (req.body.studentId) {
     customResponse(res, 404, result, "Student Id not creatable");
   } else {
     const collectionLength = await Student.countDocuments();
     const studentId = studentIdCreator(collectionLength);
+    const program = await Program.findOne({
+      programCode: req.body.programCode,
+    });
+    const department = await Department.findOne({
+      departmentCode: program.departmentCode,
+    });
+
     bodyData.studentId = studentId;
+    bodyData.departmentCode = program.departmentCode;
+    bodyData.facultyCode = department.facultyCode;
+    bodyData.admission_date = new Date();
+
     const result = await Student.create(bodyData);
-    sendCreatedResponse(res, result);
+    sendCreatedResponse(res, bodyData);
   }
 });
 
