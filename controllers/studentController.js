@@ -43,6 +43,7 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     });
     bodyData.studentId = studentId;
     bodyData.departmentCode = program.departmentCode;
+    bodyData.programName = program.programName;
     bodyData.facultyCode = department.facultyCode;
     bodyData.admission_date = new Date();
 
