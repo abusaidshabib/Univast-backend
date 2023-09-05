@@ -38,8 +38,15 @@ const studentSchema = new mongoose.Schema({
     birth_date: Date,
     religion: String,
     marital: String,
-    blood_group: String,
-    email: String,
+    blood_group: {
+      type: String,
+      enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+    },
+    email: {
+      type: String,
+      required: [true, "Email must have to add"],
+      unique: [true, "You have already registered"],
+    },
     mobile: String,
     nid_Birth_certificate: {
       type: String,
