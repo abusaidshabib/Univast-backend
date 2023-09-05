@@ -17,6 +17,7 @@ const semesterRouter = require("./routes/semesterRouter");
 const teacherRouter = require("./routes/teacherRouter");
 const usersRouter = require("./routes/usersRouter");
 const mailRouter = require("./routes/nodeMailRoutes");
+const teachAddRouter = require("./routes/teachAddRouter");
 
 // All error handler route
 const AppError = require("./utils/AppError");
@@ -69,6 +70,7 @@ app.use("/api/v1/semester", semesterRouter);
 app.use("/api/v1/teacher", teacherRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/email", mailRouter);
+app.use("/api/v1/teachadd", teachAddRouter);
 
 // Handle unusual routes
 app.all("*", (req, res, next) => {
