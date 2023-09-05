@@ -48,7 +48,7 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     bodyData.admission_date = new Date();
 
     const result = await Student.create(bodyData);
-    sendCreatedResponse(res, bodyData);
+    sendCreatedResponse(res, result);
   }
 });
 
