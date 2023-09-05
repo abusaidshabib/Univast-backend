@@ -31,9 +31,8 @@ const userSchema = new mongoose.Schema({
       message: (props) => `${props.value} is not a valid email address!`,
     },
   },
-  phone: String,
 });
 
 const User = mongoose.model("User", userSchema);
-userSchema.index({ email: 1 }, { unique: true });
+userSchema.index({ firebaseId: 1 }, { unique: true });
 module.exports = User;
