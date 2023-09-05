@@ -10,8 +10,9 @@ const {
 
 exports.createAdmission = catchAsync(async (req, res, next) => {
   let bodyData = req.body;
+  console.log(bodyData);
   const program = await Program.findOne({
-    programCode: req.body.programCode,
+    programCode: req.body.general.programCode,
   });
   bodyData.general.programName = program.programName;
   const newAdmission = await Admission.create(bodyData);
