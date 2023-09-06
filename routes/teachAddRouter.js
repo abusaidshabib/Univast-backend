@@ -1,6 +1,10 @@
 const express = require("express");
-const { CreateTechAdd } = require("../controllers/teachAddController");
+const {
+  CreateTechAdd,
+  GetTeachAdd,
+  deleteTeachAdd,
+} = require("../controllers/teachAddController");
 const router = express.Router();
 
-router.route("/").post(CreateTechAdd);
+router.route("/").get(GetTeachAdd).post(CreateTechAdd).delete(deleteTeachAdd);
 module.exports = router;
