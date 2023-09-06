@@ -43,5 +43,24 @@ exports.deleteTeachAdd = catchAsync(async (req, res, next) => {
   let result;
   let statusCode = 204;
   let message;
-  let method = "DEL"
+  let method = "DELETE";
+  switch (queryKeys.length) {
+    case 0:
+      message = "No query is available";
+      break;
+    case 1:
+      if (req.query.email) {
+        result = await TeachAdd.findOneAndRemove({
+          "personal.email": req.query.email,
+        });
+      } else {
+        message = "One query is available only";
+      }
+      break;
+
+    default:
+      message = "Unknown Error";
+      break;
+  }
+  new ResponseGenerator(res, statusCode, result, method, message);
 });

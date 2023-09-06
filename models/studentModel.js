@@ -35,7 +35,7 @@ const studentSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     gender: String,
-    birth_date: Date,
+    birth_date: String,
     religion: String,
     marital: String,
     blood_group: {
