@@ -1,10 +1,7 @@
 const Department = require("../models/departmentModel");
 const Program = require("../models/programModel");
 const Student = require("../models/studentModel");
-const {
-  studentIdCreator,
-  admissionDateCreate,
-} = require("../subControllers/studentSub");
+const { studentIdCreator } = require("../subControllers/studentSub");
 const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
@@ -64,6 +61,7 @@ exports.getStudents = catchAsync(async (req, res, next) => {
     default:
       statusCode = 401;
       message = "Multiple query work not done yet";
+      break;
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
@@ -85,7 +83,6 @@ exports.updateStudent = catchAsync(async (req, res, next) => {
         message =
           "Student Id or Nid/birth or ID or Email certificate not editable";
       } else {
-        console.log("SUccess");
         const filter = { "personal.email": req.query.email };
         result = await Student.findOneAndUpdate(filter, req.body);
       }

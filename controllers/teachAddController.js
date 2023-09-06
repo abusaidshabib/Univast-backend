@@ -1,7 +1,10 @@
 const catchAsync = require("../utils/catchAsync");
-const { sendCreatedResponse } = require("../utils/successStatus");
 
 exports.CreateTechAdd = catchAsync(async (req, res, next) => {
+  let result;
+  let statusCode = 201;
+  let message;
+  let method = "POST";
   console.log("working");
-  sendCreatedResponse(res, result);
+  new ResponseGenerator(res, statusCode, result, method, message);
 });

@@ -1,17 +1,15 @@
 const { generateToken } = require("../Authentication/authJWT");
 const User = require("../models/userModel");
 const AppError = require("../utils/AppError");
+const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
-const { customResponse } = require("../utils/successStatus");
 
 exports.createUser = catchAsync(async (req, res, next) => {
-  const result = await User.create(req.body);
-  res.status(200).json({
-    status: "success",
-    data: {
-      result,
-    },
-  });
+  let result;
+  let statusCode = 201;
+  let method = "POST";
+  result = await User.create(req.body);
+  new ResponseGenerator(res, statusCode, result, method);
 });
 // exports.createUser = catchAsync(async (req, res, next) => {
 //     const result = await User.create(req.body);

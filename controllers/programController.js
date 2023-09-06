@@ -1,13 +1,8 @@
 const mongoose = require("mongoose");
 const catchAsync = require("../utils/catchAsync");
 const Program = require("../models/programModel");
-const {
-  dataGetResponse,
-  serverNOTdeclared,
-  sendCreatedResponse,
-  sendUpdatedResponse,
-} = require("../utils/successStatus");
 const AppError = require("../utils/AppError");
+const ResponseGenerator = require("../utils/ResponseGenerator");
 
 exports.createProgram = catchAsync(async (req, res, next) => {
   let result;
