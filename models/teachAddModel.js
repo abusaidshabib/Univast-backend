@@ -67,4 +67,4 @@ const teachAddSchema = new mongoose.Schema({
 });
 
 const TeachAdd = mongoose.model("TeachAdd", teachAddSchema);
-exports.module = TeachAdd;
+module.exports = TeachAdd;
