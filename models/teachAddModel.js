@@ -1,4 +1,34 @@
 const { default: mongoose } = require("mongoose");
+const publicationSchema = new mongoose.Schema({
+  title: String,
+  author: [String],
+  publication_year: Date,
+  journal: String,
+  volume: Number,
+  pages: String,
+  doi: String,
+});
+
+const coursesSchema = new mongoose.Schema({
+  course_code: String,
+  course_name: String,
+  semester: String,
+  total_Student: Number,
+  class_schedule: {
+    days: [String],
+    time: String,
+  },
+});
+
+const educationSchema = new mongoose.Schema({
+  exam: String,
+  institution_name: String,
+  board: String,
+  group_major: String,
+  result: Number,
+  passing_year: Number,
+  certificates: String,
+});
 
 const teachAddSchema = new mongoose.Schema({
   family: {
