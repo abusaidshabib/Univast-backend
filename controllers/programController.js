@@ -31,6 +31,7 @@ exports.getProgram = catchAsync(async (req, res, next) => {
       ) {
         result = await Program.find(req.query);
       }
+      break;
 
     default:
       message = "unknown error arrive";
