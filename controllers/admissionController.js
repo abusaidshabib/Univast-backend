@@ -32,6 +32,7 @@ exports.getAllAdmissions = catchAsync(async (req, res, next) => {
       break;
     default:
       message = "Multiple query or others work not done yet";
+      break;
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
