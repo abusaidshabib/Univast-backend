@@ -5,6 +5,10 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.createAdmission = catchAsync(async (req, res, next) => {
   let bodyData = req.body;
+  const program = await Program.findOne({
+    programCode: req.body.general.programCode,
+  });
+  bodyData.general.programName = program.programName;
   const result = await Admission.create(bodyData);
   new ResponseGenerator(res, 201, result, "POST");
 });
