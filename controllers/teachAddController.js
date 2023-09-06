@@ -43,5 +43,5 @@ exports.deleteTeachAdd = catchAsync(async (req, res, next) => {
   let result;
   let statusCode = 204;
   let message;
-  let method = "DEL "
+  let method = "DEL"
 });
