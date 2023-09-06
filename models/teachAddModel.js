@@ -31,10 +31,6 @@ const educationSchema = new mongoose.Schema({
 });
 
 const teachAddSchema = new mongoose.Schema({
-  family: {
-    father_name: String,
-    mother_name: String,
-  },
   personal: {
     firstName: String,
     lastName: String,
@@ -43,6 +39,8 @@ const teachAddSchema = new mongoose.Schema({
     religion: String,
     marital: String,
     blood_group: String,
+    father_name: String,
+    mother_name: String,
     email: {
       type: String,
       required: [true, "Email must have to add"],

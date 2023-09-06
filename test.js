@@ -1,4 +1,4 @@
-function generatePassword(email, programCode) {
+const generatePassword = (email, programCode) => {
   // Extract the first part of the email before '@' (username)
   const username = email.split("@")[0];
 
@@ -6,10 +6,10 @@ function generatePassword(email, programCode) {
   const codePart = programCode.slice(0, 3);
 
   // Create a memorable password by combining these parts
-  const memorablePassword = `${username}${codePart}Random123`;
+  const memorablePassword = `${username}${codePart}`;
 
   return memorablePassword;
-}
+};
 
 // Example usage:
 const email = "john@example.com";

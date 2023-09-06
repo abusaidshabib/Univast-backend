@@ -22,4 +22,3 @@ const Faculties = mongoose.model("Faculties", facultySchema);
 
 module.exports = Faculties;
 
-//FAC-101
