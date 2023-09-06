@@ -1,35 +1,22 @@
-const myObject = {
-  foo: {
-    program_type: String,
-    last_complete_degree_type: String,
-    program: String,
-    medium: String,
-    education_shift: String,
-  },
-  baz: "qux",
-};
-delete myObject.foo.program_type;
-console.log(myObject)
+function generatePassword(email, programCode) {
+  // Extract the first part of the email before '@' (username)
+  const username = email.split("@")[0];
 
-// const myObject = {
-//   foo: {
-//     program_type: "SomeValue",
-//     last_complete_degree_type: "AnotherValue",
-//     program: "YetAnotherValue",
-//     medium: "OneMoreValue",
-//     education_shift: "FinalValue",
-//   },
-//   baz: "qux",
-// };
+  // Extract the first three characters of the programCode
+  const codePart = programCode.slice(0, 3);
 
-// // List of fields you want to delete
-// const fieldsToDelete = ["program_type", "program", "education_shift"];
+  // Create a memorable password by combining these parts
+  const memorablePassword = `${username}${codePart}Random123`;
 
-// // Iterate through the fieldsToDelete array and delete the corresponding properties
-// for (const field of fieldsToDelete) {
-//   if (myObject.foo.hasOwnProperty(field)) {
-//     delete myObject.foo[field];
-//   }
-// }
+  return memorablePassword;
+}
 
-// console.log(myObject);
+// Example usage:
+const email = "john@example.com";
+const programCode = "ABC123";
+
+const memorablePassword = generatePassword(email, programCode);
+
+console.log(`Email: ${email}`);
+console.log(`Program Code: ${programCode}`);
+console.log(`Memorable Password: ${memorablePassword}`);
