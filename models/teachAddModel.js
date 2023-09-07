@@ -30,6 +30,13 @@ const educationSchema = new mongoose.Schema({
   certificates: String,
 });
 
+const experienceSchema = new mongoose.Schema({
+  institution_name: String,
+  designation: String,
+  startDate: String,
+  endDate: String,
+});
+
 const teachAddSchema = new mongoose.Schema({
   personal: {
     firstName: String,
@@ -79,6 +86,7 @@ const teachAddSchema = new mongoose.Schema({
       },
     },
   },
+  experience: [experienceSchema],
   education: [educationSchema],
   departmentCode: String,
   courses_taught: [coursesSchema],
