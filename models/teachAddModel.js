@@ -36,7 +36,7 @@ const experienceSchema = new mongoose.Schema({
   location: String,
   startDate: String,
   endDate: String,
-  currentlyWorking: Boolean
+  currentlyWorking: Boolean,
 });
 
 const teachAddSchema = new mongoose.Schema({
@@ -105,4 +105,5 @@ const teachAddSchema = new mongoose.Schema({
 });
 
 const TeachAdd = mongoose.model("TeachAdd", teachAddSchema);
+teachAddSchema.index({ "personal.email": 1 }, { unique: true });
 module.exports = TeachAdd;
