@@ -24,6 +24,7 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
     const collectionLength = await Teacher.countDocuments();
     const teacherId = teacherIdCreator(collectionLength);
     bodyData.teacherId = teacherId;
+    console.log(bodyData);
     result = await Teacher.create(bodyData);
   }
   new ResponseGenerator(res, statusCode, result, method, message);
