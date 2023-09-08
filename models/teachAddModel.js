@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 const publicationSchema = new mongoose.Schema({
   title: String,
   author: [String],
-  publication_year: Date,
+  publication_year: String,
   journal: String,
   volume: Number,
   pages: String,
@@ -33,8 +33,10 @@ const educationSchema = new mongoose.Schema({
 const experienceSchema = new mongoose.Schema({
   institution_name: String,
   designation: String,
+  location: String,
   startDate: String,
   endDate: String,
+  currentlyWorking: Boolean
 });
 
 const teachAddSchema = new mongoose.Schema({
@@ -42,7 +44,7 @@ const teachAddSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     gender: String,
-    birth_date: Date,
+    birth_date: String,
     religion: String,
     marital: String,
     blood_group: String,
