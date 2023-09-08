@@ -104,7 +104,6 @@ const teacherSchema = new mongoose.Schema({
   },
   experience: [experienceSchema],
   education: [educationSchema],
-  departmentCode: String,
   courses_taught: [coursesSchema],
   research_interests: [String],
   publication: [publicationSchema],
