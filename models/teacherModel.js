@@ -1,8 +1,9 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+
 const publicationSchema = new mongoose.Schema({
   title: String,
   author: [String],
-  publication_year: String,
+  publication_year: Date,
   journal: String,
   volume: Number,
   pages: String,
@@ -30,31 +31,25 @@ const educationSchema = new mongoose.Schema({
   certificates: String,
 });
 
-const experienceSchema = new mongoose.Schema({
-  institution_name: String,
-  designation: String,
-  location: String,
-  startDate: String,
-  endDate: String,
-  currentlyWorking: Boolean,
-});
-
-const teachAddSchema = new mongoose.Schema({
+const teacherSchema = new mongoose.Schema({
+  teacherId: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  family: {
+    father_name: String,
+    mother_name: String,
+  },
   personal: {
     firstName: String,
     lastName: String,
     gender: String,
-    birth_date: String,
+    birth_date: Date,
     religion: String,
     marital: String,
     blood_group: String,
-    father_name: String,
-    mother_name: String,
-    email: {
-      type: String,
-      required: [true, "Email must have to add"],
-      unique: [true, "You have already registered"],
-    },
+    email: String,
     mobile: String,
     nid_Birth_certificate: {
       type: String,
@@ -88,9 +83,10 @@ const teachAddSchema = new mongoose.Schema({
       },
     },
   },
-  experience: [experienceSchema],
   education: [educationSchema],
+  facultyCode: String,
   departmentCode: String,
+  position: String,
   courses_taught: [coursesSchema],
   research_interests: [String],
   publication: [publicationSchema],
@@ -104,5 +100,5 @@ const teachAddSchema = new mongoose.Schema({
   },
 });
 
-const TeachAdd = mongoose.model("TeachAdd", teachAddSchema);
-module.exports = TeachAdd;
+const Teacher = mongoose.model("Teacher", teacherSchema);
+module.exports = Teacher;
