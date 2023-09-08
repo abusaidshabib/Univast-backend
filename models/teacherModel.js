@@ -101,4 +101,5 @@ const teacherSchema = new mongoose.Schema({
 });
 
 const Teacher = mongoose.model("Teacher", teacherSchema);
+teacherSchema.index({ "personal.email": 1 }, { unique: true });
 module.exports = Teacher;
