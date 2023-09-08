@@ -41,6 +41,19 @@ const experienceSchema = new mongoose.Schema({
 });
 
 const teacherSchema = new mongoose.Schema({
+  teacherId: Number,
+  designation: {
+    type: String,
+    default: "Lecturer",
+  },
+  facultyCode: {
+    type: String,
+    default: "FAC-101",
+  },
+  departmentCode: {
+    type: String,
+    default: "DEP-101",
+  },
   personal: {
     firstName: String,
     lastName: String,
