@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Important Announcement 1",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et libero ac nunc cursus fermentum.",
+    "date": "2023-09-09T10:00:00Z",
+    "author": "John Doe",
+    "targetAudience": "All Employees"
+  },
+  {
+    "title": "Team Meeting Reminder",
+    "content": "Don't forget the team meeting at 2 PM tomorrow in the conference room.",
+    "date": "2023-09-10T14:00:00Z",
+    "author": "Jane Smith",
+    "targetAudience": "Team A"
+  },
+  {
+    "title": "Holiday Notice",
+    "content": "Our office will be closed on September 15th for the holiday.",
+    "date": "2023-09-15T00:00:00Z",
+    "author": "HR Department",
+    "targetAudience": "All Employees"
+  },
+  {
+    "title": "Product Launch Announcement",
+    "content": "We are excited to announce the launch of our new product on October 1st.",
+    "date": "2023-10-01T09:00:00Z",
+    "author": "Marketing Team",
+    "targetAudience": "Customers"
+  },
+  {
+    "title": "Training Session",
+    "content": "Join us for a training session on September 20th to learn about our new software.",
+    "date": "2023-09-20T15:30:00Z",
+    "author": "Training Department",
+    "targetAudience": "Employees"
+  },
+  {
+    "title": "Office Closure",
+    "content": "The office will be closed for maintenance on September 12th and 13th.",
+    "date": "2023-09-12T00:00:00Z",
+    "author": "Facilities Team",
+    "targetAudience": "All Employees"
+  },
+  {
+    "title": "New HR Policy",
+    "content": "We have updated our HR policy handbook. Please review the changes.",
+    "date": "2023-09-25T08:00:00Z",
+    "author": "HR Department",
+    "targetAudience": "Employees"
+  },
+  {
+    "title": "Upcoming Conference",
+    "content": "Save the date for our annual company conference on November 5th.",
+    "date": "2023-11-05T10:00:00Z",
+    "author": "Events Team",
+    "targetAudience": "All Employees"
+  },
+  {
+    "title": "Project Deadline Extension",
+    "content": "The deadline for project XYZ has been extended to October 15th.",
+    "date": "2023-09-07T16:00:00Z",
+    "author": "Project Manager",
+    "targetAudience": "Project Team"
+  },
+  {
+    "title": "New Employee Welcome",
+    "content": "Please join us in welcoming our new team member, Sarah Johnson.",
+    "date": "2023-09-14T09:30:00Z",
+    "author": "HR Department",
+    "targetAudience": "All Employees"
+  }
+]
