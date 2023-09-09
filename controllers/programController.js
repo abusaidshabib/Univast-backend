@@ -27,7 +27,8 @@ exports.getProgram = catchAsync(async (req, res, next) => {
       if (
         req.query.programCode ||
         req.query.programType ||
-        req.query.programLevel
+        req.query.programLevel ||
+        req.query.departmentCode
       ) {
         result = await Program.find(req.query);
       }
