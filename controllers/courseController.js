@@ -18,40 +18,49 @@ exports.createCourse = catchAsync(async (req, res, next) => {
 });
 
 exports.getCourse = catchAsync(async (req, res, next) => {
-  const queryKeys = Object.keys(req.query);
+  const { programCode, facultyCode, departmentCode, courseCode } = req.query;
   let result;
   let statusCode = 200;
   let message;
   let method = "GET";
-  switch (queryKeys.length) {
-    case 0:
-      result = await Course.find();
-      break;
-    case 1:
-      if (req.query.courseCode) {
-        result = await Course.findOne(req.query);
-      } else if (
-        req.query.programCode ||
-        req.query.facultyCode ||
-        req.query.departmentCode
-      ) {
-        result = await Course.find(req.query);
-      } else {
-        message = "Please use right query";
-      }
-      break;
-    case 2:
-      let query = queryData(req);
-      result = await Course.find(query);
-      break;
-    case 3:
-      query = queryData(req);
-      result = await Course.find(query);
-      break;
-    default:
-      message = "No option available";
-      break;
+  const filter = {};
+
+  console.log(filter)
+
+  if (facultyCode !== "") {
+    filter.facultyCode = facultyCode;
   }
+  if (departmentCode !== "") {
+    filter.departmentCode = departmentCode;
+  }
+  if (programCode !== "") {
+    filter.programCode = programCode;
+  }
+  result = await Course.find(filter);
+
+  // const queryKeys = Object.keys(req.query);
+  // switch (queryKeys.length) {
+  //   case 0:
+  //     result = await Course.find();
+  //     break;
+  //   case 1:
+  //     if (courseCode) {
+  //       result = await Course.findOne(req.query);
+  //     } else if (programCode || facultyCode || departmentCode) {
+  //       result = await Course.find(req.query);
+  //     } else {
+  //       message = "Please use right query";
+  //     }
+  //     break;
+  //   case 2:
+  //     break;
+  //   case 3:
+  //     result = await Course.find(filter);
+  //     break;
+  //   default:
+  //     message = "No option available";
+  //     break;
+  // }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
 
