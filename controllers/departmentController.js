@@ -1,4 +1,5 @@
 const Department = require("../models/departmentModel");
+const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 const {
   sendCreatedResponse,

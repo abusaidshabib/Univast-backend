@@ -7,6 +7,11 @@ exports.createCourse = catchAsync(async (req, res, next) => {
   let statusCode = 201;
   let message;
   let method = "POST";
+  if (req.body._id) {
+    message = "Student Id not creatable";
+  } else {
+    result = await Course.create(req.body);
+  }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
 
