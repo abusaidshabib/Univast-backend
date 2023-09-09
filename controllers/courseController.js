@@ -41,7 +41,11 @@ exports.getCourse = catchAsync(async (req, res, next) => {
       }
       break;
     case 2:
-      const query = queryData(req);
+      let query = queryData(req);
+      result = await Course.find(query);
+      break;
+    case 3:
+      query = queryData(req);
       result = await Course.find(query);
       break;
     default:
