@@ -81,8 +81,10 @@ exports.updateCourse = catchAsync(async (req, res, next) => {
   let statusCode = 204;
   let message;
   let method = "PATCH";
-  if (req.query.courseCode) {
-    result = await Course.findOneAndUpdate(req.query);
+  if (queryKeys.length === 0) {
+    if (req.query.courseCode) {
+      result = await Course.findOneAndUpdate(req.query);
+    }
   } else {
     message = "One query is available only";
   }
