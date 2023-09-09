@@ -20,10 +20,8 @@ exports.getNotice = catchAsync(async (req, res, next) => {
       result = await Notice.find();
       break;
     case 1:
-      if (req.query.email) {
-        result = await Notice.findOne({
-          "personal.email": req.query.email,
-        });
+      if (req.query.id) {
+        result = await Notice.findOne({ _id: req.query.id });
       } else {
         statusCode = 401;
         message = "Your query not acceptable";
@@ -31,6 +29,32 @@ exports.getNotice = catchAsync(async (req, res, next) => {
       break;
     default:
       message = "Multiple query or others work not done yet";
+      break;
+  }
+  new ResponseGenerator(res, statusCode, result, method, message);
+});
+
+exports.deleteNotice = catchAsync(async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  let result;
+  let statusCode = 204;
+  let message;
+  let method = "DELETE";
+
+  switch (queryKeys.length) {
+    case 0:
+      message = "No query is available";
+      break;
+    case 1:
+      if (req.query.id) {
+        result = await Notice.findOneAndRemove({ _id: req.query.id });
+      } else {
+        statusCode = 401;
+        message = "Your query not acceptable";
+      }
+      break;
+    default:
+      message = "Unknown Error";
       break;
   }
   new ResponseGenerator(res, statusCode, result, method, message);
