@@ -3,7 +3,9 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createNotice = catchAsync(async (req, res, next) => {
+  let bodyData = req.body;
   let result;
+  bodyData.date = new Date();
   result = await Notice.create(bodyData);
   new ResponseGenerator(res, 201, result, "POST");
 });
