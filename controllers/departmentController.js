@@ -29,6 +29,10 @@ exports.getDepartment = catchAsync(async (req, res, next) => {
         result = await Department.findOne({
           departmentCode: req.query.departmentCode,
         });
+      } else if (req.query.facultyCode) {
+        result = await Department.find({
+          facultyCode: req.query.facultyCode,
+        });
       } else {
         statusCode = 401;
         message = "Only single query acceptable";
