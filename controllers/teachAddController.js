@@ -1,4 +1,3 @@
-const Admission = require("../models/admissionModel");
 const TeachAdd = require("../models/teachAddModel");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
@@ -13,6 +12,7 @@ exports.CreateTechAdd = catchAsync(async (req, res, next) => {
 
 exports.GetTeachAdd = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
+  console.log(req.query);
   let result;
   let statusCode = 200;
   let message;
@@ -23,7 +23,7 @@ exports.GetTeachAdd = catchAsync(async (req, res, next) => {
       break;
     case 1:
       if (req.query.email) {
-        result = await Admission.findOne({
+        result = await TeachAdd.findOne({
           "personal.email": req.query.email,
         });
       } else {
