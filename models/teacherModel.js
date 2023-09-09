@@ -54,7 +54,9 @@ const teacherSchema = new mongoose.Schema({
     type: String,
     default: "DEP-101",
   },
+  departmentName: String,
   personal: {
+    enrollDate: Date,
     firstName: String,
     lastName: String,
     gender: String,

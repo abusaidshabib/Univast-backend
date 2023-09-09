@@ -1,3 +1,4 @@
+const Department = require("../models/departmentModel");
 const Teacher = require("../models/teacherModel");
 const { teacherIdCreator } = require("../subControllers/teacherSub");
 const AppError = require("../utils/AppError");
@@ -23,8 +24,12 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
   } else {
     const collectionLength = await Teacher.countDocuments();
     const teacherId = teacherIdCreator(collectionLength);
+    const department = await Department.findOne({
+      departmentCode: req.body.departmentCode,
+    });
     bodyData.teacherId = teacherId;
-    console.log(bodyData);
+    bodyData.departmentName = department.departmentName;
+    bodyData.personal.enrollDate = new Date();
     result = await Teacher.create(bodyData);
   }
   new ResponseGenerator(res, statusCode, result, method, message);
