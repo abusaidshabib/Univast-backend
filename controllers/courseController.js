@@ -74,3 +74,17 @@ exports.deleteCourse = catchAsync(async (req, res, next) => {
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
+
+exports.updateCourse = catchAsync(async (req, res, next) => {
+  const queryKeys = Object.keys(req.query);
+  let result;
+  let statusCode = 204;
+  let message;
+  let method = "PATCH";
+  if (req.query.courseCode) {
+    result = await Course.findOneAndUpdate(req.query);
+  } else {
+    message = "One query is available only";
+  }
+  new ResponseGenerator(res, statusCode, result, method, message);
+});

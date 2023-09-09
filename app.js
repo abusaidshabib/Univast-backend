@@ -18,6 +18,7 @@ const teacherRouter = require("./routes/teacherRouter");
 const usersRouter = require("./routes/usersRouter");
 const mailRouter = require("./routes/nodeMailRoutes");
 const teachAddRouter = require("./routes/teachAddRouter");
+const noticeRouter = require("./routes/noticeRouter");
 
 // All error handler route
 const AppError = require("./utils/AppError");
@@ -71,6 +72,7 @@ app.use("/api/v1/teacher", teacherRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/email", mailRouter);
 app.use("/api/v1/teachadd", teachAddRouter);
+app.use("/api/v1/notice", noticeRouter);
 
 // Handle unusual routes
 app.all("*", (req, res, next) => {
