@@ -1,5 +1,6 @@
 const Course = require("../models/courseModel");
 const AppError = require("../utils/AppError");
+const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createCourse = catchAsync(async (req, res, next) => {

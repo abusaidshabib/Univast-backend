@@ -1,0 +1,51 @@
+[
+  {
+    "day": "Saturday",
+    "classes": [
+      { "startTime": "9:00 AM", "className": "Math" },
+      { "startTime": "11:00 AM", "className": "Science" }
+    ]
+  },
+  {
+    "day": "Sunday",
+    "classes": [
+      { "startTime": "10:00 AM", "className": "History" },
+      { "startTime": "1:00 PM", "className": "English" }
+    ]
+  },
+  {
+    "day": "Monday",
+    "classes": [
+      { "startTime": "8:30 AM", "className": "Physics" },
+      { "startTime": "10:30 AM", "className": "Chemistry" }
+    ]
+  },
+  {
+    "day": "Tuesday",
+    "classes": [
+      { "startTime": "9:15 AM", "className": "Biology" },
+      { "startTime": "11:15 AM", "className": "Geography" }
+    ]
+  },
+  {
+    "day": "Wednesday",
+    "classes": [
+      { "startTime": "9:30 AM", "className": "Art" },
+      { "startTime": "1:30 PM", "className": "Music" }
+    ]
+  },
+  {
+    "day": "Thursday",
+    "classes": [
+      { "startTime": "8:45 AM", "className": "Physical Education" },
+      { "startTime": "10:45 AM", "className": "Health" }
+    ]
+  },
+  {
+    "day": "Friday",
+    "classes": [
+      { "startTime": "10:15 AM", "className": "Computer Science" },
+      { "startTime": "12:15 PM", "className": "Programming" }
+    ]
+  }
+]
