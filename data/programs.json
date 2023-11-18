@@ -6,7 +6,8 @@
     "programType": "Bachelor",
     "programLevel": "Undergraduate",
     "programDuration": "4 years",
-    "shifts": ["Day", "Evening"]
+    "shifts": ["Day", "Evening"],
+    "startDate": "2013-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-102",
@@ -15,7 +16,8 @@
     "programType": "Bachelor",
     "programLevel": "Undergraduate",
     "programDuration": "4 years",
-    "shifts": ["Day", "Evening"]
+    "shifts": ["Day", "Evening"],
+    "startDate": "2011-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-104",
@@ -24,7 +26,8 @@
     "programType": "Bachelor",
     "programLevel": "Undergraduate",
     "programDuration": "4 years",
-    "shifts": ["Day"]
+    "shifts": ["Day"],
+    "startDate": "2012-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-105",
@@ -33,7 +36,8 @@
     "programType": "Bachelor",
     "programLevel": "Undergraduate",
     "programDuration": "3 years",
-    "shifts": ["Day"]
+    "shifts": ["Day"],
+    "startDate": "2003-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-106",
@@ -42,7 +46,8 @@
     "programType": "Bachelor",
     "programLevel": "Undergraduate",
     "programDuration": "3 years",
-    "shifts": ["Day", "Evening"]
+    "shifts": ["Day", "Evening"],
+    "startDate": "2009-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-107",
@@ -51,7 +56,8 @@
     "programType": "Bachelor",
     "programLevel": "Undergraduate",
     "programDuration": "4 years",
-    "shifts": ["Evening"]
+    "shifts": ["Evening"],
+    "startDate": "2008-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-108",
@@ -60,7 +66,8 @@
     "programType": "Bachelor",
     "programLevel": "Undergraduate",
     "programDuration": "3.5 years",
-    "shifts": ["Evening"]
+    "shifts": ["Evening"],
+    "startDate": "2005-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-108",
@@ -69,7 +76,8 @@
     "programType": "Masters",
     "programLevel": "Graduate",
     "programDuration": "2 years",
-    "shifts": ["Evening"]
+    "shifts": ["Evening"],
+    "startDate": "2010-11-16T22:07:47.022+00:00"
   },
   {
     "departmentCode": "DEP-107",
@@ -78,6 +86,7 @@
     "programType": "Masters",
     "programLevel": "Graduate",
     "programDuration": "3 years",
-    "shifts": ["Day"]
+    "shifts": ["Day"],
+    "startDate": "2014-11-16T22:07:47.022+00:00"
   }
 ]

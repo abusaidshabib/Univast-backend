@@ -20,6 +20,7 @@ const programSchema = new mongoose.Schema({
   programLevel: String,
   programDuration: String,
   shifts: Array, //day, evening
+  startDate: String
 });
 
 const Program = mongoose.model("Program", programSchema);

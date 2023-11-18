@@ -8,7 +8,7 @@ const catchAsync = require("../utils/catchAsync");
 
 // Student creating callback function
 exports.createStudent = catchAsync(async (req, res, next) => {
-  let result;
+  let result = "";
   let statusCode = 201;
   let message;
   let method = "POST";
@@ -18,20 +18,24 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     message = "Student Id not creatable";
   } else {
     const collectionLength = await Student.countDocuments();
-    const studentId = studentIdCreator(collectionLength);
     const program = await Program.findOne({
       programCode: req.body.programCode,
     });
-    const department = await Department.findOne({
-      departmentCode: program.departmentCode,
-    });
-    bodyData.studentId = studentId;
-    bodyData.departmentCode = program.departmentCode;
-    bodyData.programName = program.programName;
-    bodyData.facultyCode = department.facultyCode;
-    bodyData.admission_date = new Date();
+    // const studentId = studentIdCreator(
+    //   collectionLength,
+    //   "2005-11-16T22:07:47.022+00:00",
+    //   req.body.admission_date
+    // );
+    // const department = await Department.findOne({
+    //   departmentCode: program.departmentCode,
+    // });
+    // bodyData.studentId = studentId;
+    // bodyData.departmentCode = program.departmentCode;
+    // bodyData.programName = program.programName;
+    // bodyData.facultyCode = department.facultyCode;
+    // bodyData.admission_date = new Date();
 
-    result = await Student.create(bodyData);
+    // result = await Student.create(bodyData);
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
