@@ -4,7 +4,6 @@ const programSchema = new mongoose.Schema({
   departmentCode: {
     type: String,
     required: true,
-    unique: true,
   },
   programCode: {
     type: String,
