@@ -58,6 +58,7 @@ class ResponseGenerator {
     res.status(statusCode).json({
       status: status,
       message: message,
+      length: data.length,
       data: data,
     });
   }
