@@ -45,7 +45,10 @@ exports.getTeacher = catchAsync(async (req, res) => {
 
   const query = {
     ...(teacherId && { "personal.teacherId": teacherId }),
-    $or: [{ "personal.firstName": name }, { "personal.lastName": name }],
+    $or: [
+      { "personal.firstName": { $regex: new RegExp(`^${name}`, "i") } },
+      { "personal.lastName": { $regex: new RegExp(`^${name}`, "i") } },
+    ],
     ...(department && { "personal.department": department }),
     ...(email && { "personal.email": email }),
   };
