@@ -36,29 +36,26 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
 });
 
 exports.getTeacher = catchAsync(async (req, res) => {
-  const queryKeys = Object.keys(req.query);
-  const { teacherId, name, department, email } = req.query;
-  console.log(req.query)
-  console.log(req.params)
-  console.log(teacherId, name, department, email);
+  const { teacherQuery, department, email } = req.query;
   let result;
   let statusCode = 200;
   let message;
   let method = "GET";
 
   const query = {
-    ...(teacherId && { "personal.teacherId": teacherId }),
     $or: [
-      { "personal.firstName": { $regex: new RegExp(`^${name}`, "i") } },
-      { "personal.lastName": { $regex: new RegExp(`^${name}`, "i") } },
+      { "personal.firstName": { $regex: new RegExp(teacherQuery, "i") } },
+      { "personal.lastName": { $regex: new RegExp(teacherQuery, "i") } },
+      { teacherId: parseInt(teacherQuery) || 0 },
+      { departmentName: { $regex: new RegExp(teacherQuery, "i") } },
+      { "personal.email": { $regex: new RegExp(teacherQuery, "i") } },
     ],
-    ...(department && { "personal.department": department }),
+    ...(department && { departmentCode: department }),
     ...(email && { "personal.email": email }),
   };
 
   try {
-    result =
-      queryKeys.length > 0 ? await Teacher.find(query) : await Teacher.find();
+    result = await Teacher.find(query);
   } catch (error) {
     statusCode = 404;
     console.log(error);
