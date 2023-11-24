@@ -42,13 +42,11 @@ exports.getTeacher = catchAsync(async (req, res) => {
   let message;
   let method = "GET";
 
-  console.log(teacherQuery, department);
-
   const query = {
     $or: [
       { "personal.firstName": { $regex: new RegExp(teacherQuery, "i") } },
       { "personal.lastName": { $regex: new RegExp(teacherQuery, "i") } },
-      { teacherId: parseInt(teacherQuery) || 0 },
+      { teacherId: { $regex: new RegExp(teacherQuery, "i") } },
       { departmentName: { $regex: new RegExp(teacherQuery, "i") } },
       { "personal.email": { $regex: new RegExp(teacherQuery, "i") } },
     ],
