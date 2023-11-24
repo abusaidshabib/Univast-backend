@@ -38,7 +38,8 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
 exports.getTeacher = catchAsync(async (req, res) => {
   const queryKeys = Object.keys(req.query);
   const { teacherId, name, department, email } = req.query;
-  console.log(req)
+  console.log(req.query)
+  console.log(req.params)
   console.log(teacherId, name, department, email);
   let result;
   let statusCode = 200;
