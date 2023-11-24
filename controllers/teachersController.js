@@ -37,31 +37,25 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
 
 exports.getTeacher = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
+  const { teacherId, name, department, email } = req.query;
   let result;
   let statusCode = 200;
   let message;
   let method = "GET";
+  const query = {
+    ...(teacherId && { "personal.teacherId": teacherId }),
+    $or: [{ "personal.firstName": name }, { "personal.lastName": name }],
+    ...(department && { "personal.department": department }),
+    ...(email && { "personal.email": email }),
+  };
 
-  switch (queryKeys.length) {
-    case 0:
-      result = await Teacher.find();
-      break;
-
-    case 1:
-      if (req.query.email) {
-        result = await Teacher.findOne({
-          "personal.email": req.query.email,
-        });
-      } else {
-        statusCode = 401;
-        message = "Your query not acceptable";
-      }
-      break;
-
-    default:
-      statusCode = 401;
-      message = "Multiple query work not done yet";
-      break;
+  if (queryKeys.length > 0) {
+    result = await Teacher.find(query);
+  } else if (queryKeys.length == 0) {
+    result = await Teacher.find();
+  } else {
+    statusCode = 401;
+    message = "Something other from getTeacher query";
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
