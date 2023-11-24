@@ -42,6 +42,8 @@ exports.getTeacher = catchAsync(async (req, res) => {
   let message;
   let method = "GET";
 
+  console.log(teacherQuery, department);
+
   const query = {
     $or: [
       { "personal.firstName": { $regex: new RegExp(teacherQuery, "i") } },
