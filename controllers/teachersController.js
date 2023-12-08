@@ -1,16 +1,8 @@
 const Department = require("../models/departmentModel");
 const Teacher = require("../models/teacherModel");
 const { teacherIdCreator } = require("../subControllers/teacherSub");
-const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
-const {
-  dataGetResponse,
-  serverNOTdeclared,
-  sendCreatedResponse,
-  sendUpdatedResponse,
-  customResponse,
-} = require("../utils/successStatus");
 
 exports.createTeacher = catchAsync(async (req, res, next) => {
   let result;

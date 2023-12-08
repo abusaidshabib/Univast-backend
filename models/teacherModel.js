@@ -11,14 +11,8 @@ const publicationSchema = new mongoose.Schema({
 });
 
 const coursesSchema = new mongoose.Schema({
-  course_code: String,
-  course_name: String,
+  courses: [String],
   semester: String,
-  total_Student: Number,
-  class_schedule: {
-    days: [String],
-    time: String,
-  },
 });
 
 const educationSchema = new mongoose.Schema({

@@ -2,11 +2,11 @@ const Semester = require("../models/semesterModel");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
-exports.createSemester = catchAsync(async (req, res, next) => {
+exports.getSemester = catchAsync(async (req, res) => {
   let result;
-  let statusCode = 201;
+  let statusCode = 200;
   let message;
-  let method = "POST";
-  result = await Semester.create();
+  let method = "GET";
+  result = await Semester.find();
   new ResponseGenerator(res, statusCode, result, method, message);
 });
