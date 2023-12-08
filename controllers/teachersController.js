@@ -36,7 +36,7 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
 });
 
 exports.getTeacher = catchAsync(async (req, res) => {
-  const { teacherQuery, department, email } = req.query;
+  const { teacherQuery, department, email, id, nid } = req.query;
   let result;
   let statusCode = 200;
   let message;
@@ -52,6 +52,8 @@ exports.getTeacher = catchAsync(async (req, res) => {
     ],
     ...(department && { departmentCode: department }),
     ...(email && { "personal.email": email }),
+    ...(id && { teacherId: id }),
+    ...(nid && { "personal.nid_Birth_certificate": nid }),
   };
 
   try {
