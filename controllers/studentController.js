@@ -21,21 +21,20 @@ exports.createStudent = catchAsync(async (req, res, next) => {
     const program = await Program.findOne({
       programCode: req.body.programCode,
     });
-    // const studentId = studentIdCreator(
-    //   collectionLength,
-    //   "2005-11-16T22:07:47.022+00:00",
-    //   req.body.admission_date
-    // );
-    // const department = await Department.findOne({
-    //   departmentCode: program.departmentCode,
-    // });
-    // bodyData.studentId = studentId;
-    // bodyData.departmentCode = program.departmentCode;
-    // bodyData.programName = program.programName;
-    // bodyData.facultyCode = department.facultyCode;
-    // bodyData.admission_date = new Date();
+    const department = await Department.findOne({
+      departmentCode: program.departmentCode,
+    });
+    const studentId = studentIdCreator(
+      collectionLength,
+      department.departmentCode
+    );
+    bodyData.studentId = studentId;
+    bodyData.departmentCode = program.departmentCode;
+    bodyData.programName = program.programName;
+    bodyData.facultyCode = department.facultyCode;
+    bodyData.admission_date = new Date();
 
-    // result = await Student.create(bodyData);
+    result = await Student.create(bodyData);
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
@@ -94,5 +93,5 @@ exports.updateStudent = catchAsync(async (req, res, next) => {
     default:
       message = "Only one query available";
   }
-  new ResponseGenerator(res, statusCode, result, method, message);
+  ResponseGenerator.send(res, result);
 });

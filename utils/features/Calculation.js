@@ -1,4 +1,4 @@
-exports.countSemester = (start, end) => {
+exports.countSemester = (date1, date2) => {
   var year1 = date1.getFullYear();
   var year2 = date2.getFullYear();
   var month1 = date1.getMonth();
@@ -11,7 +11,7 @@ exports.countSemester = (start, end) => {
   return Math.ceil(totalMonths / 4);
 };
 
-exports.countBatch = (start, end) => {
+exports.countBatch = (date1, date2) => {
   var year1 = date1.getFullYear();
   var year2 = date2.getFullYear();
   var month1 = date1.getMonth();
