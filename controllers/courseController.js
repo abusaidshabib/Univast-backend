@@ -58,39 +58,30 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 exports.deleteCourse = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
   let result;
-  let statusCode = 204;
-  let message;
-  let method = "DELETE";
+
   switch (queryKeys.length) {
     case 0:
-      message = "No query is available";
       break;
     case 1:
       if (req.query.courseCode) {
         result = await Course.findOneAndRemove(req.query);
       } else {
-        message = "One query is available only";
       }
       break;
     default:
-      message = "Unknown Error";
       break;
   }
-  new ResponseGenerator(res, statusCode, result, method, message);
+  ResponseGenerator.send(res, result);
 });
 
 exports.updateCourse = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
   let result;
-  let statusCode = 204;
-  let message;
-  let method = "PATCH";
+
   if (queryKeys.length === 0) {
     if (req.query.courseCode) {
       result = await Course.findOneAndUpdate(req.query);
     }
-  } else {
-    message = "One query is available only";
   }
-  new ResponseGenerator(res, statusCode, result, method, message);
+  ResponseGenerator.send(res, result);
 });

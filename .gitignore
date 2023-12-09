@@ -4,3 +4,4 @@ config.env
 .flaskenv*
 !.env.project
 !.env.vault
+.vercel

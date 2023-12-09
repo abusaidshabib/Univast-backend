@@ -1,10 +1,10 @@
 const { countSemester } = require("../utils/features/Calculation");
 
-exports.studentIdCreator = (index, start, end) => {
-  const yourDateString = "2023-08-22";
-  const dateObject = new Date(yourDateString);
+exports.studentIdCreator = (total, dep) => {
+  const dateObject = new Date();
   const year = dateObject.getFullYear();
-  return year.toString() + countSemester(start, end) + (index + 1).toString();
+
+  return year.toString() + dep.replace(/\D/g, "") + (total + 1).toString();
 };
 
 exports.admissionDateCreate = () => {
