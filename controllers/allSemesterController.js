@@ -3,8 +3,8 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getAllSemester = catchAsync(async (req, res) => {
-  let statusCode = 200;
   let result;
+  let statusCode = 200;
   if (req.query.departmentCode) {
     result = await ALLSemester.find({
       departmentCode: req.query.departmentCode,
@@ -16,10 +16,9 @@ exports.getAllSemester = catchAsync(async (req, res) => {
 });
 
 exports.createAllSemester = catchAsync(async (req, res, next) => {
-  let statusCode = 200;
   let { departmentCode, semesterName } = req.body;
   let result;
-
+  let statusCode = 201;
   const existingSemester = await ALLSemester.findOne({ departmentCode });
 
   if (existingSemester) {
