@@ -1,4 +1,4 @@
-function generateSemesterArray(startDate, endDate) {
+exports.getSemesterNameOnDate = (startDate, endDate) => {
     const startDateTime = new Date(startDate);
     const endDateTime = new Date(endDate);
     const semesterSet = new Set();
@@ -10,8 +10,6 @@ function generateSemesterArray(startDate, endDate) {
         if (semesterName !== 'Invalid Date') {
             semesterSet.add(`${semesterName}-${year}`);
         }
-        
-        // Move to the next month
         startDateTime.setMonth(startDateTime.getMonth() + 1);
     }
     
@@ -30,9 +28,3 @@ function getSemesterNameOnDate(date) {
         return 'Invalid Date';
     }
 }
-
-// Example usage
-const startDate = "2020-01-15";
-const endDate = "2021-09-30";
-const result = generateSemesterArray(startDate, endDate);
-console.log(result);
