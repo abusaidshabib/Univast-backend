@@ -5,6 +5,7 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createTeacher = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let result;
   const bodyData = req.body;
   if (req.body.teacherId) {
@@ -19,10 +20,11 @@ exports.createTeacher = catchAsync(async (req, res, next) => {
     bodyData.personal.enrollDate = new Date();
     result = await Teacher.create(bodyData);
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.getTeacher = catchAsync(async (req, res) => {
+  let statusCode = 200;
   const { teacherQuery, department, email, id, nid } = req.query;
   let result;
 
@@ -46,10 +48,11 @@ exports.getTeacher = catchAsync(async (req, res) => {
     console.log(error);
   }
 
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.updateTeacher = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let result;
   switch (true) {
     case req.query.email !== undefined:
@@ -67,5 +70,5 @@ exports.updateTeacher = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });

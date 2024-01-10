@@ -14,6 +14,7 @@ exports.createProgram = catchAsync(async (req, res, next) => {
 });
 
 exports.getProgram = catchAsync(async (req, res, next) => {
+  let statusCode = 200;
   const queryKeys = Object.keys(req.query);
   let result;
   switch (queryKeys.length) {
@@ -34,7 +35,7 @@ exports.getProgram = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 // exports.updatePrograms = catchAsync(async (req, res, next) => {
@@ -44,6 +45,7 @@ exports.getProgram = catchAsync(async (req, res, next) => {
 // });
 
 exports.deleteProgram = catchAsync(async (req, res, next) => {
+  let statusCode = 204;
   const queryKeys = Object.keys(req.query);
   let result;
   switch (queryKeys.length) {
@@ -60,5 +62,5 @@ exports.deleteProgram = catchAsync(async (req, res, next) => {
       }
     default:
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });

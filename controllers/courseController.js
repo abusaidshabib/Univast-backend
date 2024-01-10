@@ -56,6 +56,7 @@ exports.getCourse = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteCourse = catchAsync(async (req, res, next) => {
+  let statusCode = 204;
   const queryKeys = Object.keys(req.query);
   let result;
 
@@ -71,10 +72,11 @@ exports.deleteCourse = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.updateCourse = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   const queryKeys = Object.keys(req.query);
   let result;
 
@@ -83,5 +85,5 @@ exports.updateCourse = catchAsync(async (req, res, next) => {
       result = await Course.findOneAndUpdate(req.query);
     }
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });

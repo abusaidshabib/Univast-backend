@@ -5,9 +5,10 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createUser = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let result;
   result = await User.create(req.body);
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 // exports.createUser = catchAsync(async (req, res, next) => {
 //     const result = await User.create(req.body);

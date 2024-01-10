@@ -3,13 +3,14 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.CreateTechAdd = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let result;
-
   result = await TeachAdd.create(req.body);
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.GetTeachAdd = catchAsync(async (req, res, next) => {
+  let statusCode = 200;
   const queryKeys = Object.keys(req.query);
   console.log(req.query);
   let result;
@@ -27,10 +28,11 @@ exports.GetTeachAdd = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.deleteTeachAdd = catchAsync(async (req, res, next) => {
+  let statusCode = 204;
   const queryKeys = Object.keys(req.query);
   let result;
   switch (queryKeys.length) {
@@ -47,5 +49,5 @@ exports.deleteTeachAdd = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-    ResponseGenerator.send(res, result);
+    new ResponseGenerator(res, statusCode, result);
 });

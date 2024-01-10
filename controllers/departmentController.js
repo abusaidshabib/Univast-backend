@@ -3,12 +3,14 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createDepartment = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let result;
   result = await Department.create(req.body);
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.getDepartment = catchAsync(async (req, res, next) => {
+  let statusCode = 200;
   const queryKeys = Object.keys(req.query);
   let result;
   switch (queryKeys.length) {
@@ -30,5 +32,5 @@ exports.getDepartment = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });

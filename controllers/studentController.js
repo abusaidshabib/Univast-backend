@@ -93,5 +93,5 @@ exports.updateStudent = catchAsync(async (req, res, next) => {
     default:
       message = "Only one query available";
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
