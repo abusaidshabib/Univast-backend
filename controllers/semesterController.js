@@ -21,5 +21,5 @@ exports.getSemester = catchAsync(async(req, res, next) => {
   else{
     result = await Semester.find();
   }
-  new ResponseGenerator(res, statusCode, result);
+  new ResponseGenerator(res, statusCode, result.reverse());
 });
