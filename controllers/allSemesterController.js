@@ -3,6 +3,7 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getAllSemester = catchAsync(async (req, res) => {
+  let statusCode = 200;
   let result;
   if (req.query.departmentCode) {
     result = await ALLSemester.find({
@@ -11,10 +12,11 @@ exports.getAllSemester = catchAsync(async (req, res) => {
   } else {
     result = await ALLSemester.find();
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.createAllSemester = catchAsync(async (req, res, next) => {
+  let statusCode = 200;
   let { departmentCode, semesterName } = req.body;
   let result;
 
@@ -38,5 +40,5 @@ exports.createAllSemester = catchAsync(async (req, res, next) => {
     result = await newSemester.save();
   }
 
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });

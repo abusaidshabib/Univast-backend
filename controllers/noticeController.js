@@ -3,14 +3,16 @@ const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createNotice = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let bodyData = req.body;
   let result;
   bodyData.date = new Date();
   result = await Notice.create(bodyData);
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.getNotice = catchAsync(async (req, res, next) => {
+  let statusCode = 200;
   const queryKeys = Object.keys(req.query);
   let result;
 
@@ -30,10 +32,11 @@ exports.getNotice = catchAsync(async (req, res, next) => {
       message = "Multiple query or others work not done yet";
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.deleteNotice = catchAsync(async (req, res, next) => {
+  let statusCode = 204;
   const queryKeys = Object.keys(req.query);
   let result;
 
@@ -49,5 +52,5 @@ exports.deleteNotice = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });

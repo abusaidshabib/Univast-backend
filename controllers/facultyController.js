@@ -9,12 +9,14 @@ const {
 const ResponseGenerator = require("../utils/ResponseGenerator");
 
 exports.createFaculty = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let result;
   result = await Faculties.create(req.body);
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.getFaculty = catchAsync(async (req, res, next) => {
+  let statusCode = 200;
   const queryKeys = Object.keys(req.query);
   let result;
   switch (queryKeys.length) {
@@ -31,10 +33,11 @@ exports.getFaculty = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 exports.updateFaculty = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
   let result;
   switch (queryKeys.length) {
     case 0:
@@ -51,5 +54,5 @@ exports.updateFaculty = catchAsync(async (req, res, next) => {
     default:
       break;
   }
-  ResponseGenerator.send(res, result);
+  new ResponseGenerator(res, statusCode, result);
 });
