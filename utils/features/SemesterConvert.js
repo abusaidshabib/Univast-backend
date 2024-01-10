@@ -4,7 +4,7 @@ exports.getSemesterNameOnDate = (startDate, endDate) => {
     const semesterSet = new Set();
     
     while (startDateTime <= endDateTime) {
-        const year = startDateTime.getFullYear().toString().slice(-2);
+        const year = startDateTime.getFullYear().toString();
         const semesterName = getSemesterNameOnDate(startDateTime);
         
         if (semesterName !== 'Invalid Date') {
