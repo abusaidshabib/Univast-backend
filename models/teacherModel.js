@@ -10,7 +10,7 @@ const publicationSchema = new mongoose.Schema({
   doi: String,
 });
 
-const coursesSchema = new mongoose.Schema({
+const courseToughSchema = new mongoose.Schema({
   courses: [String],
   semester: String,
 });
@@ -100,7 +100,7 @@ const teacherSchema = new mongoose.Schema({
   },
   experience: [experienceSchema],
   education: [educationSchema],
-  courses_taught: [coursesSchema],
+  courses_taught: [courseToughSchema],
   research_interests: [String],
   publication: [publicationSchema],
   others: {
