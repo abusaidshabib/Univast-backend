@@ -10,6 +10,15 @@ const educationSchema = new mongoose.Schema({
   certificates: String,
 });
 
+const courseTaughtSchema = new mongoose.Schema({
+  semester: String,
+  courseCode: String,
+  courseId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course",
+  },
+});
+
 const studentSchema = new mongoose.Schema({
   studentId: {
     type: Number,
@@ -110,6 +119,7 @@ const studentSchema = new mongoose.Schema({
     },
   },
   education: [educationSchema],
+  enrolledCourses: [courseTaughtSchema],
   others: {
     is_parents_freedom_fighter: Boolean,
     is_tribal: Boolean,
