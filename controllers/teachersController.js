@@ -43,7 +43,10 @@ exports.getTeacher = catchAsync(async (req, res) => {
   };
 
   try {
-    result = await Teacher.find(query);
+    result = await Teacher.find(query).populate({
+      path: 'courses_taught.courses',
+      model: 'Course'
+    }).exec();
   } catch (error) {
     console.log(error);
   }
