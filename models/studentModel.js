@@ -10,13 +10,15 @@ const educationSchema = new mongoose.Schema({
   certificates: String,
 });
 
-const courseTaughtSchema = new mongoose.Schema({
+const courseToughSchema = new mongoose.Schema({
   semester: String,
-  courseCode: String,
-  courseId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Course",
-  },
+  courseCode: [String],
+  courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
 });
 
 const studentSchema = new mongoose.Schema({
@@ -119,7 +121,7 @@ const studentSchema = new mongoose.Schema({
     },
   },
   education: [educationSchema],
-  enrolledCourses: [courseTaughtSchema],
+  courses_taught: [courseToughSchema],
   others: {
     is_parents_freedom_fighter: Boolean,
     is_tribal: Boolean,
