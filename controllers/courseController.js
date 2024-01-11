@@ -1,4 +1,5 @@
 const Course = require("../models/courseModel");
+const Teacher = require("../models/teacherModel");
 const AppError = require("../utils/AppError");
 const { queryData } = require("../utils/QueryData");
 const ResponseGenerator = require("../utils/ResponseGenerator");
@@ -16,6 +17,42 @@ exports.createCourse = catchAsync(async (req, res, next) => {
   }
   new ResponseGenerator(res, statusCode, result, method, message);
 });
+
+exports.addCourseCodeToTeacher = catchAsync(async (req, res, next) => {
+  let result;
+  let statusCode = 201;
+  const { teacherId, semester, courseCode } = req.body;
+
+  const teacher = await Teacher.findOne({ teacherId });
+
+  if (!teacher) {
+    return res.status(404).json({ status: 'failed', message: 'Teacher not found.' });
+  } else {
+    const courseModel = await Course.findOne({ courseCode });
+
+    if (!courseModel) {
+      return res.status(404).json({ status: 'failed', message: 'Course not found.' });
+    }
+
+    const semesterExists = teacher.courses_taught.some((course) => course.semester === semester);
+
+    if (!semesterExists) {
+      teacher.courses_taught.push({
+        semester,
+        courses: [courseModel._id],
+      });
+    } else {
+      const semesterIndex = teacher.courses_taught.findIndex((course) => course.semester === semester);
+      teacher.courses_taught[semesterIndex].courses.push(courseModel._id);
+    }
+
+    await teacher.save();
+  }
+
+  new ResponseGenerator(res, statusCode, result);
+});
+
+
 
 exports.getCourse = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);

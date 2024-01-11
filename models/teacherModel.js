@@ -11,8 +11,13 @@ const publicationSchema = new mongoose.Schema({
 });
 
 const courseToughSchema = new mongoose.Schema({
-  courses: [String],
   semester: String,
+  courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
 });
 
 const educationSchema = new mongoose.Schema({
