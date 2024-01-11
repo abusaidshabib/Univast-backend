@@ -49,13 +49,19 @@ exports.getStudents = catchAsync(async (req, res, next) => {
 
   switch (queryKeys.length) {
     case 0:
-      result = await Student.find();
+      result = await Student.find().populate({
+        path: 'courses_taught.courses',
+        model: 'Course'
+      }).exec();
       break;
     case 1:
       if (req.query.email) {
         result = await Student.findOne({
           "personal.email": req.query.email,
-        });
+        }).populate({
+          path: 'courses_taught.courses',
+          model: 'Course'
+        }).exec();
       } else {
         statusCode = 401;
         message = "Your query not acceptable";

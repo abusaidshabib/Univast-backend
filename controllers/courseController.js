@@ -29,10 +29,10 @@ exports.addCourseCodeToTeacher = catchAsync(async (req, res, next) => {
   if (!teacher) {
     return res.status(404).json({ status: 'failed', message: 'Teacher not found.' });
   } else {
-    const courseModel = await Course.findOne({ courseCode });
+    const courseModels = await Course.find({ courseCode: { $in: courseCode } });
 
-    if (!courseModel) {
-      return res.status(404).json({ status: 'failed', message: 'Course not found.' });
+    if (!courseModels || courseModels.length !== courseCode.length) {
+      return res.status(404).json({ status: 'failed', message: 'One or more courses not found.' });
     }
 
     const semesterIndex = teacher.courses_taught.findIndex((course) => course.semester === semester);
@@ -40,46 +40,49 @@ exports.addCourseCodeToTeacher = catchAsync(async (req, res, next) => {
     if (semesterIndex === -1) {
       teacher.courses_taught.push({
         semester,
-        courseCode: [courseCode],
-        courses: [courseModel._id],
+        courseCode: courseCode,
+        courses: courseModels.map(course => course._id),
       });
     } else {
-      const isCourseAlreadyAdded = teacher.courses_taught[semesterIndex].courseCode.includes(courseCode);
+      courseCode.forEach(code => {
+        const isCourseAlreadyAdded = teacher.courses_taught[semesterIndex].courseCode.includes(code);
 
-      if (!isCourseAlreadyAdded) {
-        teacher.courses_taught[semesterIndex].courseCode.push(courseCode);
-        teacher.courses_taught[semesterIndex].courses.push(courseModel._id);
-      } else {
-        statusCode = 400;
-        result = { status: 'failed', message: 'Course already added for the specified semester.' };
-      }
+        if (!isCourseAlreadyAdded) {
+          teacher.courses_taught[semesterIndex].courseCode.push(code);
+          const correspondingCourse = courseModels.find(course => course.courseCode === code);
+          teacher.courses_taught[semesterIndex].courses.push(correspondingCourse._id);
+        } else {
+          statusCode = 400;
+          result = { status: 'failed', message: 'One or more courses already added for the specified semester.' };
+        }
+      });
     }
 
     await teacher.save();
     const enrollCourseData = await EnrollCourse.findOne({ semester });
 
     if (enrollCourseData) {
-      const courseEntry = enrollCourseData.courses.find(course => course.courseId.equals(courseModel._id));
+      courseModels.forEach(async (courseModel) => {
+        const courseEntry = enrollCourseData.courses.find(course => course.courseId.equals(courseModel._id));
 
-      if (courseEntry) {
-        courseEntry.teachersId = teacher._id;
-      } else {
-        enrollCourseData.courses.push({
-          courseId: courseModel._id,
-          teachersId: teacher._id,
-        });
-      }
+        if (courseEntry) {
+          courseEntry.teachersId = teacher._id;
+        } else {
+          enrollCourseData.courses.push({
+            courseId: courseModel._id,
+            teachersId: teacher._id,
+          });
+        }
+      });
 
       await enrollCourseData.save();
     } else {
       const newEnrollCourseData = new EnrollCourse({
         semester,
-        courses: [
-          {
-            courseId: courseModel._id,
-            teachersId: teacher._id,
-          },
-        ],
+        courses: courseModels.map(course => ({
+          courseId: course._id,
+          teachersId: teacher._id,
+        })),
       });
 
       await newEnrollCourseData.save();
@@ -92,7 +95,8 @@ exports.addCourseCodeToTeacher = catchAsync(async (req, res, next) => {
 
 
 
-exports.removeCourseCodeToTeacher = catchAsync(async (req, res, next) => {
+
+exports.removeCourseCodeFromTeacher = catchAsync(async (req, res, next) => {
   let result;
   let statusCode = 201;
   const { teacherId, semester, courseCode } = req.body;
@@ -101,33 +105,52 @@ exports.removeCourseCodeToTeacher = catchAsync(async (req, res, next) => {
 
   if (!teacher) {
     return res.status(404).json({ status: 'failed', message: 'Teacher not found.' });
-  } else {
-    const courseModel = await Course.findOne({ courseCode });
-    if (!courseModel) {
-      return res.status(404).json({ status: 'failed', message: 'Course not found.' });
+  }
+    const courseModels = await Course.find({ courseCode: { $in: courseCode } });
+
+    if (!courseModels || courseModels.length !== courseCode.length) {
+      return res.status(404).json({ status: 'failed', message: 'One or more courses not found.' });
     }
 
-    const semesterIndex = teacher.courses_taught.findIndex((course) => course.semester === semester);
-    if (semesterIndex !== -1) {
-      const courseCodeIndex = teacher.courses_taught[semesterIndex].courseCode.indexOf(courseCode);
+      
+      const semesterIndex = teacher.courses_taught.findIndex((course) => course.semester === semester);
+      if (semesterIndex !== -1) {
+        const coursesToRemove = [];
 
-      if (courseCodeIndex !== -1) {
-        teacher.courses_taught[semesterIndex].courseCode.splice(courseCodeIndex, 1);
-        teacher.courses_taught[semesterIndex].courses.splice(courseCodeIndex, 1);
+        
+        if(courseModels.length>0){
+          courseCode?.forEach((code) => {
+            const courseCodeIndex = teacher.courses_taught[semesterIndex].courseCode.indexOf(code);
+            console.log(courseCodeIndex)
+            if (courseCodeIndex !== -1) {
+              teacher.courses_taught[semesterIndex].courseCode.splice(courseCodeIndex, 1);
+              teacher.courses_taught[semesterIndex].courses.splice(courseCodeIndex, 1);
+              const correspondingCourse = courseModels.find(course => course.courseCode === code);
+              coursesToRemove.push(correspondingCourse._id);
+            } else {
+              statusCode = 404;
+              result = { status: 'failed', message: 'One or more CourseCodes not found in the specified semester.' };
+            }
+          });
+        }
         await teacher.save();
-        result = { status: 'success', message: 'CourseCode removed from teacher.' };
+        const enrollCourseData = await EnrollCourse.findOne({ semester });
+        
+        if (enrollCourseData) {
+          enrollCourseData.courses = enrollCourseData.courses.filter(courseEntry => coursesToRemove.includes(courseEntry.courseId));
+          console.log(enrollCourseData)
+          await enrollCourseData.save();
+        }
+        
+        result = { status: 'success', message: 'CourseCodes removed from teacher.' };
       } else {
         statusCode = 404;
-        result = { status: 'failed', message: 'CourseCode not found in the specified semester.' };
+        result = { status: 'failed', message: 'Semester not found for the teacher.' };
       }
-    } else {
-      statusCode = 404;
-      result = { status: 'failed', message: 'Semester not found for the teacher.' };
-    }
-  }
+      new ResponseGenerator(res, statusCode, result);
+    });
+    
 
-  new ResponseGenerator(res, statusCode, result);
-});
 
 
 
