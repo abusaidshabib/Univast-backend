@@ -138,7 +138,6 @@ exports.removeCourseCodeFromTeacher = catchAsync(async (req, res, next) => {
         
         if (enrollCourseData) {
           enrollCourseData.courses = enrollCourseData.courses.filter(courseEntry => coursesToRemove.includes(courseEntry.courseId));
-          console.log(enrollCourseData)
           await enrollCourseData.save();
         }
         
