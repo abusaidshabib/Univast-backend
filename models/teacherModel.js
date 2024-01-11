@@ -12,6 +12,7 @@ const publicationSchema = new mongoose.Schema({
 
 const courseToughSchema = new mongoose.Schema({
   semester: String,
+  courseCode: [String],
   courses: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -76,3 +76,46 @@ exports.updateTeacher = catchAsync(async (req, res, next) => {
   }
   new ResponseGenerator(res, statusCode, result);
 });
+
+exports.getTeachersWithCourses = async (req, res) => {
+  try {
+    const teachers = await Teacher.find();
+    const result = [];
+
+    for (const teacher of teachers) {
+      const teacherData = {
+        semesterData: [],
+      };
+
+      for (const semesterInfo of teacher.courses_taught) {
+        const semesterData = {
+          semester: semesterInfo.semester,
+          courses: [],
+        };
+
+        for (const courseId of semesterInfo.courses) {
+          const course = await Course.findById(courseId);
+          if (course) {
+            semesterData.courses.push({
+              teacherId: teacher.teacherId,
+              firstName: teacher.personal.firstName,
+              lastName: teacher.personal.lastName,
+              courseCode: course.courseCode,
+              courseName: course.courseName,
+              credit: course.credit,
+            });
+          }
+        }
+
+        teacherData.semesterData.push(semesterData);
+      }
+
+      result.push(teacherData);
+    }
+
+    return res.json(result);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ status: 'failed', message: 'Internal server error.' });
+  }
+};
