@@ -52,6 +52,44 @@ exports.addCourseCodeToTeacher = catchAsync(async (req, res, next) => {
   new ResponseGenerator(res, statusCode, result);
 });
 
+exports.removeCourseCodeToTeacher = catchAsync(async (req, res, next) => {
+  let result;
+  let statusCode = 201;
+  const { teacherId, semester, courseCode } = req.body;
+
+  const teacher = await Teacher.findOne({ teacherId });
+
+  if (!teacher) {
+    return res.status(404).json({ status: 'failed', message: 'Teacher not found.' });
+  } else {
+    const courseModel = await Course.findOne({ courseCode });
+    if (!courseModel) {
+      return res.status(404).json({ status: 'failed', message: 'Course not found.' });
+    }
+
+    const semesterIndex = teacher.courses_taught.findIndex((course) => course.semester === semester);
+    if (semesterIndex !== -1) {
+      const courseIndex = teacher.courses_taught[semesterIndex].courses.indexOf(courseModel._id);
+      console.log(courseIndex)
+
+      if (courseIndex !== -1) {
+        teacher.courses_taught[semesterIndex].courses.splice(courseIndex, 1);
+        await teacher.save();
+        result = { status: 'success', message: 'Course removed from teacher.' };
+      } else {
+        statusCode = 404;
+        result = { status: 'failed', message: 'Course not found in the specified semester.' };
+      }
+    } else {
+      statusCode = 404;
+      result = { status: 'failed', message: 'Semester not found for the teacher.' };
+    }
+  }
+
+  new ResponseGenerator(res, statusCode, result);
+});
+
+
 
 exports.getCourse = catchAsync(async (req, res, next) => {
   const queryKeys = Object.keys(req.query);
