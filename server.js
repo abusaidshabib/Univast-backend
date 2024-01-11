@@ -8,6 +8,8 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
+// const DB = "mongodb://localhost:27017/univast"
+
 
 const connectWithRetry = () => {
   mongoose
