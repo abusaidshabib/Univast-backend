@@ -1,4 +1,5 @@
 const Course = require("../models/courseModel");
+const Teacher = require("../models/teacherModel");
 const AppError = require("../utils/AppError");
 const { queryData } = require("../utils/QueryData");
 const ResponseGenerator = require("../utils/ResponseGenerator");

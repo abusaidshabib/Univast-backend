@@ -1,3 +1,4 @@
+const Course = require("../models/courseModel");
 const Department = require("../models/departmentModel");
 const Teacher = require("../models/teacherModel");
 const { teacherIdCreator } = require("../subControllers/teacherSub");
