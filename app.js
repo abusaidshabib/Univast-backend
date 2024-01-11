@@ -5,6 +5,9 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const app = express();
 var cors = require("cors");
+const path = require('path');
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //Take all router required..............
 const admissionRouter = require("./routes/admissionRouter");
@@ -20,6 +23,7 @@ const usersRouter = require("./routes/usersRouter");
 const mailRouter = require("./routes/nodeMailRoutes");
 const teachAddRouter = require("./routes/teachAddRouter");
 const noticeRouter = require("./routes/noticeRouter");
+const uploadImgRouter = require('./routes/imageUpRouter');
 
 // All error handler route
 const AppError = require("./utils/AppError");
@@ -75,6 +79,7 @@ app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/email", mailRouter);
 app.use("/api/v1/teachadd", teachAddRouter);
 app.use("/api/v1/notice", noticeRouter);
+app.use("/api/v1/upload", uploadImgRouter);
 
 // Handle unusual routes
 app.all("*", (req, res, next) => {

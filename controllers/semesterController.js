@@ -1,7 +1,8 @@
 const Semester = require("../models/semesterModel");
+const Teacher = require("../models/teacherModel");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
-const { getSemesterNameOnDate, generateSemesterData } = require("../utils/features/SemesterConvert");
+const { getSemesterNameOnDate } = require("../utils/features/SemesterConvert");
 
 exports.createAllSemester = catchAsync(async (req, res) => {
   let result;
@@ -10,16 +11,18 @@ exports.createAllSemester = catchAsync(async (req, res) => {
   new ResponseGenerator(res, statusCode, result);
 });
 
-
 exports.getSemester = catchAsync(async(req, res, next) => {
   let result;
   let statusCode = 200;
-  if (req.query.start){
-    console.log(req.query.start, req.query.end)
+  if (req.query.start && req.query.end && req.query.teachid){
+    courses = await Teacher.find({teacherId:req.query.teachid})
+    result = getSemesterNameOnDate(req.query.start, req.query.end, result = await Semester.find())
+  }
+  else if(req.query.start && req.query.end){
     result = getSemesterNameOnDate(req.query.start, req.query.end, result = await Semester.find())
   }
   else{
     result = await Semester.find();
   }
   new ResponseGenerator(res, statusCode, result.reverse());
-});
+})

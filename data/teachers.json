@@ -1,0 +1,825 @@
+[
+  {
+    "teacherId": "20231",
+    "designation": "Lecturer",
+    "facultyCode": "FAC-102",
+    "departmentCode": "DEP-201",
+    "departmentName": "Computer Science & Engineering",
+    "personal": {
+      "enrollDate": {
+        "$date": "2023-09-09T07:20:34.626Z"
+      },
+      "firstName": "Pobon Saha",
+      "lastName": "Chowdhury",
+      "gender": "Male",
+      "birth_date": "January 2nd 1995",
+      "religion": "Hinduism",
+      "marital": "Single",
+      "blood_group": "A+",
+      "father_name": "Mr. Saha",
+      "mother_name": "Mst Saha",
+      "email": "pobonsaha001@gmail.com",
+      "mobile": "12348587453",
+      "nid_Birth_certificate": "013463484",
+      "passport": "",
+      "nationality": "Bangladeshi",
+      "country": "Bangladesh",
+      "social_media": "",
+      "image": "https://firebasestorage.googleapis.com/v0/b/univast-2023.appspot.com/o/images%2Fpobon%20sir.jpg?alt=media&token=4c939275-8ccd-4b8c-a6fe-7287030159ef",
+      "signature": "https://firebasestorage.googleapis.com/v0/b/univast-2023.appspot.com/o/images%2F324720415_704602161052451_3291418215164659268_n.jpg?alt=media&token=4926eb3b-2cee-450e-a531-b51b111c4794",
+      "address": {
+        "present_address": {
+          "present_country": "Bangladesh",
+          "present_state_division": "Dhaka",
+          "present_thana": "",
+          "present_city": "Dhaka",
+          "present_zip_code": "1236",
+          "present_street1": "Kajirgaon, West Matuail, Jatrabari, Dhaka",
+          "present_street2": "Kajirgaon, West Matuail, Jatrabari, Dhaka"
+        },
+        "permanent_address": {
+          "permanent_country": "Bangladesh",
+          "permanent_state_division": "Dhaka",
+          "permanent_thana": "",
+          "permanent_city": "Dhaka",
+          "permanent_zip_code": "1236",
+          "permanent_street1": "Kajirgaon, West Matuail, Jatrabari, Dhaka",
+          "permanent_street2": "Kajirgaon, West Matuail, Jatrabari, Dhaka"
+        }
+      }
+    },
+    "experience": [
+      {
+        "institution_name": "Mawlana Bhashani Science and Technology University(MBSTU)",
+        "designation": "Lecturer",
+        "location": "Dhaka",
+        "startDate": "January 1st 2022",
+        "endDate": "September 8th 2023",
+        "currentlyWorking": true,
+        "_id": {
+          "$oid": "64fae3f8a9364df685b4074d"
+        }
+      }
+    ],
+    "education": [
+      {
+        "exam": "SSC",
+        "institution_name": "Bindu Basini Govt. Boys' High School",
+        "board": "dhaka",
+        "group_major": "science",
+        "result": 5,
+        "passing_year": 2011,
+        "certificates": "https://firebasestorage.googleapis.com/v0/b/univast-2023.appspot.com/o/files%2FGoat%20Moves_Contract%20Offer_Md%20Golam%20Mehedi.pdf?alt=media&token=6c756370-638e-4470-b31b-36a4dd56618c",
+        "_id": {
+          "$oid": "64fae3f8a9364df685b4074e"
+        }
+      },
+      {
+        "exam": "BACHELOR",
+        "institution_name": "Mawlana Bhashani Science and Technology University(MBSTU)",
+        "board": "dhaka",
+        "group_major": "science",
+        "result": 4,
+        "passing_year": 2019,
+        "certificates": "https://firebasestorage.googleapis.com/v0/b/univast-2023.appspot.com/o/files%2FGoat%20Moves_Contract%20Offer_Md%20Golam%20Mehedi%20Pulok.pdf?alt=media&token=50b6bb02-6cfc-4703-bfb0-6357c0f88b16",
+        "_id": {
+          "$oid": "64fae3f8a9364df685b4074f"
+        }
+      }
+    ],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [
+      {
+        "title": "A Comprehensive Study of Machine Learning Algorithms",
+        "author": ["Pobon Saha", "Minowar Ahmed"],
+        "publication_year": "February 1st 2022",
+        "journal": "Machine Learning Journal",
+        "volume": 25,
+        "pages": "100-200",
+        "doi": "10.1234/mlj.2022.12345",
+        "_id": {
+          "$oid": "64fae3f8a9364df685b40750"
+        }
+      }
+    ],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10001",
+    "designation": "Assistant Professor",
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-101",
+    "departmentName": "Internal Medicine",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-10T09:45:20.123Z" },
+      "firstName": "John",
+      "lastName": "Doe",
+      "gender": "Male",
+      "birth_date": "March 15th 1980",
+      "religion": "Christianity",
+      "marital": "Married",
+      "blood_group": "O+",
+      "father_name": "Mr. Doe",
+      "mother_name": "Mrs. Doe",
+      "email": "john.doe@email.com",
+      "mobile": "9876543210",
+      "nid_Birth_certificate": "023487651",
+      "passport": "AB123456",
+      "nationality": "American",
+      "country": "USA",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/handsome-man-black-suit-with-white-shirt-posing-attractive-guy-with-fashion-hairstyle-confident-man-with-short-beard-adult-boy-with-brown-hair_186202-8527.jpg?w=740&t=st=1699212034~exp=1699212634~hmac=dd3afb62c318af9f9befb2f035053823fb4fa2781eecf20720562ba2f0d0bc08",
+      "signature": "https://example.com/john_doe_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "USA",
+          "present_state_division": "California",
+          "present_city": "Los Angeles",
+          "present_zip_code": "90001",
+          "present_street1": "123 Main St",
+          "present_street2": "Apt 456"
+        },
+        "permanent_address": {
+          "permanent_country": "USA",
+          "permanent_state_division": "California",
+          "permanent_city": "Los Angeles",
+          "permanent_zip_code": "90001",
+          "permanent_street1": "123 Main St",
+          "permanent_street2": "Apt 456"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10002",
+    "designation": "Professor",
+    "facultyCode": "FAC-101",
+    "departmentCode": "DEP-102",
+    "departmentName": "Surgery",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-11T10:30:15.567Z" },
+      "firstName": "Alice",
+      "lastName": "Smith",
+      "gender": "Female",
+      "birth_date": "June 5th 1985",
+      "religion": "Buddhism",
+      "marital": "Single",
+      "blood_group": "B-",
+      "father_name": "Mr. Smith",
+      "mother_name": "Mrs. Smith",
+      "email": "alice.smith@email.com",
+      "mobile": "8765432109",
+      "nid_Birth_certificate": "045612378",
+      "passport": "CD789012",
+      "nationality": "Canadian",
+      "country": "Canada",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/smiling-young-man-with-crossed-arms-outdoors_1140-255.jpg?w=740&t=st=1699215707~exp=1699216307~hmac=a0654dd17c60bb7e4196a712437e8e1f5106876b3c933331c6f53a01baefc0a4",
+      "signature": "https://example.com/alice_smith_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "Canada",
+          "present_state_division": "Ontario",
+          "present_city": "Toronto",
+          "present_zip_code": "M5V 1A1",
+          "present_street1": "456 Oak St",
+          "present_street2": "Apt 789"
+        },
+        "permanent_address": {
+          "permanent_country": "Canada",
+          "permanent_state_division": "Ontario",
+          "permanent_city": "Toronto",
+          "permanent_zip_code": "M5V 1A1",
+          "permanent_street1": "456 Oak St",
+          "permanent_street2": "Apt 789"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10003",
+    "designation": "Associate Professor",
+    "facultyCode": "FAC-102",
+    "departmentCode": "DEP-202",
+    "departmentName": "Artificial Intelligence",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-12T11:15:45.789Z" },
+      "firstName": "Emily",
+      "lastName": "Johnson",
+      "gender": "Female",
+      "birth_date": "November 20th 1978",
+      "religion": "Christianity",
+      "marital": "Married",
+      "blood_group": "AB+",
+      "father_name": "Mr. Johnson",
+      "mother_name": "Mrs. Johnson",
+      "email": "emily.johnson@email.com",
+      "mobile": "7654321098",
+      "nid_Birth_certificate": "056783421",
+      "passport": "EF123456",
+      "nationality": "British",
+      "country": "United Kingdom",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/portrait-young-businesswoman-holding-eyeglasses-hand-against-gray-backdrop_23-2148029483.jpg?size=626&ext=jpg&ga=GA1.1.901456262.1693049087&semt=sph",
+      "signature": "https://example.com/emily_johnson_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "United Kingdom",
+          "present_state_division": "England",
+          "present_city": "London",
+          "present_zip_code": "WC1E 6BT",
+          "present_street1": "789 Pine St",
+          "present_street2": "Apt 012"
+        },
+        "permanent_address": {
+          "permanent_country": "United Kingdom",
+          "permanent_state_division": "England",
+          "permanent_city": "London",
+          "permanent_zip_code": "WC1E 6BT",
+          "permanent_street1": "789 Pine St",
+          "permanent_street2": "Apt 012"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+
+  {
+    "teacherId": "10004",
+    "designation": "Assistant Professor",
+    "facultyCode": "FAC-103",
+    "departmentCode": "DEP-301",
+    "departmentName": "Environmental Science",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-13T12:00:30.456Z" },
+      "firstName": "Michael",
+      "lastName": "Williams",
+      "gender": "Male",
+      "birth_date": "April 10th 1982",
+      "religion": "Islam",
+      "marital": "Divorced",
+      "blood_group": "A-",
+      "father_name": "Mr. Williams",
+      "mother_name": "Mrs. Williams",
+      "email": "michael.williams@email.com",
+      "mobile": "6543210987",
+      "nid_Birth_certificate": "067834210",
+      "passport": "GH123456",
+      "nationality": "Australian",
+      "country": "Australia",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/portrait-smiling-charming-young-man-grey-t-shirt-standing-against-plain-background_23-2148213406.jpg?w=740&t=st=1699215771~exp=1699216371~hmac=5e6f5d2a7a89b01d1781e7907c9177bb61894f2f7b1101ec8a68029cc5090a40",
+      "signature": "https://example.com/michael_williams_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "Australia",
+          "present_state_division": "Victoria",
+          "present_city": "Melbourne",
+          "present_zip_code": "3000",
+          "present_street1": "101 Oak St",
+          "present_street2": "Apt 202"
+        },
+        "permanent_address": {
+          "permanent_country": "Australia",
+          "permanent_state_division": "Victoria",
+          "permanent_city": "Melbourne",
+          "permanent_zip_code": "3000",
+          "permanent_street1": "101 Oak St",
+          "permanent_street2": "Apt 202"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10005",
+    "designation": "Lecturer",
+    "facultyCode": "FAC-103",
+    "departmentCode": "DEP-302",
+    "departmentName": "Ecology and Conservation",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-14T13:30:10.234Z" },
+      "firstName": "Sophia",
+      "lastName": "Brown",
+      "gender": "Female",
+      "birth_date": "September 25th 1989",
+      "religion": "Judaism",
+      "marital": "Single",
+      "blood_group": "B+",
+      "father_name": "Mr. Brown",
+      "mother_name": "Mrs. Brown",
+      "email": "sophia.brown@email.com",
+      "mobile": "5432109876",
+      "nid_Birth_certificate": "078943210",
+      "passport": "IJ123456",
+      "nationality": "German",
+      "country": "Germany",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/portrait-young-woman-wearing-black-hat-standing-front-wall_23-2147910358.jpg?size=626&ext=jpg&ga=GA1.1.901456262.1693049087&semt=sph",
+      "signature": "https://example.com/sophia_brown_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "Germany",
+          "present_state_division": "Berlin",
+          "present_city": "Berlin",
+          "present_zip_code": "10115",
+          "present_street1": "567 Maple St",
+          "present_street2": "Apt 303"
+        },
+        "permanent_address": {
+          "permanent_country": "Germany",
+          "permanent_state_division": "Berlin",
+          "permanent_city": "Berlin",
+          "permanent_zip_code": "10115",
+          "permanent_street1": "567 Maple St",
+          "permanent_street2": "Apt 303"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10006",
+    "designation": "Professor",
+    "facultyCode": "FAC-104",
+    "departmentCode": "DEP-401",
+    "departmentName": "Music Composition",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-15T14:45:25.789Z" },
+      "firstName": "Daniel",
+      "lastName": "Miller",
+      "gender": "Male",
+      "birth_date": "July 8th 1975",
+      "religion": "Christianity",
+      "marital": "Married",
+      "blood_group": "O-",
+      "father_name": "Mr. Miller",
+      "mother_name": "Mrs. Miller",
+      "email": "daniel.miller@email.com",
+      "mobile": "4321098765",
+      "nid_Birth_certificate": "089743210",
+      "passport": "KL123456",
+      "nationality": "French",
+      "country": "France",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-vector/vector-pop-art-illustration-brutal-bearded-man-macho-with-tatoo_1441-376.jpg?w=740&t=st=1699215793~exp=1699216393~hmac=b68900df2c873e0d68f4f67239d620e7bd38a34047e92da533be9c1d879342c9",
+      "signature": "https://example.com/daniel_miller_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "France",
+          "present_state_division": "Île-de-France",
+          "present_city": "Paris",
+          "present_zip_code": "75001",
+          "present_street1": "789 Oak St",
+          "present_street2": "Apt 404"
+        },
+        "permanent_address": {
+          "permanent_country": "France",
+          "permanent_state_division": "Île-de-France",
+          "permanent_city": "Paris",
+          "permanent_zip_code": "75001",
+          "permanent_street1": "789 Oak St",
+          "permanent_street2": "Apt 404"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10007",
+    "designation": "Assistant Professor",
+    "facultyCode": "FAC-104",
+    "departmentCode": "DEP-402",
+    "departmentName": "Theater Arts",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-16T15:15:35.123Z" },
+      "firstName": "Olivia",
+      "lastName": "Taylor",
+      "gender": "Female",
+      "birth_date": "December 12th 1987",
+      "religion": "Hinduism",
+      "marital": "Single",
+      "blood_group": "AB-",
+      "father_name": "Mr. Taylor",
+      "mother_name": "Mrs. Taylor",
+      "email": "olivia.taylor@email.com",
+      "mobile": "3210987654",
+      "nid_Birth_certificate": "098543210",
+      "passport": "MN123456",
+      "nationality": "Indian",
+      "country": "India",
+      "social_media": "",
+      "image": "https://img.freepik.com/premium-photo/woman-with-sunglasses-that-says-she-is-wearing-rainbow-colored-top_894855-2031.jpg?size=626&ext=jpg&ga=GA1.1.901456262.1693049087&semt=sph",
+      "signature": "https://example.com/olivia_taylor_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "India",
+          "present_state_division": "Maharashtra",
+          "present_city": "Mumbai",
+          "present_zip_code": "400001",
+          "present_street1": "456 Maple St",
+          "present_street2": "Apt 505"
+        },
+        "permanent_address": {
+          "permanent_country": "India",
+          "permanent_state_division": "Maharashtra",
+          "permanent_city": "Mumbai",
+          "permanent_zip_code": "400001",
+          "permanent_street1": "456 Maple St",
+          "permanent_street2": "Apt 505"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10008",
+    "designation": "Lecturer",
+    "facultyCode": "FAC-105",
+    "departmentCode": "DEP-501",
+    "departmentName": "Criminal Law",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-17T16:30:40.567Z" },
+      "firstName": "Ethan",
+      "lastName": "Harris",
+      "gender": "Male",
+      "birth_date": "August 18th 1984",
+      "religion": "Sikhism",
+      "marital": "Married",
+      "blood_group": "O+",
+      "father_name": "Mr. Harris",
+      "mother_name": "Mrs. Harris",
+      "email": "ethan.harris@email.com",
+      "mobile": "2109876543",
+      "nid_Birth_certificate": "109854321",
+      "passport": "OP123456",
+      "nationality": "Canadian",
+      "country": "Canada",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/handsome-young-man-with-arms-crossed-white-background_23-2148222620.jpg?w=740&t=st=1699215810~exp=1699216410~hmac=17ec17a13b5db19ee5191e7b3be45bbe2645c03dac94921da7120972c557cb38",
+      "signature": "https://example.com/ethan_harris_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "Canada",
+          "present_state_division": "Alberta",
+          "present_city": "Calgary",
+          "present_zip_code": "T2P 1J9",
+          "present_street1": "101 Pine St",
+          "present_street2": "Apt 606"
+        },
+        "permanent_address": {
+          "permanent_country": "Canada",
+          "permanent_state_division": "Alberta",
+          "permanent_city": "Calgary",
+          "permanent_zip_code": "T2P 1J9",
+          "permanent_street1": "101 Pine St",
+          "permanent_street2": "Apt 606"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10009",
+    "designation": "Associate Professor",
+    "facultyCode": "FAC-105",
+    "departmentCode": "DEP-502",
+    "departmentName": "Corporate Law",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-18T17:45:55.890Z" },
+      "firstName": "Ava",
+      "lastName": "Jones",
+      "gender": "Female",
+      "birth_date": "May 3rd 1986",
+      "religion": "Christianity",
+      "marital": "Single",
+      "blood_group": "A+",
+      "father_name": "Mr. Jones",
+      "mother_name": "Mrs. Jones",
+      "email": "ava.jones@email.com",
+      "mobile": "1098765432",
+      "nid_Birth_certificate": "120987654",
+      "passport": "QR123456",
+      "nationality": "Australian",
+      "country": "Australia",
+      "social_media": "",
+      "image": "https://img.freepik.com/premium-photo/3d-render-little-boy-playing-with-colorful-balloons_1057-18949.jpg?size=626&ext=jpg&ga=GA1.1.901456262.1693049087&semt=sph",
+      "signature": "https://example.com/ava_jones_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "Australia",
+          "present_state_division": "New South Wales",
+          "present_city": "Sydney",
+          "present_zip_code": "2000",
+          "present_street1": "789 Cedar St",
+          "present_street2": "Apt 707"
+        },
+        "permanent_address": {
+          "permanent_country": "Australia",
+          "permanent_state_division": "New South Wales",
+          "permanent_city": "Sydney",
+          "permanent_zip_code": "2000",
+          "permanent_street1": "789 Cedar St",
+          "permanent_street2": "Apt 707"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10010",
+    "designation": "Professor",
+    "facultyCode": "FAC-106",
+    "departmentCode": "DEP-601",
+    "departmentName": "Crop Science",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-19T18:00:10.234Z" },
+      "firstName": "Liam",
+      "lastName": "Davis",
+      "gender": "Male",
+      "birth_date": "January 12th 1970",
+      "religion": "Judaism",
+      "marital": "Divorced",
+      "blood_group": "B-",
+      "father_name": "Mr. Davis",
+      "mother_name": "Mrs. Davis",
+      "email": "liam.davis@email.com",
+      "mobile": "9876543210",
+      "nid_Birth_certificate": "130987654",
+      "passport": "ST123456",
+      "nationality": "British",
+      "country": "United Kingdom",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?w=740&t=st=1699215818~exp=1699216418~hmac=ce5344bf24a8f3cdc5e4e0f14f6ddfb847ef773a3e65af4aff10856826779f45",
+      "signature": "https://example.com/liam_davis_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "United Kingdom",
+          "present_state_division": "England",
+          "present_city": "London",
+          "present_zip_code": "W1J 9LT",
+          "present_street1": "101 Birch St",
+          "present_street2": "Apt 808"
+        },
+        "permanent_address": {
+          "permanent_country": "United Kingdom",
+          "permanent_state_division": "England",
+          "permanent_city": "London",
+          "permanent_zip_code": "W1J 9LT",
+          "permanent_street1": "101 Birch St",
+          "permanent_street2": "Apt 808"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+  {
+    "teacherId": "10011",
+    "designation": "Assistant Professor",
+    "facultyCode": "FAC-106",
+    "departmentCode": "DEP-602",
+    "departmentName": "Livestock Management",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-20T19:15:30.567Z" },
+      "firstName": "Mia",
+      "lastName": "Robinson",
+      "gender": "Female",
+      "birth_date": "April 5th 1983",
+      "religion": "Christianity",
+      "marital": "Married",
+      "blood_group": "O+",
+      "father_name": "Mr. Robinson",
+      "mother_name": "Mrs. Robinson",
+      "email": "mia.robinson@email.com",
+      "mobile": "8765432109",
+      "nid_Birth_certificate": "140987654",
+      "passport": "UV123456",
+      "nationality": "American",
+      "country": "USA",
+      "social_media": "",
+      "image": "https://img.freepik.com/free-photo/woman-with-long-hair-hoodie-sits-field_1340-48096.jpg?size=626&ext=jpg&ga=GA1.1.901456262.1693049087&semt=sph",
+      "signature": "https://example.com/mia_robinson_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "USA",
+          "present_state_division": "New York",
+          "present_city": "New York City",
+          "present_zip_code": "10001",
+          "present_street1": "456 Elm St",
+          "present_street2": "Apt 909"
+        },
+        "permanent_address": {
+          "permanent_country": "USA",
+          "permanent_state_division": "New York",
+          "permanent_city": "New York City",
+          "permanent_zip_code": "10001",
+          "permanent_street1": "456 Elm St",
+          "permanent_street2": "Apt 909"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  },
+
+  {
+    "teacherId": "10012",
+    "designation": "Professor",
+    "facultyCode": "FAC-107",
+    "departmentCode": "DEP-701",
+    "departmentName": "Elementary Education",
+    "personal": {
+      "enrollDate": { "$date": "2023-09-21T20:00:45.890Z" },
+      "firstName": "Logan",
+      "lastName": "Evans",
+      "gender": "Male",
+      "birth_date": "September 15th 1977",
+      "religion": "Atheist",
+      "marital": "Single",
+      "blood_group": "B+",
+      "father_name": "Mr. Evans",
+      "mother_name": "Mrs. Evans",
+      "email": "logan.evans@email.com",
+      "mobile": "7654321098",
+      "nid_Birth_certificate": "150987654",
+      "passport": "WX123456",
+      "nationality": "Canadian",
+      "country": "Canada",
+      "social_media": "",
+      "image": "https://img.freepik.com/premium-photo/african-american-man-with-afro-hairstyle-blue-background-vector-illustration_890887-1310.jpg?size=626&ext=jpg&ga=GA1.1.901456262.1693049087&semt=sph",
+      "signature": "https://example.com/logan_evans_signature.jpg",
+      "address": {
+        "present_address": {
+          "present_country": "Canada",
+          "present_state_division": "Ontario",
+          "present_city": "Toronto",
+          "present_zip_code": "M5V 2L6",
+          "present_street1": "789 Oak St",
+          "present_street2": "Apt 1010"
+        },
+        "permanent_address": {
+          "permanent_country": "Canada",
+          "permanent_state_division": "Ontario",
+          "permanent_city": "Toronto",
+          "permanent_zip_code": "M5V 2L6",
+          "permanent_street1": "789 Oak St",
+          "permanent_street2": "Apt 1010"
+        }
+      }
+    },
+    "experience": [],
+    "education": [],
+    "courses_taught": [],
+    "research_interests": [],
+    "publication": [],
+    "others": {
+      "is_parents_freedom_fighter": false,
+      "is_tribal": false,
+      "is_physical_disorder": false,
+      "is_first_division_player": false,
+      "accept_declaration": true,
+      "accept_terms": true
+    }
+  }
+]

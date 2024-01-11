@@ -2,61 +2,101 @@
   {
     "facultyCode": "FAC-101",
     "departmentCode": "DEP-101",
-    "programCode": "PRO-101",
-    "departmentName": "Computer Science & Engineering"
+    "departmentName": "Internal Medicine"
   },
   {
     "facultyCode": "FAC-101",
     "departmentCode": "DEP-102",
-    "programCode": "PRO-102",
-    "departmentName": "Mathematics"
-  },
-  {
-    "facultyCode": "FAC-101",
-    "departmentCode": "DEP-103",
-    "programCode": "PRO-103",
-    "departmentName": "Pharmacy"
-  },
-  {
-    "facultyCode": "FAC-101",
-    "departmentCode": "DEP-104",
-    "programCode": "PRO-104",
-    "departmentName": "Electrical and Electronic Engineering"
-  },
-  {
-    "facultyCode": "FAC-101",
-    "departmentCode": "DEP-105",
-    "programCode": "PRO-105",
-    "departmentName": "Architecture"
+    "departmentName": "Surgery"
   },
   {
     "facultyCode": "FAC-102",
-    "departmentCode": "DEP-106",
-    "programCode": "PRO-106",
-    "departmentName": "English"
+    "departmentCode": "DEP-201",
+    "departmentName": "Computer Science & Engineering"
   },
   {
     "facultyCode": "FAC-102",
-    "departmentCode": "DEP-107",
-    "programCode": "PRO-107",
-    "departmentName": "Sociology"
-  },
-  {
-    "facultyCode": "FAC-102",
-    "departmentCode": "DEP-108",
-    "programCode": "PRO-108",
-    "departmentName": "Bachelor of Laws"
+    "departmentCode": "DEP-202",
+    "departmentName": "Artificial Intelligence"
   },
   {
     "facultyCode": "FAC-103",
-    "departmentCode": "DEP-109",
-    "programCode": "PRO-109",
-    "departmentName": "Bachelor of Business Administration"
+    "departmentCode": "DEP-301",
+    "departmentName": "Environmental Science"
   },
   {
     "facultyCode": "FAC-103",
-    "departmentCode": "DEP-110",
-    "programCode": "PRO-110",
-    "departmentName": "Bachelor of Economics"
+    "departmentCode": "DEP-302",
+    "departmentName": "Ecology and Conservation"
+  },
+  {
+    "facultyCode": "FAC-104",
+    "departmentCode": "DEP-401",
+    "departmentName": "Music Composition"
+  },
+  {
+    "facultyCode": "FAC-104",
+    "departmentCode": "DEP-402",
+    "departmentName": "Theater Arts"
+  },
+  {
+    "facultyCode": "FAC-105",
+    "departmentCode": "DEP-501",
+    "departmentName": "Criminal Law"
+  },
+  {
+    "facultyCode": "FAC-105",
+    "departmentCode": "DEP-502",
+    "departmentName": "Corporate Law"
+  },
+  {
+    "facultyCode": "FAC-106",
+    "departmentCode": "DEP-601",
+    "departmentName": "Crop Science"
+  },
+  {
+    "facultyCode": "FAC-106",
+    "departmentCode": "DEP-602",
+    "departmentName": "Livestock Management"
+  },
+  {
+    "facultyCode": "FAC-107",
+    "departmentCode": "DEP-701",
+    "departmentName": "Elementary Education"
+  },
+  {
+    "facultyCode": "FAC-107",
+    "departmentCode": "DEP-702",
+    "departmentName": "Special Education"
+  },
+  {
+    "facultyCode": "FAC-108",
+    "departmentCode": "DEP-801",
+    "departmentName": "Finance"
+  },
+  {
+    "facultyCode": "FAC-108",
+    "departmentCode": "DEP-802",
+    "departmentName": "Economics"
+  },
+  {
+    "facultyCode": "FAC-109",
+    "departmentCode": "DEP-901",
+    "departmentName": "Sports Management"
+  },
+  {
+    "facultyCode": "FAC-109",
+    "departmentCode": "DEP-902",
+    "departmentName": "Physical Education"
+  },
+  {
+    "facultyCode": "FAC-110",
+    "departmentCode": "DEP-1001",
+    "departmentName": "English Linguistics"
+  },
+  {
+    "facultyCode": "FAC-110",
+    "departmentCode": "DEP-1002",
+    "departmentName": "Foreign Languages"
   }
 ]
