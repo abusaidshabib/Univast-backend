@@ -102,7 +102,7 @@ app.use("/api/v1/email", mailRouter);
 app.use("/api/v1/teachadd", teachAddRouter);
 app.use("/api/v1/notice", noticeRouter);
 app.use("/api/v1/upload",demo,upload.single("image"), uploadImgRouter);
-app.use("/api/v1/ex", courseExtensionRouter);
+app.use("/api/v1/cx", courseExtensionRouter);
 
 
 // Handle unusual routes
