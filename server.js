@@ -3,14 +3,31 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
 
-const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+// const DB = process.env.DATABASE.replace(
+//   "<PASSWORD>",
+//   process.env.DATABASE_PASSWORD
+// );
 
-mongoose.connect(DB).then(() => console.log("DB connection successful!"));
+const DB = "mongodb://localhost:27017/univast"
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
-});
+const connectWithRetry = () => {
+  mongoose
+    .connect(DB, {
+      serverSelectionTimeoutMS: 4000,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      const port = process.env.PORT || 3000;
+      app.listen(port, () => {
+        console.log(`App running on port ${port}`)
+      })
+    })
+    .catch((error) => {
+      console.error("DB connection failed:", error);
+      console.log("Retrying connection...");
+      setTimeout(connectWithRetry, 5000);
+    });
+};
+
+connectWithRetry();
