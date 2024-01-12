@@ -37,6 +37,7 @@ const mailRouter = require("./routes/nodeMailRoutes");
 const teachAddRouter = require("./routes/teachAddRouter");
 const noticeRouter = require("./routes/noticeRouter");
 const uploadImgRouter = require('./routes/imageUpRouter');
+const courseExtensionRouter = require('./routes/courseExtensionRouter');
 
 // All error handler route
 const AppError = require("./utils/AppError");
@@ -101,6 +102,7 @@ app.use("/api/v1/email", mailRouter);
 app.use("/api/v1/teachadd", teachAddRouter);
 app.use("/api/v1/notice", noticeRouter);
 app.use("/api/v1/upload",demo,upload.single("image"), uploadImgRouter);
+app.use("/api/v1/ex", courseExtensionRouter);
 
 
 // Handle unusual routes
