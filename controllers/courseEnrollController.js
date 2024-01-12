@@ -123,13 +123,10 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
     if (!student) {
       return res.status(404).json({ status: 'failed', message: 'Student not found.' });
     } else {
-      const courseModel = await Course.findOne({ courseCode });
+      const courseModels = await Course.find({ courseCode: { $in: courseCode } });
   
-      if (!courseModel) {
-        return res.status(404).json({ status: 'failed', message: 'Course not found.' });
-      }
-      if (!student.courses_taught) {
-        student.courses_taught = [];
+      if (!courseModels || courseModels.length !== courseCode.length) {
+        return res.status(404).json({ status: 'failed', message: 'One or more courses not found.' });
       }
   
       const semesterIndex = student.courses_taught.findIndex((course) => course.semester === semester);
@@ -137,22 +134,26 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
       if (semesterIndex === -1) {
         student.courses_taught.push({
           semester,
-          courseCode: [courseCode],
-          courses: [courseModel._id],
+          courseCode: courseCode,
+          courses: courseModels.map(course => course._id),
         });
       } else {
-        const isCourseAlreadyAdded = student.courses_taught[semesterIndex].courseCode.includes(courseCode);
+        courseCode.forEach(code => {
+          const isCourseAlreadyAdded = student.courses_taught[semesterIndex].courseCode.includes(code);
   
-        if (!isCourseAlreadyAdded) {
-          student.courses_taught[semesterIndex].courseCode.push(courseCode);
-          student.courses_taught[semesterIndex].courses.push(courseModel._id);
-        } else {
-          statusCode = 400;
-          result = { status: 'failed', message: 'Course already added for the specified semester.' };
-        }
+          if (!isCourseAlreadyAdded) {
+            student.courses_taught[semesterIndex].courseCode.push(code);
+            const correspondingCourse = courseModels.find(course => course.courseCode === code);
+            student.courses_taught[semesterIndex].courses.push(correspondingCourse._id);
+          } else {
+            statusCode = 400;
+            result = { status: 'failed', message: 'One or more courses already added for the specified semester.' };
+          }
+        });
       }
   
       await student.save();
+      result = { status: 'success', message: 'CourseCodes added to student.' };
     }
   
     new ResponseGenerator(res, statusCode, result);
@@ -167,39 +168,44 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
   
     if (!student) {
       return res.status(404).json({ status: 'failed', message: 'Student not found.' });
+    }
+  
+    const courseModels = await Course.find({ courseCode: { $in: courseCode } });
+  
+    if (!courseModels || courseModels.length !== courseCode.length) {
+      return res.status(404).json({ status: 'failed', message: 'One or more courses not found.' });
+    }
+  
+    const semesterIndex = student.courses_taught.findIndex((course) => course.semester === semester);
+    if (semesterIndex !== -1) {
+      const coursesToRemove = [];
+  
+      if (courseModels.length > 0) {
+        courseCode?.forEach((code) => {
+          const courseCodeIndex = student.courses_taught[semesterIndex].courseCode.indexOf(code);
+          console.log(courseCodeIndex);
+          if (courseCodeIndex !== -1) {
+            student.courses_taught[semesterIndex].courseCode.splice(courseCodeIndex, 1);
+            student.courses_taught[semesterIndex].courses.splice(courseCodeIndex, 1);
+            const correspondingCourse = courseModels.find((course) => course.courseCode === code);
+            coursesToRemove.push(correspondingCourse._id);
+          } else {
+            statusCode = 404;
+            result = { status: 'failed', message: 'One or more CourseCodes not found in the specified semester.' };
+          }
+        });
+      }
+  
+      await student.save();
+  
+      result = { status: 'success', message: 'CourseCodes removed from student.' };
     } else {
-      const courseModel = await Course.findOne({ courseCode });
-  
-      if (!courseModel) {
-        return res.status(404).json({ status: 'failed', message: 'Course not found.' });
-      }
-  
-      // Initialize courses_taught array if undefined
-      if (!student.courses_taught) {
-        student.courses_taught = [];
-      }
-  
-      const semesterIndex = student.courses_taught.findIndex((course) => course.semester === semester);
-  
-      if (semesterIndex !== -1) {
-        const courseCodeIndex = student.courses_taught[semesterIndex].courseCode.indexOf(courseCode);
-  
-        if (courseCodeIndex !== -1) {
-          student.courses_taught[semesterIndex].courseCode.splice(courseCodeIndex, 1);
-          student.courses_taught[semesterIndex].courses.splice(courseCodeIndex, 1);
-          await student.save();
-          result = { status: 'success', message: 'CourseCode removed from student.' };
-        } else {
-          statusCode = 404;
-          result = { status: 'failed', message: 'CourseCode not found in the specified semester.' };
-        }
-      } else {
-        statusCode = 404;
-        result = { status: 'failed', message: 'Semester not found for the student.' };
-      }
+      statusCode = 404;
+      result = { status: 'failed', message: 'Semester not found for the student.' };
     }
   
     new ResponseGenerator(res, statusCode, result);
   });
+  
   
   
