@@ -53,61 +53,111 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
   exports.getCourseEnrollmentData = catchAsync(async (req, res, next) => {
     let statusCode = 200;
     let result;
-    const semester = req.query.semester;
+
+    const {semester, teacherId} = req.query;
   
-    result = await EnrollCourse.aggregate([
-      {
-        $match: { semester: semester },
-      },
-      {
-        $unwind: '$courses',
-      },
-      {
-        $lookup: {
-          from: 'teachers',
-          localField: 'courses.teachersId',
-          foreignField: '_id',
-          as: 'teacherData',
+    if(semester){
+      result = await EnrollCourse.aggregate([
+        {
+          $match: { semester: semester },
         },
-      },
-      {
-        $lookup: {
-          from: 'courses',
-          localField: 'courses.courseId',
-          foreignField: '_id',
-          as: 'courseData',
+        {
+          $unwind: '$courses',
         },
-      },
-      {
-        $unwind: '$teacherData',
-      },
-      {
-        $unwind: '$courseData',
-      },
-      {
-        $group: {
-          _id: '$_id',
-          semester: { $first: '$semester' },
-          combinedData: {
-            $push: {
-              firstName: '$teacherData.personal.firstName',
-              lastName: '$teacherData.personal.lastName',
-              email: '$teacherData.personal.email',
-              courseCode: '$courseData.courseCode',
-              courseName: '$courseData.courseName',
-              credit: '$courseData.credit',
+        {
+          $lookup: {
+            from: 'teachers',
+            localField: 'courses.teachersId',
+            foreignField: '_id',
+            as: 'teacherData',
+          },
+        },
+        {
+          $lookup: {
+            from: 'courses',
+            localField: 'courses.courseId',
+            foreignField: '_id',
+            as: 'courseData',
+          },
+        },
+        {
+          $unwind: '$teacherData',
+        },
+        {
+          $unwind: '$courseData',
+        },
+        {
+          $group: {
+            _id: '$_id',
+            semester: { $first: '$semester' },
+            combinedData: {
+              $push: {
+                firstName: '$teacherData.personal.firstName',
+                lastName: '$teacherData.personal.lastName',
+                email: '$teacherData.personal.email',
+                courseCode: '$courseData.courseCode',
+                courseName: '$courseData.courseName',
+                credit: '$courseData.credit',
+              },
             },
           },
         },
-      },
-      {
-        $project: {
-          _id: 0,
-          semester: 1,
-          combinedData: 1,
+        {
+          $project: {
+            _id: 0,
+            semester: 1,
+            combinedData: 1,
+          },
         },
-      },
-    ]);
+      ]);
+    }
+    else if (teacherId) {
+      try {
+        const tempResult = await EnrollCourse.find().populate({
+          path: 'courses.courseId',
+          model: 'Course',
+        }).populate({
+          path: 'courses.teachersId',
+          model: 'Teacher',
+        }).exec();
+    
+        const filteredData = {};
+    
+        tempResult.forEach(enrollment => {
+          // Ensure that 'courses' array and its first element exist
+          if (enrollment.courses && enrollment.courses[0] && enrollment.courses[0].teachersId) {
+            const teacherIdFromData = enrollment.courses[0].teachersId.teacherId;
+    
+            if (teacherIdFromData === teacherId) {
+              if (!filteredData[teacherId]) {
+                filteredData[teacherId] = {
+                  teacherId,
+                  courses: new Set(),
+                };
+              }
+    
+              enrollment.courses.forEach(course => {
+                // Ensure that 'courseId' and 'courseCode' exist
+                if (course.courseId && course.courseId.courseCode) {
+                  filteredData[teacherId].courses.add(course.courseId.courseCode);
+                }
+              });
+            }
+          }
+        });
+    
+        result = Object.values(filteredData).map(teacherData => {
+          return {
+            teacherId: teacherData.teacherId,
+            courses: Array.from(teacherData.courses),
+          };
+        });
+    
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   
     new ResponseGenerator(res, statusCode, result);
   });
