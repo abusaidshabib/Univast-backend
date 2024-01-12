@@ -116,9 +116,11 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
   exports.addCourseCodeToStudent = catchAsync(async (req, res, next) => {
     let result;
     let statusCode = 201;
-    const { studentId, semester, courseCode } = req.body;
-  
+    const { studentId, semester } = req.body;
     const student = await Student.findOne({ studentId });
+    const course = await Course.find({semester:student.courses_taught.length+1})
+    let courseCode = course.map(course => course.courseCode);
+    // console.log(courseCode,semester, studentId);
   
     if (!student) {
       return res.status(404).json({ status: 'failed', message: 'Student not found.' });
@@ -152,7 +154,7 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
         });
       }
   
-      await student.save();
+      // await student.save();
       result = { status: 'success', message: 'CourseCodes added to student.' };
     }
   

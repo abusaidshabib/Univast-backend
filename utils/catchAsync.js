@@ -11,7 +11,7 @@ module.exports = (fn) => {
       } else {
         res.status(400).json({
           status: "failed",
-          message: error.message,
+          message: error,
         });
       }
     });

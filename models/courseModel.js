@@ -14,6 +14,7 @@ const courseSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  semester: Number,
   credit: Number,
 });
 
