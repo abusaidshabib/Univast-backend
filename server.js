@@ -10,11 +10,10 @@ const DB = process.env.DATABASE.replace(
 
 // const DB = "mongodb://localhost:27017/univast"
 
-
 const connectWithRetry = () => {
   mongoose
     .connect(DB, {
-      serverSelectionTimeoutMS: 20000,
+      serverSelectionTimeoutMS: 4000,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

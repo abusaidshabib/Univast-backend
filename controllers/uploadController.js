@@ -7,10 +7,10 @@ const port = process.env.PORT;
 
 
 exports.uploadImg = catchAsync(async (req, res) => {
-    const base64Data = req.body.image.replace(/^data:image\/png;base64,/, '');
-    const filename = `image_${Date.now()}.png`;
-    const filePath = path.join(__dirname, '..', 'uploads', filename);
-    fs.writeFileSync(filePath, base64Data, 'base64');
-    const imageUrl = `http://localhost:${port}/uploads/${filename}`;
-    res.json({ imageUrl });
+    if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+    }
+    const imageUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
+    res.json({ imageUrl});
 });
+

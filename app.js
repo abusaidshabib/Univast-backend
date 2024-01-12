@@ -6,8 +6,20 @@ const helmet = require("helmet");
 const app = express();
 var cors = require("cors");
 const path = require('path');
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+    console.log(file)
+  }
+})
+const upload = multer({ storage: storage });
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
 
 //Take all router required..............
 const admissionRouter = require("./routes/admissionRouter");
@@ -25,6 +37,7 @@ const mailRouter = require("./routes/nodeMailRoutes");
 const teachAddRouter = require("./routes/teachAddRouter");
 const noticeRouter = require("./routes/noticeRouter");
 const uploadImgRouter = require('./routes/imageUpRouter');
+const courseExtensionRouter = require('./routes/courseExtensionRouter');
 
 // All error handler route
 const AppError = require("./utils/AppError");
@@ -58,13 +71,20 @@ app.get("/login", limiter, function(req, res) {
   res.send("Test for limiter")
 })
 */
-
+// 2) Multer middleware for handling file uploads
+// app.use("/api/v1/upload", upload.single("image"));
 app.use(express.json({ limit: "1000kb" }));
 app.use(express.static(`${__dirname}/public`));
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
 });
+
+const demo = (req, res, next) => {
+  console.log("middleware1")
+  // console.log(req.files)
+  next()
+}
 
 // 3) Important ROUTES
 app.use("/api/v1/admission", admissionRouter);
@@ -81,7 +101,9 @@ app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/email", mailRouter);
 app.use("/api/v1/teachadd", teachAddRouter);
 app.use("/api/v1/notice", noticeRouter);
-app.use("/api/v1/upload", uploadImgRouter);
+app.use("/api/v1/upload",demo,upload.single("image"), uploadImgRouter);
+app.use("/api/v1/cx", courseExtensionRouter);
+
 
 // Handle unusual routes
 app.all("*", (req, res, next) => {
