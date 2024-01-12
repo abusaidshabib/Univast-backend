@@ -5,20 +5,26 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const app = express();
 var cors = require("cors");
+const path = require('path');
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //Take all router required..............
 const admissionRouter = require("./routes/admissionRouter");
 const facultyRouter = require("./routes/facultyRouter");
 const studentRouter = require("./routes/studentRouter");
+const courseEnrollRouter = require('./routes/courseEnrollRouter');
 const courseRouter = require("./routes/courseRouter");
 const departmentRouter = require("./routes/departmentRouter");
 const programRouter = require("./routes/programRouter");
 const semesterRouter = require("./routes/semesterRouter");
+const allSemesterRouter = require("./routes/allSemesterRouter");
 const teacherRouter = require("./routes/teacherRouter");
 const usersRouter = require("./routes/usersRouter");
 const mailRouter = require("./routes/nodeMailRoutes");
 const teachAddRouter = require("./routes/teachAddRouter");
 const noticeRouter = require("./routes/noticeRouter");
+const uploadImgRouter = require('./routes/imageUpRouter');
 
 // All error handler route
 const AppError = require("./utils/AppError");
@@ -65,14 +71,17 @@ app.use("/api/v1/admission", admissionRouter);
 app.use("/api/v1/faculty", facultyRouter);
 app.use("/api/v1/student", studentRouter);
 app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/course-enroll", courseEnrollRouter);
 app.use("/api/v1/department", departmentRouter);
 app.use("/api/v1/programs", programRouter);
 app.use("/api/v1/semester", semesterRouter);
+app.use("/api/v1/allsemester", allSemesterRouter);
 app.use("/api/v1/teacher", teacherRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/email", mailRouter);
 app.use("/api/v1/teachadd", teachAddRouter);
 app.use("/api/v1/notice", noticeRouter);
+app.use("/api/v1/upload", uploadImgRouter);
 
 // Handle unusual routes
 app.all("*", (req, res, next) => {

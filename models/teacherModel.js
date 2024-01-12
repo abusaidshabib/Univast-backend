@@ -10,15 +10,15 @@ const publicationSchema = new mongoose.Schema({
   doi: String,
 });
 
-const coursesSchema = new mongoose.Schema({
-  course_code: String,
-  course_name: String,
+const courseToughSchema = new mongoose.Schema({
   semester: String,
-  total_Student: Number,
-  class_schedule: {
-    days: [String],
-    time: String,
-  },
+  courseCode: [String],
+  courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
 });
 
 const educationSchema = new mongoose.Schema({
@@ -106,7 +106,7 @@ const teacherSchema = new mongoose.Schema({
   },
   experience: [experienceSchema],
   education: [educationSchema],
-  courses_taught: [coursesSchema],
+  courses_taught: [courseToughSchema],
   research_interests: [String],
   publication: [publicationSchema],
   others: {

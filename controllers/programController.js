@@ -14,11 +14,9 @@ exports.createProgram = catchAsync(async (req, res, next) => {
 });
 
 exports.getProgram = catchAsync(async (req, res, next) => {
+  let statusCode = 200;
   const queryKeys = Object.keys(req.query);
   let result;
-  let statusCode = 200;
-  let message;
-  let method = "GET";
   switch (queryKeys.length) {
     case 0:
       result = await Program.find();
@@ -35,10 +33,9 @@ exports.getProgram = catchAsync(async (req, res, next) => {
       break;
 
     default:
-      message = "unknown error arrive";
       break;
   }
-  new ResponseGenerator(res, statusCode, result, method, message);
+  new ResponseGenerator(res, statusCode, result);
 });
 
 // exports.updatePrograms = catchAsync(async (req, res, next) => {
@@ -48,14 +45,12 @@ exports.getProgram = catchAsync(async (req, res, next) => {
 // });
 
 exports.deleteProgram = catchAsync(async (req, res, next) => {
+  let statusCode = 204;
   const queryKeys = Object.keys(req.query);
   let result;
-  let statusCode = 204;
-  let message;
-  let method = "DELETE";
   switch (queryKeys.length) {
     case 0:
-      message = "No query is available";
+
     case 1:
       if (
         req.query.programCode ||
@@ -64,10 +59,8 @@ exports.deleteProgram = catchAsync(async (req, res, next) => {
       ) {
         result = await Program.findOneAndRemove(req.query);
       } else {
-        message = "One query is available only";
       }
     default:
-      message = "Unknown Error";
   }
-  new ResponseGenerator(res, statusCode, result, method, message);
+  new ResponseGenerator(res, statusCode, result);
 });
