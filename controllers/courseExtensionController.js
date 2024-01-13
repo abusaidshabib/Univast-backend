@@ -6,6 +6,7 @@ const catchAsync = require("../utils/catchAsync");
 exports.getCourseExtension = catchAsync(async(req, res, next) => {
     let statusCode = 200;
     let result;
+
     const { semester, courseCode } = req.query;
     console.log(semester, courseCode)
     try{
@@ -29,42 +30,41 @@ exports.createCourseContent = catchAsync(async (req, res, next) => {
     const course = await Course.findOne({ courseCode: courseCode });
 
     if (!course) {
-      return res
-        .status(400)
-        .json({
-          status: "failed",
-          message: "Course not found with the provided code.",
-        });
+      return res.status(400).json({
+        status: "failed",
+        message: "Course not found with the provided code.",
+      });
     }
 
-    const courseExtension = await CourseExtension.findOne({
+    const existingCourseExtension = await CourseExtension.findOne({
       semester,
       courseId: course._id,
     });
 
-    if (courseExtension) {
+    if (existingCourseExtension) {
       if (notice) {
-        courseExtension.notice.push(notice);
+        existingCourseExtension.notice.push(notice);
       }
 
       if (classwork) {
-        courseExtension.classwork.push(classwork);
+        existingCourseExtension.classwork.push(classwork);
       }
 
       if (outline) {
-        courseExtension.outline.push(outline);
+        existingCourseExtension.outline.push(outline);
       }
 
       if (lectures) {
-        courseExtension.lectures.push(lectures);
+        existingCourseExtension.lectures.push(lectures);
       }
 
-      await courseExtension.save();
+      await existingCourseExtension.save();
     } else {
       const newCourseExtension = new CourseExtension({
         semester,
         courseId: course._id,
       });
+
       if (notice) {
         newCourseExtension.notice.push(notice);
       }
