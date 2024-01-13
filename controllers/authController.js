@@ -1,9 +1,9 @@
 const { signToken, generateToken } = require("../Authentication/authJWT");
 const { promisify } = require("util");
-const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
+const AppError = require("../utils/AppError");
 
 exports.verifyToken = catchAsync(async (req, res, next) => {
   // 1)Getting token and check of it's there

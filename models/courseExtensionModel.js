@@ -10,7 +10,7 @@ const courseExtensionSchema = new mongoose.Schema({
   notice: [String],
   classwork: [String],
   outline: [String],
-  lectures: [String]
+  lectures: [String],
 });
 
 const CourseExtension = mongoose.model("CourseExtension", courseExtensionSchema);

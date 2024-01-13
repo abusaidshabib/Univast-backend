@@ -40,10 +40,10 @@ const uploadImgRouter = require('./routes/imageUpRouter');
 const courseExtensionRouter = require('./routes/courseExtensionRouter');
 
 // All error handler route
-const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 const { limiter } = require("./Authentication/Rate-limit");
 const { verifyToken } = require("./controllers/authController");
+const AppError = require("./utils/AppError");
 
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === "development") {
@@ -102,7 +102,7 @@ app.use("/api/v1/email", mailRouter);
 app.use("/api/v1/teachadd", teachAddRouter);
 app.use("/api/v1/notice", noticeRouter);
 app.use("/api/v1/upload",demo,upload.single("image"), uploadImgRouter);
-app.use("/api/v1/cx", courseExtensionRouter);
+app.use("/api/v1/course-content", courseExtensionRouter);
 
 
 // Handle unusual routes
