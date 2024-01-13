@@ -20,6 +20,7 @@ const admissionSchema = new mongoose.Schema({
     medium: String,
     education_shift: String,
     admission_test_venue: String,
+    admission_semester: String,
   },
   personal: {
     firstName: String,
