@@ -108,6 +108,11 @@ const admissionSchema = new mongoose.Schema({
     accept_declaration: Boolean,
     accept_terms: Boolean,
   },
+  firebaseId: {
+    type: String,
+    required: [true, "Firebase Id must have to add"],
+      unique: true, // Set the unique option to true for a unique index
+  },
 });
 
 admissionSchema.index(
