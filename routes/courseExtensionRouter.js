@@ -3,4 +3,5 @@ const { getCourseExtension, createCourseContent } = require("../controllers/cour
 const router = express.Router();
 
 router.route("/").get(getCourseExtension).post(createCourseContent);
+
 module.exports = router;

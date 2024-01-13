@@ -8,7 +8,6 @@ exports.getCourseExtension = catchAsync(async(req, res, next) => {
     let result;
 
     const { semester, courseCode } = req.query;
-    console.log(semester, courseCode)
     try{
         let {_id} = await Course.findOne({courseCode: courseCode})
         result = await CourseExtension.find({
