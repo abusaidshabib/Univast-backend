@@ -1,10 +1,25 @@
 const CourseExtension = require("../models/courseExtensionModel");
 const Course = require("../models/courseModel");
+const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getCourseExtension = catchAsync(async(req, res, next) => {
-    console.log(req.query)
-    req.json({})
+    let statusCode = 200;
+    let result;
+    const { semester, courseCode } = req.query;
+    console.log(semester, courseCode)
+    try{
+        let {_id} = await Course.findOne({courseCode: courseCode})
+        result = await CourseExtension.find({
+          semester: semester,
+          courseId: _id,
+        });
+        console.log(result)
+    }
+    catch(error){
+        console.log(error)
+    }
+    new ResponseGenerator(res, statusCode, result);
 })
 
 exports.createCourseContent = catchAsync(async (req, res, next) => {
