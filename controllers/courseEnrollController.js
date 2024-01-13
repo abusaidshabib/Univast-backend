@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const EnrollCourse = require("../models/courseEnrollModel");
-const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 const Student = require('../models/studentModel');

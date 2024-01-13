@@ -1,6 +1,5 @@
 const { generateToken } = require("../Authentication/authJWT");
 const User = require("../models/userModel");
-const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 

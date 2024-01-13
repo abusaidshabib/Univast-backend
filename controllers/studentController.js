@@ -2,7 +2,6 @@ const Department = require("../models/departmentModel");
 const Program = require("../models/programModel");
 const Student = require("../models/studentModel");
 const { studentIdCreator } = require("../subControllers/studentSub");
-const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 

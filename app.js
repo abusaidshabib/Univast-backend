@@ -40,10 +40,10 @@ const uploadImgRouter = require('./routes/imageUpRouter');
 const courseExtensionRouter = require('./routes/courseExtensionRouter');
 
 // All error handler route
-const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 const { limiter } = require("./Authentication/Rate-limit");
 const { verifyToken } = require("./controllers/authController");
+const AppError = require("./utils/AppError");
 
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === "development") {
