@@ -6,6 +6,7 @@ const catchAsync = require("../utils/catchAsync");
 exports.getCourseExtension = catchAsync(async(req, res, next) => {
     let statusCode = 200;
     let result;
+
     const { semester, courseCode } = req.query;
     console.log(semester, courseCode)
     try{
