@@ -203,9 +203,11 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
         });
       }
 
+
+
       // console.log(student.courses_taught)
   
-      await student.save();
+      // await student.save();
       result = { status: 'success', message: 'CourseCodes added to student.' };
     }
   

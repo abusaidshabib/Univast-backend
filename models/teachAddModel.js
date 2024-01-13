@@ -88,6 +88,7 @@ const teachAddSchema = new mongoose.Schema({
       },
     },
   },
+  admission_semester: String,
   experience: [experienceSchema],
   education: [educationSchema],
   departmentCode: String,
