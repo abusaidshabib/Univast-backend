@@ -38,6 +38,7 @@ const teachAddRouter = require("./routes/teachAddRouter");
 const noticeRouter = require("./routes/noticeRouter");
 const uploadImgRouter = require('./routes/imageUpRouter');
 const courseExtensionRouter = require('./routes/courseExtensionRouter');
+const studentAttendanceRouter = require('./routes/studentAttendanceRouter');
 
 // All error handler route
 const globalErrorHandler = require("./controllers/errorController");
@@ -103,6 +104,7 @@ app.use("/api/v1/teachadd", teachAddRouter);
 app.use("/api/v1/notice", noticeRouter);
 app.use("/api/v1/upload",demo,upload.single("image"), uploadImgRouter);
 app.use("/api/v1/course-content", courseExtensionRouter);
+app.use("/api/v1/student-attendance", studentAttendanceRouter);
 
 
 // Handle unusual routes

@@ -262,5 +262,3 @@ exports.createEnrollCourse = catchAsync(async (req, res, next) => {
     new ResponseGenerator(res, statusCode, result);
   });
   
-  
-  

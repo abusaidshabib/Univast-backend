@@ -11,8 +11,10 @@ semester: String,
     ref: "Course",
   },
   date: Date,
+  update_at: { type: Date, default: Date.now },
   status: {
     type: Boolean,
+    default: false
   },
 });
 
