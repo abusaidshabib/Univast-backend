@@ -3,12 +3,12 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
 
-const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+// const DB = process.env.DATABASE.replace(
+//   "<PASSWORD>",
+//   process.env.DATABASE_PASSWORD
+// );
 
-// const DB = "mongodb://localhost:27017/univast"
+const DB = "mongodb://localhost:27017/univast"
 
 const connectWithRetry = () => {
   mongoose

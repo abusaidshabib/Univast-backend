@@ -3,6 +3,7 @@ const Student_Attendance = require("../models/studentAttendanceModel");
 const Student = require("../models/studentModel");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
+const { processAttendanceForStudent } = require("../utils/features/studentAttendance");
 
 exports.postStudentAttendance = catchAsync(async (req, res, next) => {
     const { semester, studentId, courseCode, date } = req.body;
@@ -92,71 +93,63 @@ result = enrolledStudents.map((student) => {
 
   exports.getStudentAttendanceOnMonth = catchAsync(async (req, res, next) => {
     try {
-      let statusCode = 200;
-      let result;
-  
-      const { courseCode, semester, date, studentId } = req.query;
-      const fetchStudent = studentId ? Student.findOne({ studentId: studentId }) : null;
-      const fetchCourse = courseCode ? Course.findOne({ courseCode: courseCode }) : null;
-  
-      baseQuery = {};
-      if (semester) {
-        baseQuery.semester = semester;
-      }
+      const { courseCode, semester, date } = req.query;
+      const baseQuery = {};
+      if (semester) baseQuery.semester = semester;
       if (date) {
         const [year, month] = date.split('-').map(Number);
         const firstDayOfMonth = new Date(year, month - 1, 1);
         const lastDayOfMonth = new Date(year, month, 0);
         baseQuery.date = { $gte: firstDayOfMonth, $lte: lastDayOfMonth };
       }
-      if (fetchCourse) {
-        const course = await fetchCourse;
-        if (course) {
-          baseQuery.course = course._id;
-        }
+      if (courseCode) {
+        const course = await Course.findOne({ courseCode });
+        if (course) baseQuery.course = course._id;
       }
-  
-      if (fetchStudent) {
-        const student = await fetchStudent;
-        if (student) {
-          baseQuery.student = student._id;
-        }
-      }
-      const attendanceRecords = await Student_Attendance.find(baseQuery);
-      let enrolledStudents = [];
-      if (semester && courseCode) {
-        enrolledStudents = await Student.find({
-          "courses_taught.semester": semester,
-          "courses_taught.courseCode": courseCode,
-        });
-      }
-      const organizedData = {};
-      attendanceRecords.forEach((record) => {
-        const studentId = record.student.toString();
-        const month = new Date(record.date).toLocaleString('default', { month: 'long' });
-        if (!organizedData[studentId]) {
-          organizedData[studentId] = { studentId, studentName: '', attendanceByMonth: {} };
-        }
-        if (!organizedData[studentId].attendanceByMonth[month]) {
-          organizedData[studentId].attendanceByMonth[month] = [];
-        }
-        organizedData[studentId].attendanceByMonth[month].push({
-          date: record.date,
-          status: record.status,
-        });
+      const enrolledStudents = await Student.find({
+        "courses_taught.semester": semester,
+        "courses_taught.courseCode": courseCode,
       });
-      const studentIds = Object.keys(organizedData);
-      for (const studentId of studentIds) {
-        const student = await Student.findById(studentId);
-        if (student) {
-          organizedData[studentId].studentName = `${student.personal.firstName} ${student.personal.lastName}`;
-        }
-      }
-  
-      result = Object.values(organizedData);
 
-      allDates = 
-      new ResponseGenerator(res, statusCode, result);
+      console.log(enrolledStudents)
+
+      const attendanceRecords = await Student_Attendance.aggregate([
+        { $match: baseQuery },
+        {
+          $lookup: {
+            from: 'students',
+            localField: 'student',
+            foreignField: '_id',
+            as: 'studentDetails',
+          },
+        },
+        {
+          $unwind: '$studentDetails',
+        },
+        {
+          $project: {
+            studentId: '$studentDetails.studentId',
+            studentName: {
+              $concat: ['$studentDetails.personal.firstName', ' ', '$studentDetails.personal.lastName'],
+            },
+            date: 1,
+            status: 1,
+          },
+        },
+      ]);
+      let tableData = processAttendanceForStudent(attendanceRecords);
+
+      enrolledStudents.forEach((student) => {
+        const found = tableData.some((existingStudent) => existingStudent.studentId === student.studentId);
+        if (!found) {
+          const name = `${student.personal.firstName} ${student.personal.lastName}`;
+          tableData.push({ studentId: student.studentId, name });
+        }
+      });
+  
+      const tableHeadings = [...new Set(attendanceRecords.map(record => new Date(record.date).toLocaleDateString()))];
+
+      res.status(200).json({ tableData, tableHeadings, value:"test" });
     } catch (error) {
       console.error(error);
       res.status(500).json(error);
