@@ -1,0 +1,13 @@
+PORT=8000
+NODE_ENV=devlopment
+DATABASE=mongodb+srv://univast:<PASSWORD>@cluster0.ac9llt1.mongodb.net/univast?retryWrites=true&w=majority&ssl=true
+DATABASE_PASSWORD=WU7kn7JQ20kcOuNj
+LOCALHOST_URL=http://localhost:5173/
+FRONTEND_URL=http://localhost:3000/
+
+JWT_SECRET=eb7cb44053144333e591ca2494cbf7cb0ae17f154c23b6cfdde62538060e65bd0e2189d496c9982140f184189f379331c07e24b7dc799b3f63d00c43fd0603f6
+JWT_EXPIRES_IN=1d
+JWT_COOKIE_EXPIRES_IN=90
+
+EMAIL_USERNAME =codezerox2022@gmail.com
+EMAIL_PASS =psjranjhzvyqzhte
