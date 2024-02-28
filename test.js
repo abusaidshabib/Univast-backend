@@ -28,3 +28,5 @@ const firstArray = [
   });
   console.log(secondArray);
   
+
+  // writeout
