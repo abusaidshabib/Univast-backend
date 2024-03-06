@@ -105,38 +105,39 @@ result = enrolledStudents.map((student) => {
       if (courseCode) {
         const course = await Course.findOne({ courseCode });
         if (course) baseQuery.course = course._id;
+        console.log(course._id)
       }
       const enrolledStudents = await Student.find({
         "courses_taught.semester": semester,
         "courses_taught.courseCode": courseCode,
       });
 
-      console.log(enrolledStudents)
-
       const attendanceRecords = await Student_Attendance.aggregate([
-        { $match: baseQuery },
-        {
-          $lookup: {
-            from: 'students',
-            localField: 'student',
-            foreignField: '_id',
-            as: 'studentDetails',
-          },
-        },
-        {
-          $unwind: '$studentDetails',
-        },
-        {
-          $project: {
-            studentId: '$studentDetails.studentId',
-            studentName: {
-              $concat: ['$studentDetails.personal.firstName', ' ', '$studentDetails.personal.lastName'],
-            },
-            date: 1,
-            status: 1,
-          },
-        },
+        { $match: baseQuery }
+        // {
+        //   $lookup: {
+        //     from: 'students',
+        //     localField: 'student',
+        //     foreignField: '_id',
+        //     as: 'studentDetails',
+        //   },
+        // },
+        // {
+        //   $unwind: '$studentDetails',
+        // },
+        // {
+        //   $project: {
+        //     studentId: '$studentDetails.studentId',
+        //     studentName: {
+        //       $concat: ['$studentDetails.personal.firstName', ' ', '$studentDetails.personal.lastName'],
+        //     },
+        //     date: 1,
+        //     status: 1,
+        //   },
+        // },
       ]);
+
+      console.log(attendanceRecords)
       let tableData = processAttendanceForStudent(attendanceRecords);
 
       enrolledStudents.forEach((student) => {
