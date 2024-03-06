@@ -113,31 +113,29 @@ result = enrolledStudents.map((student) => {
       });
 
       const attendanceRecords = await Student_Attendance.aggregate([
-        { $match: baseQuery }
-        // {
-        //   $lookup: {
-        //     from: 'students',
-        //     localField: 'student',
-        //     foreignField: '_id',
-        //     as: 'studentDetails',
-        //   },
-        // },
-        // {
-        //   $unwind: '$studentDetails',
-        // },
-        // {
-        //   $project: {
-        //     studentId: '$studentDetails.studentId',
-        //     studentName: {
-        //       $concat: ['$studentDetails.personal.firstName', ' ', '$studentDetails.personal.lastName'],
-        //     },
-        //     date: 1,
-        //     status: 1,
-        //   },
-        // },
+        { $match: baseQuery },
+        {
+          $lookup: {
+            from: 'students',
+            localField: 'student',
+            foreignField: '_id',
+            as: 'studentDetails',
+          },
+        },
+        {
+          $unwind: '$studentDetails',
+        },
+        {
+          $project: {
+            studentId: '$studentDetails.studentId',
+            studentName: {
+              $concat: ['$studentDetails.personal.firstName', ' ', '$studentDetails.personal.lastName'],
+            },
+            date: 1,
+            status: 1,
+          },
+        },
       ]);
-
-      console.log(attendanceRecords)
       let tableData = processAttendanceForStudent(attendanceRecords);
 
       enrolledStudents.forEach((student) => {
