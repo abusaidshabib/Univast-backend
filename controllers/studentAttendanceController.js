@@ -105,13 +105,12 @@ result = enrolledStudents.map((student) => {
       if (courseCode) {
         const course = await Course.findOne({ courseCode });
         if (course) baseQuery.course = course._id;
+        console.log(course._id)
       }
       const enrolledStudents = await Student.find({
         "courses_taught.semester": semester,
         "courses_taught.courseCode": courseCode,
       });
-
-      console.log(enrolledStudents)
 
       const attendanceRecords = await Student_Attendance.aggregate([
         { $match: baseQuery },
