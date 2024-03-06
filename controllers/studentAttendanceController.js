@@ -148,7 +148,7 @@ result = enrolledStudents.map((student) => {
   
       const tableHeadings = [...new Set(attendanceRecords.map(record => new Date(record.date).toLocaleDateString()))];
 
-      res.status(200).json({ tableData, tableHeadings, value:"test" });
+      res.status(200).json({ tableData, tableHeadings });
     } catch (error) {
       console.error(error);
       res.status(500).json(error);
