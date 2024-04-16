@@ -39,20 +39,11 @@ exports.getFaculty = catchAsync(async (req, res, next) => {
 exports.updateFaculty = catchAsync(async (req, res, next) => {
   let statusCode = 201;
   let result;
-  switch (queryKeys.length) {
-    case 0:
-      break;
-
-    case 1:
-      if (req.query.facultyCode) {
-        const filter = {
-          facultyCode: req.query.facultyCode,
-        };
-        result = await Faculties.findOneAndUpdate(filter, req.body);
-      }
-      break;
-    default:
-      break;
+  if (req.query.facultyCode) {
+    const filter = {
+      facultyCode: req.query.facultyCode,
+    };
+    result = await Faculties.findOneAndUpdate(filter, req.body);
   }
   new ResponseGenerator(res, statusCode, result);
 });
