@@ -213,15 +213,14 @@ exports.deleteCourse = catchAsync(async (req, res, next) => {
 
 exports.updateCourse = catchAsync(async (req, res, next) => {
   let statusCode = 201;
-  const queryKeys = Object.keys(req.query);
   let result;
 
-  if (queryKeys.length === 0) {
-    if (req.query.courseCode) {
-      result = await Course.findOneAndUpdate(req.query);
-    }
+  if (req.query.courseCode) {
+    console.log(req.query.courseCode)
+    const filter = {
+      courseCode: req.query.courseCode,
+    };
+      result = await Course.findOneAndUpdate(filter,req.body);
   }
   new ResponseGenerator(res, statusCode, result);
 });
-
-
