@@ -63,3 +63,18 @@ exports.deleteProgram = catchAsync(async (req, res, next) => {
   }
   new ResponseGenerator(res, statusCode, result);
 });
+
+
+exports.updateProgram = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
+  let result;
+
+  if (req.query.programCode) {
+    console.log(req.query.programCode)
+    const filter = {
+      programCode: req.query.programCode,
+    };
+      result = await Program.findOneAndUpdate(filter,req.body);
+  }
+  new ResponseGenerator(res, statusCode, result);
+});
