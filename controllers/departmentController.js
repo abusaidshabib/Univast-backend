@@ -34,3 +34,35 @@ exports.getDepartment = catchAsync(async (req, res, next) => {
   }
   new ResponseGenerator(res, statusCode, result);
 });
+
+
+exports.updateDepartment = catchAsync(async (req, res, next) => {
+  let statusCode = 201;
+  let result;
+  if (req.query.departmentCode) {
+    const filter = {
+      departmentCode: req.query.departmentCode,
+    };
+    result = await Department.findOneAndUpdate(filter, req.body);
+  }
+  new ResponseGenerator(res, statusCode, result);
+})
+
+exports.deleteDepartment = catchAsync(async (req, res, next) => {
+  let statusCode = 204;
+  const queryKeys = Object.keys(req.query);
+  let result;
+  switch (queryKeys.length) {
+    case 0:
+
+    case 1:
+      if (
+        req.query.departmentCode
+      ) {
+        result = await Department.findOneAndRemove(req.query);
+      } else {
+      }
+    default:
+  }
+  new ResponseGenerator(res, statusCode, result);
+});

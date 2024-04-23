@@ -47,3 +47,22 @@ exports.updateFaculty = catchAsync(async (req, res, next) => {
   }
   new ResponseGenerator(res, statusCode, result);
 });
+
+exports.deleteFaculty = catchAsync(async (req, res, next) => {
+  let statusCode = 204;
+  const queryKeys = Object.keys(req.query);
+  let result;
+  switch (queryKeys.length) {
+    case 0:
+
+    case 1:
+      if (
+        req.query.facultyCode
+      ) {
+        result = await Faculties.findOneAndRemove(req.query);
+      } else {
+      }
+    default:
+  }
+  new ResponseGenerator(res, statusCode, result);
+});
