@@ -61,6 +61,13 @@ exports.getStudents = catchAsync(async (req, res, next) => {
           path: 'courses_taught.courses',
           model: 'Course'
         }).exec();
+      } else if (req.query.courseCode) {
+        result = await Student.find({
+          "courses_taught.courseCode": req.query.courseCode,
+        }).populate({
+          path: 'courses_taught.courses',
+          model: 'Course'
+        }).exec();
       } else {
         statusCode = 401;
         message = "Your query not acceptable";
