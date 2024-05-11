@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { resultSchema } = require("./resultModel");
 
 const educationSchema = new mongoose.Schema({
   exam: String,
@@ -122,6 +123,7 @@ const studentSchema = new mongoose.Schema({
   },
   education: [educationSchema],
   courses_taught: [courseToughSchema],
+  results: [resultSchema],
   others: {
     is_parents_freedom_fighter: Boolean,
     is_tribal: Boolean,

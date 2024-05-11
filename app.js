@@ -22,6 +22,7 @@ const upload = multer({ storage: storage });
 app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
 
 //Take all router required..............
+const studentResult = require("./routes/resultRouter");
 const admissionRouter = require("./routes/admissionRouter");
 const facultyRouter = require("./routes/facultyRouter");
 const studentRouter = require("./routes/studentRouter");
@@ -88,6 +89,7 @@ const demo = (req, res, next) => {
 }
 
 // 3) Important ROUTES
+app.use("/api/v1/results", studentResult);
 app.use("/api/v1/admission", admissionRouter);
 app.use("/api/v1/faculty", facultyRouter);
 app.use("/api/v1/student", studentRouter);
