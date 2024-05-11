@@ -22,7 +22,8 @@ exports.createStudentResult = async (req, res) => {
 
 exports.updateStudentResult = async (req, res) => {
   try{
-    const {studentId, semester, courseCode} = req.params;
+    const {studentId} = req.params;
+    const { semester, courseCode } = req.body;
     const newResult = req.body;
     const student = await Student.findOne({studentId});
     if (!student){
