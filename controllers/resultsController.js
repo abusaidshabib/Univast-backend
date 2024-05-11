@@ -38,6 +38,7 @@ exports.updateStudentResult = async (req, res) => {
 
     student.results[resultIndex] = newResult;
     await student.save()
+    // Done
 
     res.status(200).json({ message: 'Result updated successfully', student });
   }
