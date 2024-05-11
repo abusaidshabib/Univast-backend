@@ -34,8 +34,6 @@ exports.updateStudentResult = async (req, res) => {
       return res.status(404).json({error: 'Result not found for the given semester and course code'});
     }
 
-    console.log(newResult)
-
     student.results[resultIndex] = newResult;
     await student.save()
     // Done
