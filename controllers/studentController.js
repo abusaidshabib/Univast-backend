@@ -49,6 +49,9 @@ exports.getStudents = catchAsync(async (req, res, next) => {
   switch (queryKeys.length) {
     case 0:
       result = await Student.find().populate({
+        path: 'results.course',
+        model: 'Course'
+      }).populate({
         path: 'courses_taught.courses',
         model: 'Course'
       }).exec();
@@ -58,12 +61,18 @@ exports.getStudents = catchAsync(async (req, res, next) => {
         result = await Student.findOne({
           "personal.email": req.query.email,
         }).populate({
+          path: 'results.course',
+          model: 'Course'
+        }).populate({
           path: 'courses_taught.courses',
           model: 'Course'
         }).exec();
       } else if (req.query.courseCode) {
         result = await Student.find({
           "courses_taught.courseCode": req.query.courseCode,
+        }).populate({
+          path: 'results.course',
+          model: 'Course'
         }).populate({
           path: 'courses_taught.courses',
           model: 'Course'
