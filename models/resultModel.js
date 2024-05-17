@@ -3,20 +3,17 @@ const mongoose = require("mongoose");
 const resultSchema = new mongoose.Schema({
     semester: String,
     courseCode: String,
+    grade: String,
     mid:{
-        grade: String,
         number: Number
     },
     final:{
-        grade: String,
         number: Number
     },
     attendance: {
-        grade: String,
         number: Number
     },
     assessment:{
-        grade: String,
         number: Number
     }
 });
