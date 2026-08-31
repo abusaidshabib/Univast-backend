@@ -40,6 +40,8 @@ const noticeRouter = require("./routes/noticeRouter");
 const uploadImgRouter = require('./routes/imageUpRouter');
 const courseExtensionRouter = require('./routes/courseExtensionRouter');
 const studentAttendanceRouter = require('./routes/studentAttendanceRouter');
+const classScheduleRouter = require('./routes/classScheduleRouter');
+const examScheduleRouter = require('./routes/examScheduleRouter');
 
 // All error handler route
 const globalErrorHandler = require("./controllers/errorController");
@@ -107,6 +109,8 @@ app.use("/api/v1/notice", noticeRouter);
 app.use("/api/v1/upload",demo,upload.single("image"), uploadImgRouter);
 app.use("/api/v1/course-content", courseExtensionRouter);
 app.use("/api/v1/student-attendance", studentAttendanceRouter);
+app.use("/api/v1/class-schedule", classScheduleRouter);
+app.use("/api/v1/exam-schedule", examScheduleRouter);
 
 
 // Handle unusual routes
