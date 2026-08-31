@@ -113,6 +113,16 @@ const admissionSchema = new mongoose.Schema({
     required: [true, "Firebase Id must have to add"],
       unique: true, // Set the unique option to true for a unique index
   },
+  status: {
+    type: String,
+    enum: ["pending", "under_review", "accepted", "rejected"],
+    default: "pending",
+  },
+  statusNote: String,
+  submittedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 admissionSchema.index(

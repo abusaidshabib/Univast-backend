@@ -4,19 +4,17 @@ const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
-    unique: true,
   },
   lastName: {
     type: String,
     required: true,
-    unique: true,
   },
   firebaseId: {
     type: String,
   },
   role: {
     type: String,
-    enum: ["student", "faculty", "admin", "teacher"],
+    enum: ["student", "faculty", "admin", "teacher", "applicant"],
     required: true,
   },
   email: {

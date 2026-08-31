@@ -1,56 +1,37 @@
 const Notice = require("../models/noticeModel");
+const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
-exports.createNotice = catchAsync(async (req, res, next) => {
-  let statusCode = 201;
-  let bodyData = req.body;
-  let result;
-  bodyData.date = new Date();
-  result = await Notice.create(bodyData);
-  new ResponseGenerator(res, statusCode, result);
+exports.createNotice = catchAsync(async (req, res) => {
+  const bodyData = { ...req.body, date: req.body.date || new Date() };
+  const result = await Notice.create(bodyData);
+  new ResponseGenerator(res, 201, result);
 });
 
-exports.getNotice = catchAsync(async (req, res, next) => {
-  let statusCode = 200;
-  const queryKeys = Object.keys(req.query);
-  let result;
-
-  switch (queryKeys.length) {
-    case 0:
-      result = await Notice.find();
-      break;
-    case 1:
-      if (req.query.id) {
-        result = await Notice.findOne({ _id: req.query.id });
-      } else {
-        statusCode = 401;
-        message = "Your query not acceptable";
-      }
-      break;
-    default:
-      message = "Multiple query or others work not done yet";
-      break;
+exports.getNotice = catchAsync(async (req, res) => {
+  if (req.query.id) {
+    const result = await Notice.findById(req.query.id);
+    new ResponseGenerator(res, 200, result);
+    return;
   }
-  new ResponseGenerator(res, statusCode, result);
+  const query = {};
+  if (req.query.audience) {
+    const safe = String(req.query.audience).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const audience = new RegExp(`^${safe}$`, "i");
+    query.$or = [
+      { targetAudience: audience },
+      { targetAudience: /^all$/i },
+      { targetAudience: { $in: [null, ""] } },
+    ];
+  }
+  const result = await Notice.find(query).sort({ date: -1 });
+  new ResponseGenerator(res, 200, result);
 });
 
 exports.deleteNotice = catchAsync(async (req, res, next) => {
-  let statusCode = 204;
-  const queryKeys = Object.keys(req.query);
-  let result;
-
-  switch (queryKeys.length) {
-    case 0:
-      break;
-    case 1:
-      if (req.query.id) {
-        result = await Notice.findOneAndRemove({ _id: req.query.id });
-      } else {
-      }
-      break;
-    default:
-      break;
-  }
-  new ResponseGenerator(res, statusCode, result);
+  if (!req.query.id) return next(new AppError("id query is required", 400));
+  const result = await Notice.findByIdAndDelete(req.query.id);
+  if (!result) return next(new AppError("Notice not found", 404));
+  new ResponseGenerator(res, 204, result);
 });
