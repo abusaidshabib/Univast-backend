@@ -2,6 +2,7 @@ const Course = require("../models/courseModel");
 const Department = require("../models/departmentModel");
 const Teacher = require("../models/teacherModel");
 const { teacherIdCreator } = require("../subControllers/teacherSub");
+const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
@@ -56,25 +57,33 @@ exports.getTeacher = catchAsync(async (req, res) => {
 });
 
 exports.updateTeacher = catchAsync(async (req, res, next) => {
-  let statusCode = 201;
-  let result;
-  switch (true) {
-    case req.query.email !== undefined:
-      if (
-        req.body.teacherId ||
-        req.body.personal.nid_Birth_certificate ||
-        req.body._id ||
-        req.body.personal.email
-      ) {
-      } else {
-        const filter = { "personal.email": req.query.email };
-        result = await Student.findOneAndUpdate(filter, req.body);
-      }
-      break;
-    default:
-      break;
+  if (!req.query.email) {
+    return next(new AppError("Email query is required to update a teacher", 400));
   }
-  new ResponseGenerator(res, statusCode, result);
+
+  const lockedFields =
+    req.body.teacherId ||
+    req.body._id ||
+    req.body.personal?.nid_Birth_certificate ||
+    req.body.personal?.email;
+
+  if (lockedFields) {
+    return next(
+      new AppError("Cannot update teacherId, email, nid, or _id", 400)
+    );
+  }
+
+  const result = await Teacher.findOneAndUpdate(
+    { "personal.email": req.query.email },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  if (!result) {
+    return next(new AppError("Teacher not found", 404));
+  }
+
+  new ResponseGenerator(res, 200, result);
 });
 
 exports.getTeachersWithCourses = async (req, res) => {
