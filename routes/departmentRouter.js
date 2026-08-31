@@ -5,8 +5,14 @@ const {
   updateDepartment,
   deleteDepartment,
 } = require("../controllers/departmentController");
+const { adminOnly } = require("../middleware/protect");
 const router = express.Router();
 
-router.route("/").get(getDepartment).post(createDepartment).patch(updateDepartment).delete(deleteDepartment);
+router
+  .route("/")
+  .get(getDepartment)
+  .post(...adminOnly, createDepartment)
+  .patch(...adminOnly, updateDepartment)
+  .delete(...adminOnly, deleteDepartment);
 
 module.exports = router;

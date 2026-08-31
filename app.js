@@ -44,7 +44,7 @@ const studentAttendanceRouter = require('./routes/studentAttendanceRouter');
 // All error handler route
 const globalErrorHandler = require("./controllers/errorController");
 const { limiter } = require("./Authentication/Rate-limit");
-const { verifyToken } = require("./controllers/authController");
+const { corsOptions } = require("./Authentication/Cors");
 const AppError = require("./utils/AppError");
 
 // 1) MIDDLEWARES
@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Limiter will help to set maximum request at a fixed time like 15/20 min
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(limiter);
 app.use(
   helmet.contentSecurityPolicy({

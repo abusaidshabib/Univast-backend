@@ -5,8 +5,14 @@ const {
   updateFaculty,
   deleteFaculty
 } = require("../controllers/facultyController");
+const { adminOnly } = require("../middleware/protect");
 const router = express.Router();
 
-router.route("/").get(getFaculty).post(createFaculty).patch(updateFaculty).delete(deleteFaculty);
+router
+  .route("/")
+  .get(getFaculty)
+  .post(...adminOnly, createFaculty)
+  .patch(...adminOnly, updateFaculty)
+  .delete(...adminOnly, deleteFaculty);
 
 module.exports = router;

@@ -4,12 +4,12 @@ const {
   getAllAdmissions,
   deleteAdmission,
 } = require("../controllers/admissionController");
-const { verifyToken } = require("../controllers/authController");
+const { adminOnly } = require("../middleware/protect");
 const router = express.Router();
 
 router
   .route("/")
-  .get(getAllAdmissions)
+  .get(...adminOnly, getAllAdmissions)
   .post(createAdmission)
-  .delete(deleteAdmission);
+  .delete(...adminOnly, deleteAdmission);
 module.exports = router;
