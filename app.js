@@ -42,6 +42,7 @@ const courseExtensionRouter = require('./routes/courseExtensionRouter');
 const studentAttendanceRouter = require('./routes/studentAttendanceRouter');
 const classScheduleRouter = require('./routes/classScheduleRouter');
 const examScheduleRouter = require('./routes/examScheduleRouter');
+const financeRouter = require('./routes/financeRouter');
 
 // All error handler route
 const globalErrorHandler = require("./controllers/errorController");
@@ -111,6 +112,7 @@ app.use("/api/v1/course-content", courseExtensionRouter);
 app.use("/api/v1/student-attendance", studentAttendanceRouter);
 app.use("/api/v1/class-schedule", classScheduleRouter);
 app.use("/api/v1/exam-schedule", examScheduleRouter);
+app.use("/api/v1/finance", financeRouter);
 
 
 // Handle unusual routes
