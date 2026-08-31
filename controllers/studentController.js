@@ -2,6 +2,7 @@ const Department = require("../models/departmentModel");
 const Program = require("../models/programModel");
 const Student = require("../models/studentModel");
 const { studentIdCreator } = require("../subControllers/studentSub");
+const AppError = require("../utils/AppError");
 const ResponseGenerator = require("../utils/ResponseGenerator");
 const catchAsync = require("../utils/catchAsync");
 
@@ -92,27 +93,49 @@ exports.getStudents = catchAsync(async (req, res, next) => {
 
 // Update Student
 exports.updateStudent = catchAsync(async (req, res, next) => {
-  let statusCode = 201;
-  let message;
-  let method = "PATCH";
-  let result;
-  switch (true) {
-    case req.query.email !== undefined:
-      if (
-        req.body.studentId ||
-        req.body.personal.nid_Birth_certificate ||
-        req.body._id ||
-        req.body.personal.email
-      ) {
-        message =
-          "Student Id or Nid/birth or ID or Email certificate not editable";
-      } else {
-        const filter = { "personal.email": req.query.email };
-        result = await Student.findOneAndUpdate(filter, req.body);
-      }
-      break;
-    default:
-      message = "Only one query available";
+  if (!req.query.email) {
+    return next(new AppError("Email query is required to update a student", 400));
   }
-  new ResponseGenerator(res, statusCode, result);
+
+  const student = await Student.findOne({ "personal.email": req.query.email });
+  if (!student) {
+    return next(new AppError("Student not found", 404));
+  }
+
+  if (req.body.studentId || req.body._id) {
+    return next(new AppError("Student Id and document id are not editable", 400));
+  }
+
+  if (req.body.personal) {
+    const incoming = { ...req.body.personal };
+    delete incoming.email;
+    delete incoming.nid_Birth_certificate;
+
+    const currentPersonal = student.personal?.toObject
+      ? student.personal.toObject()
+      : student.personal || {};
+    const currentAddress = currentPersonal.address || {};
+
+    student.personal = {
+      ...currentPersonal,
+      ...incoming,
+      email: currentPersonal.email,
+      nid_Birth_certificate: currentPersonal.nid_Birth_certificate,
+      address: {
+        ...currentAddress,
+        ...(incoming.address || {}),
+        present_address: {
+          ...(currentAddress.present_address || {}),
+          ...(incoming.address?.present_address || {}),
+        },
+        permanent_address: {
+          ...(currentAddress.permanent_address || {}),
+          ...(incoming.address?.permanent_address || {}),
+        },
+      },
+    };
+  }
+
+  await student.save();
+  new ResponseGenerator(res, 200, student);
 });
