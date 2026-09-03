@@ -7,19 +7,8 @@ const app = express();
 var cors = require("cors");
 const path = require('path');
 const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
-    console.log(file)
-  }
-})
-const upload = multer({ storage: storage });
-
-app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
+// Images are stored on Cloudinary; the local uploads/ folder is no longer used.
+const upload = multer({ storage: multer.memoryStorage() });
 
 //Take all router required..............
 const studentResult = require("./routes/resultRouter");
